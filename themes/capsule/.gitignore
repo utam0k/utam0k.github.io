@@ -1,0 +1,7 @@
+$RECYCLE.BIN/
+.DS_Store
+*.sw[p-z]
+*~
+
+node_modules
+bower_components

@@ -1,0 +1,27 @@
+baseURL: "https://utam0k.github.io"
+languageCode: "ja-jp"
+title: "うたもく"
+baseurl: "https://utam0k.github.io/"
+theme: capsule
+permalinks:
+  post: /blog/:year/:month/:day/:filename
+
+MetaDataFormat: yaml
+
+author:
+  name: "Toru Komatsu"
+
+menu:
+  main:
+    - name: Blog
+      url: /post/
+    - name: Atom
+      url: /index.xml
+
+params:
+  categories: true
+  tags: true
+  author: utam0k
+  DateForm: "2018-05-22"
+  twitter: "https://twitter.com/utam0k"
+  github: "https://github.com/utam0k"
