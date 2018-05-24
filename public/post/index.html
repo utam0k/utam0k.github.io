@@ -123,6 +123,26 @@
           <article class="media">
   <div class="media-content">
 
+    <p class="title"><a href="//www.utam0k.jp/blog/2018/05/24/rust_ci/">RustでのCircleCiの導入</a></p>
+    <p class="subtitle is-flex" style="justify-content:space-between">
+      <span>May 24, 2018</span>
+      <span>2 min.</span>
+    </p>
+
+    <p>最近初めてのRust開発で自作シェルのmicanを作っている。
+そこでCircleCiをがんばった。
+lint Rustのlintとしてrust-clippyが有名。
+結構便利で&quot;if let&quot;でもっとよくなるよ！とかも教えてくれて助かる。よく怒られて神ってなる。
+僕もだが初心者だとRustっぽい構文がわからないので導入すると助かる。
+helpのurlに行くと言い感じになぜだめなのか教えて頂けます。
+warning: writing `&amp;Vec&lt;_&gt;` instead of `&amp;[_]` involves one more reference and cannot be used with non-Vec-based slices. --&gt; src/readline/reader.rs:154:29 | 154 | fn find_bind(&amp;self, ch: &amp;Vec&lt;u8&gt;) -&gt; Option&lt;Keybind&gt; { | ^^^^^^^^ help: change this to: `&amp;[u8]` | = note: #[warn(ptr_arg)] on by default = help: for further information visit https://rust-lang-nursery.github.io/rust-clippy/v0.0.200/index.html#ptr_arg  warning: `if _ { .. } else { .. }` is an expression --&gt; src/readline/editor.</p>
+
+  </div>
+</article>
+
+          <article class="media">
+  <div class="media-content">
+
     <p class="title"><a href="//www.utam0k.jp/blog/2018/05/24/about/">About</a></p>
     <p class="subtitle is-flex" style="justify-content:space-between">
       <span>May 24, 2018</span>

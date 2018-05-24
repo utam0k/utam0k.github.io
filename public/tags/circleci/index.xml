@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>うたもく</title>
-    <link>//www.utam0k.jp/</link>
-    <description>Recent content on うたもく</description>
+    <title>Circleci on うたもく</title>
+    <link>//www.utam0k.jp/tags/circleci/</link>
+    <description>Recent content in Circleci on うたもく</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
     <managingEditor>koma@utam0k.jp (Toru Komatsu)</managingEditor>
     <webMaster>koma@utam0k.jp (Toru Komatsu)</webMaster>
     <lastBuildDate>Thu, 24 May 2018 16:34:42 +0900</lastBuildDate>
     
-	<atom:link href="//www.utam0k.jp/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="//www.utam0k.jp/tags/circleci/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -26,24 +26,6 @@ lint Rustのlintとしてrust-clippyが有名。
 僕もだが初心者だとRustっぽい構文がわからないので導入すると助かる。
 helpのurlに行くと言い感じになぜだめなのか教えて頂けます。
 warning: writing `&amp;amp;Vec&amp;lt;_&amp;gt;` instead of `&amp;amp;[_]` involves one more reference and cannot be used with non-Vec-based slices. --&amp;gt; src/readline/reader.rs:154:29 | 154 | fn find_bind(&amp;amp;self, ch: &amp;amp;Vec&amp;lt;u8&amp;gt;) -&amp;gt; Option&amp;lt;Keybind&amp;gt; { | ^^^^^^^^ help: change this to: `&amp;amp;[u8]` | = note: #[warn(ptr_arg)] on by default = help: for further information visit https://rust-lang-nursery.github.io/rust-clippy/v0.0.200/index.html#ptr_arg  warning: `if _ { .. } else { .. }` is an expression --&amp;gt; src/readline/editor.</description>
-    </item>
-    
-    <item>
-      <title>About</title>
-      <link>//www.utam0k.jp/blog/2018/05/24/about/</link>
-      <pubDate>Thu, 24 May 2018 13:12:48 +0900</pubDate>
-      <author>koma@utam0k.jp (Toru Komatsu)</author>
-      <guid>//www.utam0k.jp/blog/2018/05/24/about/</guid>
-      <description> SNS  Github: utam0k Twitter: @utam0k Mastodon: @utam0k  Develop  mican  Interst  Rust Mastodon System programming  </description>
-    </item>
-    
-    <item>
-      <title>ブログを始める</title>
-      <link>//www.utam0k.jp/blog/2018/05/23/start/</link>
-      <pubDate>Wed, 23 May 2018 13:58:35 +0900</pubDate>
-      <author>koma@utam0k.jp (Toru Komatsu)</author>
-      <guid>//www.utam0k.jp/blog/2018/05/23/start/</guid>
-      <description>ブログを始めた。</description>
     </item>
     
   </channel>
