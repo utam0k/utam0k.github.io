@@ -15,6 +15,8 @@ menu:
   main:
     - name: Blog
       url: /post/
+    - name: About
+      url: /blog/2018/05/24/about/index.html
     - name: Atom
       url: /index.xml
 
