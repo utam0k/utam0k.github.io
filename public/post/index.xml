@@ -6,10 +6,19 @@
     <description>Recent content in Posts on うたもく</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Wed, 23 May 2018 13:58:35 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 24 May 2018 13:12:48 +0900</lastBuildDate>
     
 	<atom:link href="//www.utam0k.jp/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>About</title>
+      <link>//www.utam0k.jp/blog/2018/05/24/about/</link>
+      <pubDate>Thu, 24 May 2018 13:12:48 +0900</pubDate>
+      
+      <guid>//www.utam0k.jp/blog/2018/05/24/about/</guid>
+      <description> SNS  Github: utam0k Twitter: @utam0k Mastodon: @utam0k  Develop  mican  Interst  Rust Mastodon System programming  </description>
+    </item>
     
     <item>
       <title>ブログを始める</title>
