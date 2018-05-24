@@ -7,9 +7,13 @@ permalinks:
   post: /blog/:year/:month/:day/:filename
 
 MetaDataFormat: yaml
+pygmentsstyle: "monokai"
+PygmentsCodeFences: true
+enableRobotsTXT: true
 
 author:
   name: "Toru Komatsu"
+  email: "koma@utam0k.jp"
 
 menu:
   main:
