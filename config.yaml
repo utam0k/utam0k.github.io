@@ -23,6 +23,7 @@ params:
   tags: true
   author: utam0k
   DateForm: "2018-05-22"
+  googleAnalytics: UA-119773781-1
 
 social:
   github: "utam0k"
