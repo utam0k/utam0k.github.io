@@ -3,34 +3,34 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://utam0k.github.io/blog/2018/05/23/start/</loc>
+    <loc>https://www.utam0k.jp/blog/2018/05/23/start/</loc>
     <lastmod>2018-05-23T13:58:35+09:00</lastmod>
   </url>
   
   <url>
-    <loc>https://utam0k.github.io/categories/</loc>
+    <loc>https://www.utam0k.jp/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://utam0k.github.io/categories/diary/</loc>
-    <lastmod>2018-05-23T13:58:35+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://utam0k.github.io/post/</loc>
+    <loc>https://www.utam0k.jp/categories/diary/</loc>
     <lastmod>2018-05-23T13:58:35+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://utam0k.github.io/tags/</loc>
+    <loc>https://www.utam0k.jp/post/</loc>
+    <lastmod>2018-05-23T13:58:35+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://utam0k.github.io/</loc>
+    <loc>https://www.utam0k.jp/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.utam0k.jp/</loc>
     <lastmod>2018-05-23T13:58:35+09:00</lastmod>
     <priority>0</priority>
   </url>
