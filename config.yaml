@@ -1,7 +1,7 @@
-baseURL: "https://utam0k.github.io"
+baseURL: "https://www.utam0k.jp"
 languageCode: "ja-jp"
 title: "うたもく"
-baseurl: "https://utam0k.github.io/"
+baseurl: "https://www.utam0k.jp"
 theme: capsule
 permalinks:
   post: /blog/:year/:month/:day/:filename
