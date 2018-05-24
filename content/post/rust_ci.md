@@ -12,7 +12,7 @@ tags: [tech, rust, CircleCi, mican, rust-clippy]
 Rustのlintとして[rust-clippy](https://github.com/rust-lang-nursery/rust-clippy)が有名。  
 結構便利で```"if let"でもっとよくなるよ！```とかも教えてくれて助かる。よく怒られて神ってなる。  
 僕もだが初心者だとRustっぽい構文がわからないので導入すると助かる。  
-`help`のurlに行くと言い感じになぜだめなのか教えて頂けます。
+`help`のurlに行くと良い感じになぜだめなのか教えて頂けます。
 
 ``` rust
 warning: writing `&Vec<_>` instead of `&[_]` involves one more reference and cannot be used with non-Vec-based slices.
