@@ -1,8 +1,8 @@
-baseURL: "https://www.utam0k.jp"
+baseURL: "//www.utam0k.jp/"
 languageCode: "ja-jp"
 title: "うたもく"
-baseurl: "https://www.utam0k.jp"
 theme: capsule
+canonifyurls: true
 permalinks:
   post: /blog/:year/:month/:day/:filename
 
