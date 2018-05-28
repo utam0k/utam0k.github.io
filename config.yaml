@@ -1,36 +1,50 @@
 baseURL: "//www.utam0k.jp/"
-languageCode: "ja-jp"
+DefaultContentLanguage: "en"
+# DefaultContentLanguage: "ja"
 title: "うたもく"
-theme: capsule
+theme: beautifulhugo
 canonifyurls: true
 permalinks:
   post: /blog/:year/:month/:day/:filename
 
-MetaDataFormat: yaml
-pygmentsstyle: "monokai"
-PygmentsCodeFences: true
+MetaDataFormat: "yaml"
 enableRobotsTXT: true
 
-author:
-  name: "Toru Komatsu"
-  email: "koma@utam0k.jp"
+# pygmentsStyle: "monokai"
+pygmentsStyle: "trac"
+pygmentsUseClasses: true
+pygmentsCodeFences: true
+pygmentsCodefencesGuessSyntax: true
+
+googleAnalytics: "UA-119773781-1"
+
+Params:
+  logo: img/logo.svg
+  favicon: img/favicon.ico
+  socialShare: true
+  comments: true
+  commit: false
+  rss: true
+  readingTime: true
+  useHLJS: true
+  categories: true
+  dateFormat: January 2, 2006
 
 menu:
   main:
-    - name: Blog
+    - name: Posts
       url: /post/
+      weight: 1
     - name: About
-      url: /blog/2018/05/24/about/index.html
+      url: "page/about/"
+    - name: Tags
+      url: tags
+      weight: 3
     - name: Atom
       url: /index.xml
 
-params:
-  categories: true
-  tags: true
-  author: utam0k
-  DateForm: "2018-05-22"
-  googleAnalytics: UA-119773781-1
-
-social:
-  github: "utam0k"
-  twitter: "utam0k"
+Author:
+  name: Toru Komatsu
+  email: koma@utam0k.jp
+  twitter: utam0k
+  github: utam0k

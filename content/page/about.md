@@ -1,7 +1,6 @@
 ---
 title: "About"
 date: 2018-05-24T13:12:48+09:00
-<!-- draft: true -->
 ---
 
 ## SNS

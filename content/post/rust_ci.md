@@ -1,8 +1,7 @@
 ---
 title: "RustでのCircleCiの導入"
 date: 2018-05-24T16:34:42+09:00
-categories: [tech, rust]
-tags: [tech, rust, CircleCi, mican, rust-clippy]
+tags : [tech, rust]
 ---
 
 最近初めてのRust開発で自作シェルの[mican](https://github.com/utam0k/mican)を作っている。  
@@ -39,9 +38,7 @@ warning: `if _ { .. } else { .. }` is an expression
    = note: #[warn(useless_let_if_seq)] on by default
    = help: for further information visit https://rust-lang-nursery.github.io/rust-clippy/v0.0.200/index.html#useless_let_if_seq
 ```
-{{< message class="is-info" title="Note" >}}
 rust-clippyの導入にはnightly版のRustが必要
-{{< /message >}}
 CIの導入の際にnightly版のRustが必要になる。  
 仕方のないことだが[rust-clippy](https://github.com/rust-lang-nursery/rust-clippy)は最新のnightlyだと動かないことがある。  
 実際に最新版で動かなくて[プルリクエスト](https://github.com/rust-lang-nursery/rust-clippy/pull/2775)を出した。  
@@ -62,9 +59,7 @@ CIの導入の際にnightly版のRustが必要になる。
 
 ## テストカバレージ
 [kcov](http://simonkagstrom.github.io/kcov/)と[Codecov](https://codecov.io)を使っていきます。  
-{{< message class="is-info" title="Note" >}}
 現状だとkcovはラインカバレージのみのサポートなのでブランチカバレージ等はできません。  
-{{< /message >}}
 [参考](https://github.com/SimonKagstrom/kcov/issues/27)  
 
 [Codecov](https://codecov.io)以外にも簡単に他のも導入できます。
