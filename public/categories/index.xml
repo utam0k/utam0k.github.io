@@ -5,7 +5,6 @@
     <link>//www.utam0k.jp/categories/</link>
     <description>Recent content in Categories on うたもく</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>ja-jp</language>
     <managingEditor>koma@utam0k.jp (Toru Komatsu)</managingEditor>
     <webMaster>koma@utam0k.jp (Toru Komatsu)</webMaster>
     
@@ -18,24 +17,6 @@
       <pubDate>Wed, 23 May 2018 13:58:35 +0900</pubDate>
       <author>koma@utam0k.jp (Toru Komatsu)</author>
       <guid>//www.utam0k.jp/categories/diary/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Rust</title>
-      <link>//www.utam0k.jp/categories/rust/</link>
-      <pubDate>Thu, 24 May 2018 16:34:42 +0900</pubDate>
-      <author>koma@utam0k.jp (Toru Komatsu)</author>
-      <guid>//www.utam0k.jp/categories/rust/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Tech</title>
-      <link>//www.utam0k.jp/categories/tech/</link>
-      <pubDate>Thu, 24 May 2018 16:34:42 +0900</pubDate>
-      <author>koma@utam0k.jp (Toru Komatsu)</author>
-      <guid>//www.utam0k.jp/categories/tech/</guid>
       <description></description>
     </item>
     

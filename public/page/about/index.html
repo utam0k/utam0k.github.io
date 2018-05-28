@@ -5,9 +5,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Posts</title>
-  <meta property="og:title" content="Posts" />
-  <meta name="twitter:title" content="Posts" />
+  <title>About</title>
+  <meta property="og:title" content="About" />
+  <meta name="twitter:title" content="About" />
+  <meta name="description" content=" SNS  Github: utam0k Twitter: @utam0k Mastodon: @utam0k  Develop  mican  Interst  Rust Mastodon System programming  ">
+  <meta property="og:description" content=" SNS  Github: utam0k Twitter: @utam0k Mastodon: @utam0k  Develop  mican  Interst  Rust Mastodon System programming  ">
+  <meta name="twitter:description" content=" SNS  Github: utam0k Twitter: @utam0k Mastodon: @utam0k  Develop  mican  Interst  Rust Mastodon System programming  ">
   <meta name="author" content="Toru Komatsu"/>
   <link href='//www.utam0k.jp/img/favicon.ico' rel='icon' type='image/x-icon'/>
   <meta property="og:image" content="//www.utam0k.jp/img/logo.svg" />
@@ -15,13 +18,13 @@
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:site" content="@utam0k" />
   <meta name="twitter:creator" content="@utam0k" />
-  <meta property="og:url" content="//www.utam0k.jp/post/" />
+  <meta property="og:url" content="//www.utam0k.jp/page/about/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="うたもく" />
 
   <meta name="generator" content="Hugo 0.41-DEV" />
-  <link rel="canonical" href="//www.utam0k.jp/post/" />
-  <link rel="alternate" href="//www.utam0k.jp/post/index.xml" type="application/rss+xml" title="うたもく">
+  <link rel="canonical" href="//www.utam0k.jp/page/about/" />
+  <link rel="alternate" href="//www.utam0k.jp/index.xml" type="application/rss+xml" title="うたもく">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -156,14 +159,26 @@ if (!doNotTrack) {
 
 
     
+  
+  
+  
+
+
+
+
+  
+
   <header class="header-section ">
+    
     <div class="intro-header no-img">
+      
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="page-heading">
-              <h1>Posts</h1>
-              <hr class="small">
+              <h1>About</h1>
+                
+                
             </div>
           </div>
         </div>
@@ -171,112 +186,132 @@ if (!doNotTrack) {
     </div>
   </header>
 
+
     
-  <div class="container" role="main">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
         
-        <div class="posts-list">
-          
-            <article class="post-preview">
-              <a href="//www.utam0k.jp/blog/2018/05/24/rust_ci/">
-                <h2 class="post-title">RustでのCircleCiの導入</h2>
 
-                
-              </a>
+<h2 id="sns">SNS</h2>
 
-              <p class="post-meta">
-                <span class="post-meta">
-  
-  
-  <i class="fa fa-calendar-o"></i>&nbsp;Posted on May 24, 2018
-  
-  
-  &nbsp;|&nbsp;
-  <i class="fa fa-clock-o"></i> 2 minutes (223 words)
-  
-  
-</span>
+<ul>
+<li>Github: <a href="https://github.com/utam0k">utam0k</a></li>
+<li>Twitter: <a href="https://twitter.com/utam0k">@utam0k</a></li>
+<li>Mastodon: <a href="https://friends.nico/@utam0k">@utam0k</a></li>
+</ul>
 
+<h2 id="develop">Develop</h2>
 
-              </p>
-              <div class="post-entry">
-                
-                  最近初めてのRust開発で自作シェルのmicanを作っている。
-そこでCircleCiをがんばった。
-lint Rustのlintとしてrust-clippyが有名。
-結構便利で&quot;if let&quot;でもっとよくなるよ！とかも教えてくれて助かる。よく怒られて神ってなる。
-僕もだが初心者だとRustっぽい構文がわからないので導入すると助かる。
-helpのurlに行くと良い感じになぜだめなのか教えて頂けます。
-warning: writing`&amp;Vec&lt;_&gt;`insteadof`&amp;[_]`involvesonemorereferenceandcannotbeusedwithnon-Vec-basedslices.--&gt; src/readline/reader.rs:154:29|154|fn find_bind(&amp;self,ch: &amp;Vec&lt;u8&gt;)-&gt; Option&lt;Keybind&gt;{|^^^^^^^^help: changethisto: `&amp;[u8]`|=note: #[warn(ptr_arg)]onbydefault=help: forfurtherinformationvisithttps://rust-lang-nursery.github.io/rust-clippy/v0.0.200/index.html#ptr_arg warning: `if_{..}else{..}`isanexpression--&gt; src/readline/editor.rs:76:13|76|/letindex: usize;77||ifself.completer_index&gt;self.completions.len(){78||self.completer_index=1;79||index=1;80||}else{81||index=self.completer_index;82||}||_____________^help: itismoreidiomatictowrite: `letindex=ifself.completer_index&gt;self.completions.len(){..;1}else{self.completer_index};`|=note: #[warn(useless_let_if_seq)]onbydefault=help: forfurtherinformationvisithttps://rust-lang-nursery.github.io/rust-clippy/v0.0.200/index.html#useless_let_if_seq rust-clippyの導入にはnightly版のRustが必要 CIの導入の際にnightly版のRustが必要になる。
-仕方のないことだがrust-clippyは最新のnightlyだと動かないことがある。
-実際に最新版で動かなくてプルリクエストを出した。
-よってCIで導入する際はRustのバージョンを固定しましょう。
-インストールはcargoで簡単に入れれます。
-オプションでどのくらい厳しくチェックするかを決めれます。
-clippy_pedanticが一番厳しくチェックされます。
--run:name:lintcommand:| export PATH=~/.cargo/bin:$PATH rustup install nightly-2018-05-16 cargo +nightly-2018-05-16 install clippy --vers 0.0.200 --force cargo +nightly-2018-05-16 clippy --release -- -Dclippy_pedantic テストカバレージ kcovとCodecovを使っていきます。
-現状だとkcovはラインカバレージのみのサポートなのでブランチカバレージ等はできません。
-参考
-Codecov以外にも簡単に他のも導入できます。 kcovに例がいっぱいあります。
-テストカバレージについてはもっと良い方法があったら教えてほしいです。
-micanだとこんな感じになります。
-いんすとーる！
--run:name:kcovcommand:| wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz tar xzf master.tar.gz cd kcov-master mkdir build cd build cmake .
-                  <a href="//www.utam0k.jp/blog/2018/05/24/rust_ci/" class="post-read-more">[Read More]</a>
-                
-              </div>
+<ul>
+<li><a href="https://github.com/utam0k/mican">mican</a></li>
+</ul>
 
-              
-                <div class="blog-tags">
-                  
-                    <a href="//www.utam0k.jp//tags/tech/">tech</a>&nbsp;
-                  
-                    <a href="//www.utam0k.jp//tags/rust/">rust</a>&nbsp;
-                  
-                </div>
-              
+<h2 id="interst">Interst</h2>
 
-            </article>
-          
-            <article class="post-preview">
-              <a href="//www.utam0k.jp/blog/2018/05/23/start/">
-                <h2 class="post-title">ブログを始める</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                <span class="post-meta">
-  
-  
-  <i class="fa fa-calendar-o"></i>&nbsp;Posted on May 23, 2018
-  
-  
-  &nbsp;|&nbsp;
-  <i class="fa fa-clock-o"></i> 1 minutes (1 words)
-  
-  
-</span>
+<ul>
+<li>Rust</li>
+<li>Mastodon</li>
+<li>System programming</li>
+</ul>
 
 
-              </p>
-              <div class="post-entry">
-                
-                  <p>ブログを始めた。</p>
-
-                
-              </div>
-
-              
-
-            </article>
-          
-        </div>
         
-      </div>
+
+        
+            <hr/>
+            <section id="social-share">
+              <ul class="list-inline footer-links">
+                
+
+
+<li>
+    <a href="//twitter.com/share?url=%2f%2fwww.utam0k.jp%2fpage%2fabout%2f&amp;text=About&amp;via=utam0k"
+       target="_blank" alt="" title="Share on Twitter">
+        <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+    </a>
+</li>
+
+
+<li>
+    <a href="//plus.google.com/share?url=%2f%2fwww.utam0k.jp%2fpage%2fabout%2f" target="_blank" title="Share on Google Plus">
+         <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-google-plus fa-stack-1x fa-inverse"></i>
+              </span>
+    </a>
+</li>
+
+
+<li>
+    <a href="//www.facebook.com/sharer/sharer.php?u=%2f%2fwww.utam0k.jp%2fpage%2fabout%2f" target="_blank" title="Share on Facebook">
+        <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+              </span>
+    </a>
+</li>
+
+
+<li>
+    <a href="//reddit.com/submit?url=%2f%2fwww.utam0k.jp%2fpage%2fabout%2f&amp;title=About" target="_blank" title="Share on Reddit">
+         <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-reddit fa-stack-1x fa-inverse"></i>
+              </span>
+    </a>
+</li>
+
+
+<li>
+    <a href="//www.linkedin.com/shareArticle?url=%2f%2fwww.utam0k.jp%2fpage%2fabout%2f&amp;title=About" target="_blank"
+       title="Share on LinkedIn">
+         <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+              </span>
+    </a>
+</li>
+
+
+<li>
+    <a href="//www.stumbleupon.com/submit?url=%2f%2fwww.utam0k.jp%2fpage%2fabout%2f&amp;title=About" target="_blank"
+       title="Share on StumbleUpon">
+        <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-stumbleupon fa-stack-1x fa-inverse"></i>
+              </span>
+    </a>
+</li>
+
+
+<li>
+    <a href="//www.pinterest.com/pin/create/button/?url=%2f%2fwww.utam0k.jp%2fpage%2fabout%2f&amp;description=About" target="_blank"
+       title="Share on Pinterest">
+         <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-pinterest fa-stack-1x fa-inverse"></i>
+              </span>
+    </a>
+</li>
+
+              </ul>
+            </section>
+        
+      </article>
+
+      
+
+
+      
+
     </div>
   </div>
+</div>
 
     <footer>
   <div class="container">
@@ -311,7 +346,7 @@ micanだとこんな感じになります。
           
           <li>
             
-            <a href="//www.utam0k.jp/post/index.xml" title="RSS">
+            <a href="//www.utam0k.jp/index.xml" title="RSS">
             
               <span class="fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>

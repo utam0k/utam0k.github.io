@@ -8,7 +8,7 @@
   </url>
   
   <url>
-    <loc>//www.utam0k.jp/blog/2018/05/24/about/</loc>
+    <loc>//www.utam0k.jp/page/about/</loc>
     <lastmod>2018-05-24T13:12:48+09:00</lastmod>
   </url>
   
@@ -23,20 +23,14 @@
   </url>
   
   <url>
-    <loc>//www.utam0k.jp/tags/circleci/</loc>
-    <lastmod>2018-05-24T16:34:42+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>//www.utam0k.jp/categories/diary/</loc>
     <lastmod>2018-05-23T13:58:35+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>//www.utam0k.jp/tags/mican/</loc>
-    <lastmod>2018-05-24T16:34:42+09:00</lastmod>
+    <loc>//www.utam0k.jp/page/</loc>
+    <lastmod>2018-05-24T13:12:48+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -53,18 +47,6 @@
   </url>
   
   <url>
-    <loc>//www.utam0k.jp/categories/rust/</loc>
-    <lastmod>2018-05-24T16:34:42+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>//www.utam0k.jp/tags/rust-clippy/</loc>
-    <lastmod>2018-05-24T16:34:42+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>//www.utam0k.jp/tags/</loc>
     <lastmod>2018-05-24T16:34:42+09:00</lastmod>
     <priority>0</priority>
@@ -72,12 +54,6 @@
   
   <url>
     <loc>//www.utam0k.jp/tags/tech/</loc>
-    <lastmod>2018-05-24T16:34:42+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>//www.utam0k.jp/categories/tech/</loc>
     <lastmod>2018-05-24T16:34:42+09:00</lastmod>
     <priority>0</priority>
   </url>

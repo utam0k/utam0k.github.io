@@ -5,7 +5,6 @@
     <link>//www.utam0k.jp/</link>
     <description>Recent content on うたもく</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>ja-jp</language>
     <managingEditor>koma@utam0k.jp (Toru Komatsu)</managingEditor>
     <webMaster>koma@utam0k.jp (Toru Komatsu)</webMaster>
     <lastBuildDate>Thu, 24 May 2018 16:34:42 +0900</lastBuildDate>
@@ -25,15 +24,29 @@ lint Rustのlintとしてrust-clippyが有名。
 結構便利で&amp;quot;if let&amp;quot;でもっとよくなるよ！とかも教えてくれて助かる。よく怒られて神ってなる。
 僕もだが初心者だとRustっぽい構文がわからないので導入すると助かる。
 helpのurlに行くと良い感じになぜだめなのか教えて頂けます。
-warning: writing `&amp;amp;Vec&amp;lt;_&amp;gt;` instead of `&amp;amp;[_]` involves one more reference and cannot be used with non-Vec-based slices. --&amp;gt; src/readline/reader.rs:154:29 | 154 | fn find_bind(&amp;amp;self, ch: &amp;amp;Vec&amp;lt;u8&amp;gt;) -&amp;gt; Option&amp;lt;Keybind&amp;gt; { | ^^^^^^^^ help: change this to: `&amp;amp;[u8]` | = note: #[warn(ptr_arg)] on by default = help: for further information visit https://rust-lang-nursery.github.io/rust-clippy/v0.0.200/index.html#ptr_arg  warning: `if _ { .. } else { .. }` is an expression --&amp;gt; src/readline/editor.</description>
+warning: writing`&amp;amp;Vec&amp;lt;_&amp;gt;`insteadof`&amp;amp;[_]`involvesonemorereferenceandcannotbeusedwithnon-Vec-basedslices.--&amp;gt; src/readline/reader.rs:154:29|154|fn find_bind(&amp;amp;self,ch: &amp;amp;Vec&amp;lt;u8&amp;gt;)-&amp;gt; Option&amp;lt;Keybind&amp;gt;{|^^^^^^^^help: changethisto: `&amp;amp;[u8]`|=note: #[warn(ptr_arg)]onbydefault=help: forfurtherinformationvisithttps://rust-lang-nursery.github.io/rust-clippy/v0.0.200/index.html#ptr_arg warning: `if_{..}else{..}`isanexpression--&amp;gt; src/readline/editor.rs:76:13|76|/letindex: usize;77||ifself.completer_index&amp;gt;self.completions.len(){78||self.completer_index=1;79||index=1;80||}else{81||index=self.completer_index;82||}||_____________^help: itismoreidiomatictowrite: `letindex=ifself.completer_index&amp;gt;self.completions.len(){..;1}else{self.completer_index};`|=note: #[warn(useless_let_if_seq)]onbydefault=help: forfurtherinformationvisithttps://rust-lang-nursery.github.io/rust-clippy/v0.0.200/index.html#useless_let_if_seq rust-clippyの導入にはnightly版のRustが必要 CIの導入の際にnightly版のRustが必要になる。
+仕方のないことだがrust-clippyは最新のnightlyだと動かないことがある。
+実際に最新版で動かなくてプルリクエストを出した。
+よってCIで導入する際はRustのバージョンを固定しましょう。
+インストールはcargoで簡単に入れれます。
+オプションでどのくらい厳しくチェックするかを決めれます。
+clippy_pedanticが一番厳しくチェックされます。
+-run:name:lintcommand:| export PATH=~/.cargo/bin:$PATH rustup install nightly-2018-05-16 cargo +nightly-2018-05-16 install clippy --vers 0.0.200 --force cargo +nightly-2018-05-16 clippy --release -- -Dclippy_pedantic テストカバレージ kcovとCodecovを使っていきます。
+現状だとkcovはラインカバレージのみのサポートなのでブランチカバレージ等はできません。
+参考
+Codecov以外にも簡単に他のも導入できます。 kcovに例がいっぱいあります。
+テストカバレージについてはもっと良い方法があったら教えてほしいです。
+micanだとこんな感じになります。
+いんすとーる！
+-run:name:kcovcommand:| wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz tar xzf master.tar.gz cd kcov-master mkdir build cd build cmake .</description>
     </item>
     
     <item>
       <title>About</title>
-      <link>//www.utam0k.jp/blog/2018/05/24/about/</link>
+      <link>//www.utam0k.jp/page/about/</link>
       <pubDate>Thu, 24 May 2018 13:12:48 +0900</pubDate>
       <author>koma@utam0k.jp (Toru Komatsu)</author>
-      <guid>//www.utam0k.jp/blog/2018/05/24/about/</guid>
+      <guid>//www.utam0k.jp/page/about/</guid>
       <description> SNS  Github: utam0k Twitter: @utam0k Mastodon: @utam0k  Develop  mican  Interst  Rust Mastodon System programming  </description>
     </item>
     
