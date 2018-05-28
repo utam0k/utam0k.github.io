@@ -221,21 +221,7 @@ lint Rustのlintとしてrust-clippyが有名。
 結構便利で&quot;if let&quot;でもっとよくなるよ！とかも教えてくれて助かる。よく怒られて神ってなる。
 僕もだが初心者だとRustっぽい構文がわからないので導入すると助かる。
 helpのurlに行くと良い感じになぜだめなのか教えて頂けます。
-warning: writing`&amp;Vec&lt;_&gt;`insteadof`&amp;[_]`involvesonemorereferenceandcannotbeusedwithnon-Vec-basedslices.--&gt; src/readline/reader.rs:154:29|154|fn find_bind(&amp;self,ch: &amp;Vec&lt;u8&gt;)-&gt; Option&lt;Keybind&gt;{|^^^^^^^^help: changethisto: `&amp;[u8]`|=note: #[warn(ptr_arg)]onbydefault=help: forfurtherinformationvisithttps://rust-lang-nursery.github.io/rust-clippy/v0.0.200/index.html#ptr_arg warning: `if_{..}else{..}`isanexpression--&gt; src/readline/editor.rs:76:13|76|/letindex: usize;77||ifself.completer_index&gt;self.completions.len(){78||self.completer_index=1;79||index=1;80||}else{81||index=self.completer_index;82||}||_____________^help: itismoreidiomatictowrite: `letindex=ifself.completer_index&gt;self.completions.len(){..;1}else{self.completer_index};`|=note: #[warn(useless_let_if_seq)]onbydefault=help: forfurtherinformationvisithttps://rust-lang-nursery.github.io/rust-clippy/v0.0.200/index.html#useless_let_if_seq rust-clippyの導入にはnightly版のRustが必要 CIの導入の際にnightly版のRustが必要になる。
-仕方のないことだがrust-clippyは最新のnightlyだと動かないことがある。
-実際に最新版で動かなくてプルリクエストを出した。
-よってCIで導入する際はRustのバージョンを固定しましょう。
-インストールはcargoで簡単に入れれます。
-オプションでどのくらい厳しくチェックするかを決めれます。
-clippy_pedanticが一番厳しくチェックされます。
--run:name:lintcommand:| export PATH=~/.cargo/bin:$PATH rustup install nightly-2018-05-16 cargo +nightly-2018-05-16 install clippy --vers 0.0.200 --force cargo +nightly-2018-05-16 clippy --release -- -Dclippy_pedantic テストカバレージ kcovとCodecovを使っていきます。
-現状だとkcovはラインカバレージのみのサポートなのでブランチカバレージ等はできません。
-参考
-Codecov以外にも簡単に他のも導入できます。 kcovに例がいっぱいあります。
-テストカバレージについてはもっと良い方法があったら教えてほしいです。
-micanだとこんな感じになります。
-いんすとーる！
--run:name:kcovcommand:| wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz tar xzf master.tar.gz cd kcov-master mkdir build cd build cmake .
+warning: writing`&amp;Vec&lt;_&gt;`insteadof`&amp;[_]`involvesonemorereferenceandcannotbeusedwithnon-Vec-basedslices.
                   <a href="//www.utam0k.jp/blog/2018/05/24/rust_ci/" class="post-read-more">[Read More]</a>
                 
               </div>
