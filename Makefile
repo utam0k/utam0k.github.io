@@ -1,5 +1,5 @@
 BLOG_PATH=public
-THEME=capsule
+THEME=beautifulhugo
 
 SOURCE_ORIGIN=git@github.com:utam0k/utam0k.github.io.git
 BLOG_ORIGIN=$(SOURCE_ORIGIN)
