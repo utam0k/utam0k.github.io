@@ -19,7 +19,7 @@ pygmentsCodefencesGuessSyntax: true
 googleAnalytics: "UA-119773781-1"
 
 Params:
-  logo: img/logo.svg
+  logo: img/logo.jpg
   favicon: img/favicon.ico
   socialShare: true
   comments: true
