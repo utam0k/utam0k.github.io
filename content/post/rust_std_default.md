@@ -2,7 +2,6 @@
 title: "Rustのstd::default::Default"
 date: 2018-05-28T21:56:49+09:00
 tags : [tech, rust]
-draft: true
 ---
 
 Rustのstdに[Default](https://doc.rust-lang.org/std/default/trait.Default.html)というのがある。  
