@@ -7,10 +7,23 @@
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>koma@utam0k.jp (Toru Komatsu)</managingEditor>
     <webMaster>koma@utam0k.jp (Toru Komatsu)</webMaster>
-    <lastBuildDate>Thu, 24 May 2018 16:34:42 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 28 May 2018 21:56:49 +0900</lastBuildDate>
     
 	<atom:link href="//www.utam0k.jp/tags/tech/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Rustのstd::default::Default</title>
+      <link>//www.utam0k.jp/blog/2018/05/28/rust_std_default/</link>
+      <pubDate>Mon, 28 May 2018 21:56:49 +0900</pubDate>
+      <author>koma@utam0k.jp (Toru Komatsu)</author>
+      <guid>//www.utam0k.jp/blog/2018/05/28/rust_std_default/</guid>
+      <description>RustのstdにDefaultというのがある。
+構造体のデフォルト値を決めることができる。
+実用例からlibcoreでのどのような実装になっているかを見てみた。
+traitはこんな感じ。
+pubtraitDefault{fn default()-&amp;gt; Self;} Example  Defaultなし</description>
+    </item>
     
     <item>
       <title>RustでのCircleCiの導入</title>
