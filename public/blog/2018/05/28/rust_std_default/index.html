@@ -250,7 +250,7 @@ Defaultを利用しないとこんな感じで<code>new()</code>を作るよう�
 
 <li><p>Defaultを使う<br />
 以下は<a href="https://doc.rust-lang.org/std/default/trait.Default.html">ドキュメント</a>のコードです。<br />
-<code>[#derive]</code><a href="http://rust-lang-ja.org/rust-by-example/attribute.html">アトリビュート</a>で<a href="https://doc.rust-lang.org/std/default/trait.Default.html">Default</a>を使うことで<code>Default::default()</code>が<code>SomeOptions::new()</code>の代わりになって<code>new()</code>を定義する必要がなくなりました！はい、便利。</p>
+<code>#[derive]</code><a href="http://rust-lang-ja.org/rust-by-example/attribute.html">アトリビュート</a>で<a href="https://doc.rust-lang.org/std/default/trait.Default.html">Default</a>を使うことで<code>Default::default()</code>が<code>SomeOptions::new()</code>の代わりになって<code>new()</code>を定義する必要がなくなりました！はい、便利。</p>
 <div class="highlight"><pre class="chroma"><code class="language-rust" data-lang="rust"><span class="cp">#[derive(Default)]</span><span class="w">
 </span><span class="w"></span><span class="k">struct</span> <span class="nc">SomeOptions</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span><span class="w">    </span><span class="n">foo</span>: <span class="kt">i32</span><span class="p">,</span><span class="w">
