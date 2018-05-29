@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on うたもく</title>
-    <link>www.utam0k.jp/post/</link>
+    <link>https//www.utam0k.jp/post/</link>
     <description>Recent content in Posts on うたもく</description>
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>koma@utam0k.jp (Toru Komatsu)</managingEditor>
     <webMaster>koma@utam0k.jp (Toru Komatsu)</webMaster>
     <lastBuildDate>Mon, 28 May 2018 21:56:49 +0900</lastBuildDate>
     
-	<atom:link href="www.utam0k.jp/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https//www.utam0k.jp/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Rustのstd::default::Default</title>
-      <link>www.utam0k.jp/blog/2018/05/28/rust_std_default/</link>
+      <link>https//www.utam0k.jp/blog/2018/05/28/rust_std_default/</link>
       <pubDate>Mon, 28 May 2018 21:56:49 +0900</pubDate>
       <author>koma@utam0k.jp (Toru Komatsu)</author>
-      <guid>www.utam0k.jp/blog/2018/05/28/rust_std_default/</guid>
+      <guid>https//www.utam0k.jp/blog/2018/05/28/rust_std_default/</guid>
       <description>RustのstdにDefaultというのがある。
 構造体のデフォルト値を決めることができる。
 実用例からlibcoreでのどのような実装になっているかを見てみた。
@@ -27,10 +27,10 @@ pubtraitDefault{fn default()-&amp;gt; Self;} Example  Defaultなし</description
     
     <item>
       <title>RustでのCircleCiの導入</title>
-      <link>www.utam0k.jp/blog/2018/05/24/rust_ci/</link>
+      <link>https//www.utam0k.jp/blog/2018/05/24/rust_ci/</link>
       <pubDate>Thu, 24 May 2018 16:34:42 +0900</pubDate>
       <author>koma@utam0k.jp (Toru Komatsu)</author>
-      <guid>www.utam0k.jp/blog/2018/05/24/rust_ci/</guid>
+      <guid>https//www.utam0k.jp/blog/2018/05/24/rust_ci/</guid>
       <description>最近初めてのRust開発で自作シェルのmicanを作っている。
 そこでCircleCiをがんばった。
 lint Rustのlintとしてrust-clippyが有名。
@@ -42,10 +42,10 @@ warning: writing`&amp;amp;Vec&amp;lt;_&amp;gt;`insteadof`&amp;amp;[_]`involveson
     
     <item>
       <title>ブログを始める</title>
-      <link>www.utam0k.jp/blog/2018/05/23/start/</link>
+      <link>https//www.utam0k.jp/blog/2018/05/23/start/</link>
       <pubDate>Wed, 23 May 2018 13:58:35 +0900</pubDate>
       <author>koma@utam0k.jp (Toru Komatsu)</author>
-      <guid>www.utam0k.jp/blog/2018/05/23/start/</guid>
+      <guid>https//www.utam0k.jp/blog/2018/05/23/start/</guid>
       <description>ブログを始めた。</description>
     </item>
     

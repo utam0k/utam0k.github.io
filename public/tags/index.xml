@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on うたもく</title>
-    <link>www.utam0k.jp/tags/</link>
+    <link>https//www.utam0k.jp/tags/</link>
     <description>Recent content in Tags on うたもく</description>
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>koma@utam0k.jp (Toru Komatsu)</managingEditor>
     <webMaster>koma@utam0k.jp (Toru Komatsu)</webMaster>
     <lastBuildDate>Mon, 28 May 2018 21:56:49 +0900</lastBuildDate>
     
-	<atom:link href="www.utam0k.jp/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https//www.utam0k.jp/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Rust</title>
-      <link>www.utam0k.jp/tags/rust/</link>
+      <link>https//www.utam0k.jp/tags/rust/</link>
       <pubDate>Mon, 28 May 2018 21:56:49 +0900</pubDate>
       <author>koma@utam0k.jp (Toru Komatsu)</author>
-      <guid>www.utam0k.jp/tags/rust/</guid>
+      <guid>https//www.utam0k.jp/tags/rust/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Tech</title>
-      <link>www.utam0k.jp/tags/tech/</link>
+      <link>https//www.utam0k.jp/tags/tech/</link>
       <pubDate>Mon, 28 May 2018 21:56:49 +0900</pubDate>
       <author>koma@utam0k.jp (Toru Komatsu)</author>
-      <guid>www.utam0k.jp/tags/tech/</guid>
+      <guid>https//www.utam0k.jp/tags/tech/</guid>
       <description></description>
     </item>
     
