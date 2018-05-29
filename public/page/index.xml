@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Pages on うたもく</title>
-    <link>//www.utam0k.jp/page/</link>
+    <link>https//www.utam0k.jp/page/</link>
     <description>Recent content in Pages on うたもく</description>
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>koma@utam0k.jp (Toru Komatsu)</managingEditor>
     <webMaster>koma@utam0k.jp (Toru Komatsu)</webMaster>
     <lastBuildDate>Thu, 24 May 2018 13:12:48 +0900</lastBuildDate>
     
-	<atom:link href="//www.utam0k.jp/page/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https//www.utam0k.jp/page/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>About</title>
-      <link>//www.utam0k.jp/page/about/</link>
+      <link>https//www.utam0k.jp/page/about/</link>
       <pubDate>Thu, 24 May 2018 13:12:48 +0900</pubDate>
       <author>koma@utam0k.jp (Toru Komatsu)</author>
-      <guid>//www.utam0k.jp/page/about/</guid>
+      <guid>https//www.utam0k.jp/page/about/</guid>
       <description> SNS  Github: utam0k Twitter: @utam0k Mastodon: @utam0k  Develop  mican  Interst  Rust Mastodon System programming  </description>
     </item>
     
