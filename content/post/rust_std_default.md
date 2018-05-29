@@ -39,10 +39,10 @@ Defaultを利用しないとこんな感じで`new()`を作るようになる。
 
 2. Defaultを使う    
 以下は[ドキュメント](https://doc.rust-lang.org/std/default/trait.Default.html)のコードです。   
-`[#derive]`[アトリビュート](http://rust-lang-ja.org/rust-by-example/attribute.html)で[Default](https://doc.rust-lang.org/std/default/trait.Default.html)を使うことで`Default::default()`が`SomeOptions::new()`の代わりになって`new()`を定義する必要がなくなりました！はい、便利。
+`#[derive]`[アトリビュート](http://rust-lang-ja.org/rust-by-example/attribute.html)で[Default](https://doc.rust-lang.org/std/default/trait.Default.html)を使うことで`Default::default()`が`SomeOptions::new()`の代わりになって`new()`を定義する必要がなくなりました！はい、便利。
 
     ```rust
-#[derive(Default)]
+    #[derive(Default)]
     struct SomeOptions {
         foo: i32,
         bar: f32,
@@ -189,3 +189,79 @@ default_impl! { bool, false, "Returns the default value of `false`" }
 
 これ以外にも`tuple`でも[実装](https://github.com/rust-lang/rust/blob/1.26.0/src/libcore/tuple.rs#L73-L78)されていた。  
 他にも[いっぱい](https://doc.rust-lang.org/std/default/trait.Default.html#implementors)あるみたいです。
+
+## 追記(2018-05-29)
+[lo48576さん](https://mastodon.cardina1.red/@lo48576)さんにこんなこともできるよと教えていただいたので追記。  
+
+### その1  
+`std::default::Default`は[prelude経由](https://github.com/rust-lang/rust/blob/1.26.0/src/libcore/prelude/v1.rs#L44)で自動的にインポートされています。
+`Default::default()`の代わりに`SomeOptions::default()`でできます。  
+
+*Example1の改良*
+```rust
+#[derive(Default)]
+struct SomeOptions {
+    foo: i32,
+    bar: f32,
+}
+
+fn main() {
+    let options = SomeOptions::default();
+}
+```
+
+### その2  
+`#[derive(Default)]`を用いた以下のようなコードはコンパイルが通りません。 
+
+`Option`のデフォルトは`None`なので`NoDefault構造体`は`Default`を実装する必要がありません。  
+コンパイルを通するには`Default`を実装します。  
+
+{{< columns >}}
+*NG:*
+```rust
+// Struct with no default impl.
+struct NoDefault;
+
+#[derive(Default)]
+struct SomeOptions<Content> {
+    foo: Option<Content>,
+    bar: f32,
+}
+
+fn main() {
+    // ERROR!
+    // error[E0599]: no function or associated 
+    // item named `default` found for type 
+    // `SomeOptions<NoDefault>` in the 
+    // current scope
+    let _ = SomeOptions::<NoDefault>::default(); // NG
+}
+```
+{{< column >}}
+*OK:*
+```rust
+// Struct with no default impl.
+struct NoDefault;
+
+struct SomeOptions<Content> {
+    foo: Option<Content>,
+    bar: f32,
+}
+
+impl<Content> Default for SomeOptions<Content> {
+    fn default() -> Self {
+        Self {
+            foo: Default::default(),
+            bar: Default::default(),
+        }
+    }
+}
+
+fn main() {
+    let _ = SomeOptions::<NoDefault>::default(); // OK
+}
+```
+{{< endcolumns >}}
+
+[qnighyさんの記事](http://qnighy.hatenablog.com/entry/2017/06/01/070000)や[lo48576さんの記事](https://blog.cardina1.red/2016/03/24/rust-default-wont-compile/)
+の記事が参考になると思います。 

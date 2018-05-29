@@ -1,20 +1,16 @@
-baseURL: "//www.utam0k.jp/"
+baseurl: "https//www.utam0k.jp"
 DefaultContentLanguage: "en"
 # DefaultContentLanguage: "ja"
 title: "うたもく"
 theme: beautifulhugo
-canonifyurls: true
 permalinks:
   post: /blog/:year/:month/:day/:filename
 
 MetaDataFormat: "yaml"
 enableRobotsTXT: true
 
-# pygmentsStyle: "monokai"
-pygmentsStyle: "trac"
-pygmentsUseClasses: true
 pygmentsCodeFences: true
-pygmentsCodefencesGuessSyntax: true
+pygmentsUseClasses: true
 
 summaryLength: 10
 
@@ -28,7 +24,6 @@ Params:
   commit: false
   rss: true
   readingTime: true
-  useHLJS: true
   categories: true
   dateFormat: January 2, 2006
 
