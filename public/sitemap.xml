@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://www.utam0k.jp/blog/2018/10/12/r9cc/</loc>
+    <lastmod>2018-10-12T12:15:41+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://www.utam0k.jp/blog/2018/05/28/rust_std_default/</loc>
     <lastmod>2018-05-28T21:56:49+09:00</lastmod>
   </url>
@@ -41,7 +46,7 @@
   
   <url>
     <loc>https://www.utam0k.jp/post/</loc>
-    <lastmod>2018-05-28T21:56:49+09:00</lastmod>
+    <lastmod>2018-10-12T12:15:41+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -65,7 +70,7 @@
   
   <url>
     <loc>https://www.utam0k.jp/</loc>
-    <lastmod>2018-05-28T21:56:49+09:00</lastmod>
+    <lastmod>2018-10-12T12:15:41+09:00</lastmod>
     <priority>0</priority>
   </url>
   
