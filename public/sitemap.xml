@@ -33,6 +33,12 @@
   </url>
   
   <url>
+    <loc>https://www.utam0k.jp/tags/compiler/</loc>
+    <lastmod>2018-10-12T12:15:41+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://www.utam0k.jp/categories/diary/</loc>
     <lastmod>2018-05-23T13:58:35+09:00</lastmod>
     <priority>0</priority>
@@ -52,13 +58,13 @@
   
   <url>
     <loc>https://www.utam0k.jp/tags/rust/</loc>
-    <lastmod>2018-05-28T21:56:49+09:00</lastmod>
+    <lastmod>2018-10-12T12:15:41+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.utam0k.jp/tags/</loc>
-    <lastmod>2018-05-28T21:56:49+09:00</lastmod>
+    <lastmod>2018-10-12T12:15:41+09:00</lastmod>
     <priority>0</priority>
   </url>
   
