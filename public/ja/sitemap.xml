@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://www.utam0k.jp/blog/2018/10/12/r9cc/</loc>
+    <lastmod>2018-10-12T12:15:41+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.utam0k.jp/blog/2018/05/28/rust_std_default/</loc>
+    <lastmod>2018-05-28T21:56:49+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.utam0k.jp/blog/2018/05/24/rust_ci/</loc>
+    <lastmod>2018-05-24T16:34:42+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.utam0k.jp/page/about/</loc>
+    <lastmod>2018-05-24T13:12:48+09:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.utam0k.jp/en/page/about/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="https://www.utam0k.jp/page/about/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://www.utam0k.jp/blog/2018/05/23/start/</loc>
+    <lastmod>2018-05-23T13:58:35+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.utam0k.jp/categories/</loc>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.utam0k.jp/en/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="https://www.utam0k.jp/categories/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://www.utam0k.jp/tags/compiler/</loc>
+    <lastmod>2018-10-12T12:15:41+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.utam0k.jp/categories/diary/</loc>
+    <lastmod>2018-05-23T13:58:35+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.utam0k.jp/page/</loc>
+    <lastmod>2018-05-24T13:12:48+09:00</lastmod>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.utam0k.jp/en/page/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="https://www.utam0k.jp/page/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://www.utam0k.jp/post/</loc>
+    <lastmod>2018-10-12T12:15:41+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.utam0k.jp/tags/rust/</loc>
+    <lastmod>2018-10-12T12:15:41+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.utam0k.jp/tags/</loc>
+    <lastmod>2018-10-12T12:15:41+09:00</lastmod>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.utam0k.jp/en/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="https://www.utam0k.jp/tags/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://www.utam0k.jp/tags/tech/</loc>
+    <lastmod>2018-05-28T21:56:49+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.utam0k.jp/</loc>
+    <lastmod>2018-10-12T12:15:41+09:00</lastmod>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.utam0k.jp/en/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="https://www.utam0k.jp/"
+                />
+  </url>
+  
+</urlset>

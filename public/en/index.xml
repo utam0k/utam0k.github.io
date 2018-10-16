@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Utam0k</title>
+    <link>https://www.utam0k.jp/en/</link>
+    <description>Recent content on Utam0k</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <managingEditor>koma@utam0k.jp (Toru Komatsu)</managingEditor>
+    <webMaster>koma@utam0k.jp (Toru Komatsu)</webMaster>
+    <lastBuildDate>Thu, 24 May 2018 13:12:48 +0900</lastBuildDate>
+    
+	<atom:link href="https://www.utam0k.jp/en/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>About</title>
+      <link>https://www.utam0k.jp/en/page/about/</link>
+      <pubDate>Thu, 24 May 2018 13:12:48 +0900</pubDate>
+      <author>koma@utam0k.jp (Toru Komatsu)</author>
+      <guid>https://www.utam0k.jp/en/page/about/</guid>
+      <description>About me I am a student.
+SNS  Twitter: @utam0k Github: utam0k Mastodon: @utam0k  Develop  mican</description>
+    </item>
+    
+  </channel>
+</rss>
