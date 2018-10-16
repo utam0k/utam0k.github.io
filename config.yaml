@@ -1,8 +1,7 @@
 baseurl: "https://www.utam0k.jp/"
 canonifyurls: true
 
-DefaultContentLanguage: "en"
-# DefaultContentLanguage: "ja"
+DefaultContentLanguage: "ja"
 title: "うたもく"
 theme: beautifulhugo
 permalinks:
@@ -17,6 +16,13 @@ pygmentsUseClasses: true
 summaryLength: 10
 
 googleAnalytics: "UA-119773781-1"
+
+languages:
+  ja:
+    weight: 1
+  en:
+    title: Utam0k
+    weight: 2
 
 Params:
   logo: img/logo.jpg
