@@ -7,32 +7,33 @@ draft: true
 ---
 
 ## Introduction
-セキュリティキャンを皮切りに自作Cコンパイラがとてもはやっていました。  
 Recently, self-made C compiler is popular in Japan because a lecture was held to teach who to make it.
-たのしそー僕もやりたい！！！！でもどうやるんだ？？？  
-しかし僕の周りには知る限りではコンパイラに強い人はいませんでした。  
+I did not participate in it but it seemed fun!!! However how can I do this???
+There were no compiler experts around me. Oh My God...   
 ※ **I have many many friends!**  
-誰にも頼ることなくCコンパイラを作るのは難しいのでは!?  
-でもコンパイラは魔法みたいでいやだから知りたい。
-本とかいろいろ眺めてみてもさっぱりわからなかったので誰でもできる方法はないかなーと考えたのが[9cc](https://github.com/rui314/9cc)をお手本にすることでした。
-ということで[9cc](https://github.com/rui314/9cc)のファーストコミットからすべてRustにしてみました。
-[9cc](https://github.com/rui314/9cc)は[rui314](https://twitter.com/rui314)さんがやられているCコンパイラです。
-[9cc](https://github.com/rui314/9cc)のコードは可読性がとても高くとてもやりやすかったです。[9cc](https://github.com/rui314/9cc) ***神*** です。  
-おそらくこの方法で作るCコンパイラは事前知識はほとんど必要なくできると思います。   
-正直、やるだけだと思います(本当に *ｼｭｯ* です(ﾎﾝﾏ))。  
-もし同じようなことをやりたい人の参考になればawesomeです。
+It is difficult to make a C compiler without relying on anyone!?
+But I want to know compiler because it is too blackbox for me.
+Even though I looked at various books about compiler, 
+I did not understand at all, so I thought that there was no way anyone could do it was to model [9cc](https://github.com/rui314/9cc).
+Anyway I have transplanting all from the [9cc](https://github.com/rui314/9cc) first commit to Rust.
+[9cc](https://github.com/rui314/9cc) is a C compiler wirtten by [rui314](https://twitter.com/rui314).
+Codes of [9cc] (https://github.com/rui314/9cc) is very readable and very easy to do transplanting.
+[9cc](https://github.com/rui314/9cc) is ***God***.
+Perhaps I think that the C compiler you create with this method will require little prior knowledge.
+To be honest, only do it.
+I would be pleased if it would be helpful for those who would like to do the same thing.
 
-## Deliverables
-できあがっているブツ: [r9cc](https://github.com/utam0k/r9cc)   
+## Deliverable
+**My self-made C compiler: [r9cc](https://github.com/utam0k/r9cc)**   
 
-[9cc](https://github.com/rui314/9cc)の前作である[8cc](https://github.com/rui314/8cc)でも同じことを[チャレンジしていた](https://github.com/utam0k/r8cc)のですが  
-行き詰っていた & [9cc](https://github.com/rui314/9cc)がでた  
-ということで[9cc](https://github.com/rui314/9cc)の方に切り替えました。
-ということで実は2度目のチャレンジです。
+I was [challenging](https://github.com/utam0k/r8cc) the same thing with 9cc's previous work [8cc](https://github.com/rui314/8cc).
+However It was stalled and [9cc](https://github.com/rui314/9cc) came out.
+So I switched to [9cc](https://github.com/rui314/9cc).
+This is actually second challenge.
 
-[r9cc](https://github.com/utam0k/r9cc)ではコミットメッセージが大文字で始まるものが[9cc](https://github.com/rui314/9cc)から単純に移植しているものです。
-小文字で始まるものは独自のリファクタリングだったり独自機能だったりします。
-そろそろ日本語で書くのが疲れたので趣味で作った[r9cc](https://github.com/utam0k/r9cc)でもこのくらいのコードならコンパイルできるぜっていうのを読者に見せつけます。   
+In [r9cc](https://github.com/utam0k/r9cc), the first capital letter of the commit message is simply ported commit from [9cc](https://github.com/rui314/9cc).
+Since I was tired of writing in English soon, 
+I show reader that [r9cc](https://github.com/utam0k/r9cc) can compile this code.
 ``` c
 int fibdp[100];
 
@@ -56,7 +57,7 @@ int main() {
 }
 ```
 
-他にもこれくらいなら動きます。  
+There are other features like this.
 
 - 四則演算
 - 論理演算
