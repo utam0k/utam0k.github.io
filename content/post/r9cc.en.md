@@ -29,7 +29,7 @@ I would be pleased if it would be helpful for those who would like to do the sam
 I was [challenging](https://github.com/utam0k/r8cc) the same thing with 9cc's previous work [8cc](https://github.com/rui314/8cc).
 However It was stalled and [9cc](https://github.com/rui314/9cc) came out.
 So I switched to [9cc](https://github.com/rui314/9cc).
-This is actually second challenge.
+Actually, This is second challenge.
 
 In [r9cc](https://github.com/utam0k/r9cc), the first capital letter of the commit message is simply ported commit from [9cc](https://github.com/rui314/9cc).
 Since I was tired of writing in English soon, 
@@ -57,25 +57,25 @@ int main() {
 }
 ```
 
-There are other features like this.
+There are other features:
 
-- 四則演算
-- 論理演算
-- ローカル変数
-- グローバル変数
-- 引数[あり|なし]の関数呼び出し
-- 引数[あり|なし]の関数定義
-- 配列
-- ポインタ
+- Four arithmetic operations
+- Logical operation
+- Local variable
+- Global variable
+- Function call with args
+- Function definition
+- Array
+- Pointer
 - ++/\-\-
-- char/int型
-- 文字列リテラル
-- 構造体
+- char/int
+- String literal
+- Struct
 - extern
 - #include
-- コメント文
+- Comment
 
-[r9cc](https://github.com/utam0k/r9cc)の独自機能として配列の初期化時の代入も作ってみたのでこんなのも動きます。
+I also made assignments at the initialization of array as [r9cc](https://github.com/utam0k/r9cc)'s unique function, so this also works.
 ```c
 int main() {
   int x[3] = {10, 11, 12};
@@ -83,26 +83,23 @@ int main() {
 }
 ```
 
-これだけでも結構いろいろなCのコードがコンパイルできてびっくりしました。
+I was surprised that various C codes could be compiled quite a bit by only these features.
 
-## 気を付けたこと
-#### なにをしてるか把握する 
-おそらく各コミットを何も考えないででRustに書き換えることも可能です。
-このように**何もわからないままでもやり続けれてしまう**ことが1番怖いところだと思います。
-Rustの力は上がるかもしれませんが本質であるコンパイラを知ることはできません。
-Cじゃないの方が頭を使うかなと思ってRustにしました。
-正直Cでもよいと思います。
-できるだけ自分が作業しているコミットがなにをしているのかを意識して実装しました。
-以下の手順で読んでみてコミット全体を把握してから実装することを徹底していました。
+## Things to be careful
+#### Understand what I am doing
+It is possible to rewrite to Rust without considering each commit perhaps.
+I think that **continuing despite not understanding anything** is the most avoidable thing.
+I implemented it with as much as possible what the commit I was working on was doing.
+I was implementing it after grasping the whole commit by the following procedure.
 
-1. コミットメッセージを読む
-2. 追加されたテストコードを読んでみる
-3. コード全体を読む
+1. Reading a commit message.
+2. Reading the added test codes.
+3. Reading the entire code of commit.
 
-これに加えて今やってるコミットの+5コミット位を眺めて大まかな流れを把握していました。  
-独自機能を実装してみるのも自分がきちんとコードを把握できているのかチャックするのにはよいと思います。
+In addition to this I was grasping the rough flow by looking at the +5 commit position of the commit now doing.
+I think that it is good to check whether I can properly grasp the code by trying to implement the unique function.
 
-#### ちょっとずつ
+#### Step by step
 [r9cc](https://github.com/utam0k/r9cc)の[最初のコミット](https://github.com/utam0k/r9cc/commit/b8b44544eb51d6229f19033a5048043e628ab55a)はこんなもんです。
 [9cc](https://github.com/rui314/9cc)の[最初のコミット](https://github.com/rui314/9cc/commit/56e94442ae8844688d5390851e5b29ba0c946e2f)ももちろんそうです。
 数字を返すだけです。   
