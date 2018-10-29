@@ -100,13 +100,13 @@ In addition to this I was grasping the rough flow by looking at the +5 commit po
 I think that it is good to check whether I can properly grasp the code by trying to implement the unique function.
 
 #### Step by step
-[r9cc](https://github.com/utam0k/r9cc)の[最初のコミット](https://github.com/utam0k/r9cc/commit/b8b44544eb51d6229f19033a5048043e628ab55a)はこんなもんです。
-[9cc](https://github.com/rui314/9cc)の[最初のコミット](https://github.com/rui314/9cc/commit/56e94442ae8844688d5390851e5b29ba0c946e2f)ももちろんそうです。
-数字を返すだけです。   
-**こうみると誰でも出来そうじゃないですか!?**  
-最初は型なんかありませんでした。  
-構文解析だけを先に作るという方針ではなく、アセンブリを出力するところまでの**全体を均等的**に作っていきます。
-でかいものを作りたい気持ちはありましたが、ちょっとずつやっていきました。
+[First commit] (https://github.com/utam0k/r9cc/commit/b8b44544eb51d6229f19033a5048043e628ab55a) of [r9cc] (https://github.com/utam0k/r9cc) is as simple as this.
+[Fist commit](https://github.com/rui314/9cc/commit/56e94442ae8844688d5390851e5b29ba0c946e2f) of [9cc](https://github.com/rui314/9cc) also like this.
+It just returns a number.
+**Is anyone likely to be able to look at this!?**  
+There was not a type in the early days.
+It is not a policy to make syntactic analysis only first, but whole of up to where to output the assembly is made **evenly**.
+Although I wanted to make big things, I did it a bit at a time.
 
 #### 変数名や順序(追記 2018-10-13)
 変数名や関数の順番を[r9cc](https://github.com/utam0k/r9cc)とできるだけ一緒になるようにしました。
