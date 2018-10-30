@@ -100,9 +100,9 @@ In addition to this I was grasping the rough flow by looking at the +5 commit po
 I think that it is good to check whether I can properly grasp the code by trying to implement the unique function.
 
 #### Step by step
-[First commit] (https://github.com/utam0k/r9cc/commit/b8b44544eb51d6229f19033a5048043e628ab55a) of [r9cc] (https://github.com/utam0k/r9cc) is as simple as this.
+[First commit] (https://github.com/utam0k/r9cc/commit/b8b44544eb51d6229f19033a5048043e628ab55a) of [r9cc] (https://github.com/utam0k/r9cc) is as simple as this.  
 [Fist commit](https://github.com/rui314/9cc/commit/56e94442ae8844688d5390851e5b29ba0c946e2f) of [9cc](https://github.com/rui314/9cc) also like this.
-It just returns a number.
+It just returns a number.  
 **Is anyone likely to be able to look at this!?**  
 There was not a type in the early days.
 It is not a policy to make syntactic analysis only first, but whole of up to where to output the assembly is made **evenly**.
@@ -113,19 +113,19 @@ Although I wanted to make big things, I did it a bit at a time.
 [r9cc](https://github.com/utam0k/r9cc)には関数が書かれている場所(?)順番(?)にも意味を持っているところがあります。
 変数名や関数名もできるだけ一緒にしたほうがわかりやすくなると思います。
 
-## モチベーション
-**僕の周りにはコンパイラに興味のある人は少なかったためコンパイラについて話す相手はいませんでした。**  
-そうなると自分のとても強い意志でがんばるかどうにかしてモチベーションを保つ必要がありました。  
-僕には強い意志を持つ自信がなかったのでモチベーションを保つ方法を考えました。  
-一人でやるときの大きな壁がここだと思います。  
-目標を持つことでモチベーションを保つことができると思います。  
-まず、大きな目標として[rui314](https://twitter.com/rui314)さんの[記事](https://note.mu/ruiu/n/n00ebc977fd60)でも述べられていますがセキュリティキャンプではセルフホストを設定していたみたいです。
-[r9cc](https://github.com/utam0k/r9cc)はRustで書いているのでセルフホストはできないので今回はペアレントホストにしました。  
-ペアレントホストは勝手に僕が考えたのですが、参考にしている[9cc](https://github.com/rui314/9cc)をコンパイルできるということです。  
-ただ、この目標だけだとモチベーションを保てそうになかったのでもう少し小さな目標を考えました。  
-小さな目標は[9cc](https://github.com/rui314/9cc)の適当なコミットを目標にしました。  
-コミットの選び方は自分がわくわくするものを選んで勝手に目標にしていました。  
-僕が選んだの  
+## Motivation
+**I don't have anyone to talk about the compiler because I don't have friends who are interested in compiler in the real world.**  
+So I had to keep my motivation by somehow trying my best with strong will.
+Because I had no confidence to have a strong will, I thought about a way to keep motivation.
+I think that here is the big wall when I do it by myself.
+I think that it is possible to keep motivation by having a goal.
+I would like to set a self host as a big goal, but I could not do it because [r9cc](https://github.com/rui314/9cc) is written by Rust.
+So, I settled parent host as a big goal.
+The word `parent host` means that r9cc can compile [9cc](https://github.com/rui314/9cc).
+However, I thought about a little smaller goal because I was unlikely to keep motivation with just this goal.
+A small goal aimed at a reasonable commit of [9cc] (https://github.com/rui314/9cc).
+I chose commits that makes me exciting.  
+I chose:
 
 - [Compile a single number to a program that exits with the given number.](https://github.com/rui314/9cc/commit/56e94442ae8844688d5390851e5b29ba0c946e2f)
 - [Add variable.](https://github.com/rui314/9cc/commit/42e403e3de0c6457bc11ab14c55a9dad27ed82be)
@@ -138,16 +138,20 @@ Although I wanted to make big things, I did it a bit at a time.
 - [Implement "#include".](https://github.com/rui314/9cc/commit/a382606b9728ca33f5dedae4f6ca5cc3c9404838)
 
 コミットメッセージのタイトルだけでもわくわくしませんか。うん、しますね。  
-ここまで行くと`#include`が動くとか楽しみすぎでしょというモチベーションで少しずつやっていきました。  
+Do you feel excited about just only the title of the commit message? Yes, you do.
+ここのコミットまでできれば`#include`が動くとか楽しみすぎでしょというモチベーションで少しずつやっていきました。  
+I got it little by little with the motivation that `#include` will work or if it can be done to commit here, it is too fun.
 
-exampleも積極的に足していくとテンション爆上がりです。  
-[9cc](https://github.com/rui314/9cc)だと[nqueen.c](https://github.com/rui314/9cc/blob/master/examples/nqueen.c)だけですが、
-[r9cc](https://github.com/utam0k/r9cc)では[fib.c](https://github.com/utam0k/r9cc/blob/master/examples/fib.c)や[prime.c](https://github.com/utam0k/r9cc/blob/master/examples/prime.c)も足してみました。
-自分が書いたコードがコンパイルできた時はたのしー。
+As you add examples, the tension also increases a lot.
+It is only [nqueen.c](https://github.com/rui314/9cc/blob/master/examples/nqueen.c) if it is [9cc](https://github.com/rui314/9cc),
+but [fib.c](https://github.com/utam0k/r9cc/blob/master/examples/fib.c) and [prime.c](https://github.com/utam0k/r9cc/blob/master/examples/prime.c) 
+have also been added in [r9cc](https://github.com/utam0k/r9cc).
+It's fun when I compiled my code.
 
-## 終わりに
-とりあえず`#include`までできたので記事にしてみました。
-[r9cc](https://github.com/utam0k/r9cc)を作ることでコーディングはもちろんですが全然わからなかったコンパイラの世界が垣間見れたかなと思います。
+## Conclusion
+For the time being I was able to compile `#include`, so I made an article.
+Creating [r9cc] (https://github.com/utam0k/r9cc) improves programming skil, 
+furthermore I think that the world of the compiler that I did not understand at all was a glimpse.
 今後はペアレントホスト目指してちょっとずつ進んでいきます。
 自作Cコンパイラ人口が少しでも増えれば面白いかなと思います。  
 自作Cコンパイラはやっていてめちゃめちゃ楽しいのでおすすめです！  
