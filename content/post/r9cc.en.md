@@ -63,7 +63,7 @@ There are other features:
 - Logical operation
 - Local variable
 - Global variable
-- Function call with args
+- Function call with arguments
 - Function definition
 - Array
 - Pointer
@@ -108,11 +108,6 @@ There was not a type in the early days.
 It is not a policy to make syntactic analysis only first, but whole of up to where to output the assembly is made **evenly**.
 Although I wanted to make big things, I did it a bit at a time.
 
-#### 変数名や順序(追記 2018-10-13)
-変数名や関数の順番を[r9cc](https://github.com/utam0k/r9cc)とできるだけ一緒になるようにしました。
-[r9cc](https://github.com/utam0k/r9cc)には関数が書かれている場所(?)順番(?)にも意味を持っているところがあります。
-変数名や関数名もできるだけ一緒にしたほうがわかりやすくなると思います。
-
 ## Motivation
 **I don't have anyone to talk about the compiler because I don't have friends who are interested in compiler in the real world.**  
 So I had to keep my motivation by somehow trying my best with strong will.
@@ -152,30 +147,29 @@ It's fun when I compiled my code.
 For the time being I was able to compile `#include`, so I made an article.
 Creating [r9cc] (https://github.com/utam0k/r9cc) improves programming skil, 
 furthermore I think that the world of the compiler that I did not understand at all was a glimpse.
-今後はペアレントホスト目指してちょっとずつ進んでいきます。
-自作Cコンパイラ人口が少しでも増えれば面白いかなと思います。  
-自作Cコンパイラはやっていてめちゃめちゃ楽しいのでおすすめです！  
-***Rustまだまだ初心者なのでこんな書き方の方がいいよ的なプルリク待ってます。***  
-Rust固有のコンパイラを作るときに難したかった点はまた違う記事で書こうと思います。  
-***ﾜﾀｼ ｽｺｼ ﾎﾝﾉｽｺｼ ｼｰｹﾞﾝｺﾞﾃﾞｷﾙ***  
-くらいは言っても許されるかもしれない。  
-このような機会を与えてくれた[9cc](https://github.com/rui314/9cc)に感謝感謝です。
+In the future, I will aim for a `parent host` and go on a little by little.
+I think that it would be interesting if self-made C compiler population increased even a little.
+Because self-made C compiler is doing it is very fun and recommended!
+***I am still a beginner about Rust so I'm waiting for a good pull request.***  
+I'd like to write another article about the technical point unique to Rust.
+Even if I say  
+***I can develop C language a little***   
+it may be tolerated.
+Special thanks for [9cc](https://github.com/rui314/9cc) and [rui314](https://twitter.com/rui314).
 plz awesome.
 
-## 追記(2018-10-13)
-C言語ぽくまで動くまでには1.5週間くらいでした。
-`#include`ができるまでは2ヵ月くらいでした。
-もし自作コンパイラやってみようと思ってくれた方で質問や困ったことあったら[Twitter](https://twitter.com/utam0k)で
-DMなりメンションをもらえればできるだけ考えます！
+## Additional detail information
+It took me about 1.5 weeks to be able to compile like a general C compiler.
+It was about 2 months until `#include` was made.
+If you have any questions please do not hesitate to contact me on [Twitter](https://twitter.com/utam0k).
 
-学べたこと
+I learned:
 
-- アセンブリ
-- C言語の挙動
-- いろいろなレジスタの役割
-- スタックについて強くなった
+- Assembly
+- Behavior of C language
+- Role of various registers
+- Stack
 
 ## tcfm
-[rui314](https://twitter.com/rui314)さんがやられている[Turing Complete FM](https://turingcomplete.fm/)の紹介をします。  
-Cコンパイラの話など主に低レイヤの話が聞けます。  
-世の中にはすごい人しかいないのではと思えます。   
+Finally I introduce [Turing Complete FM](https://turingcomplete.fm/) which [rui314](https://twitter.com/rui314) is doing.
+You can listen mainly about low layer stories such as C compiler's story.
