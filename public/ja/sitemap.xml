@@ -5,16 +5,6 @@
   <url>
     <loc>https://www.utam0k.jp/blog/2018/10/12/r9cc/</loc>
     <lastmod>2018-10-12T12:15:41+09:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://www.utam0k.jp/en/blog/2018/10/12/r9cc/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="https://www.utam0k.jp/blog/2018/10/12/r9cc/"
-                />
   </url>
   
   <url>
@@ -66,16 +56,6 @@
     <loc>https://www.utam0k.jp/tags/compiler/</loc>
     <lastmod>2018-10-12T12:15:41+09:00</lastmod>
     <priority>0</priority>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://www.utam0k.jp/en/tags/compiler/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="https://www.utam0k.jp/tags/compiler/"
-                />
   </url>
   
   <url>
@@ -104,32 +84,12 @@
     <loc>https://www.utam0k.jp/post/</loc>
     <lastmod>2018-10-12T12:15:41+09:00</lastmod>
     <priority>0</priority>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://www.utam0k.jp/en/post/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="https://www.utam0k.jp/post/"
-                />
   </url>
   
   <url>
     <loc>https://www.utam0k.jp/tags/rust/</loc>
     <lastmod>2018-10-12T12:15:41+09:00</lastmod>
     <priority>0</priority>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://www.utam0k.jp/en/tags/rust/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="https://www.utam0k.jp/tags/rust/"
-                />
   </url>
   
   <url>
