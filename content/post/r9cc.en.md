@@ -1,39 +1,38 @@
 ---
-title: Self-made C compiler by oneself.
+title: A method of self-made C compiler which even a beginner can do
 subtitle: C compiler written by Rust.
 date: 2018-10-12T12:15:41+09:00
 tags : [rust, compiler]
-draft: true
 ---
 
 ## Introduction
-Recently, self-made C compiler is popular in Japan because a lecture was held to teach who to make it.
-I did not participate in it but it seemed fun!!! However how can I do this???
+Recently, self-made C compilers are popular in Japan because a lecture was held to teach about who to make them.
+I did not participate in it but it seemed fun!!! However, how can I do this???
 There were no compiler experts around me. Oh My God...   
 ※ **I have many many friends!**  
 It is difficult to make a C compiler without relying on anyone!?
-But I want to know compiler because it is too blackbox for me.
-Even though I looked at various books about compiler, 
-I did not understand at all, so I thought that there was no way anyone could do it was to model [9cc](https://github.com/rui314/9cc).
-Anyway I have transplanting all from the [9cc](https://github.com/rui314/9cc) first commit to Rust.
-[9cc](https://github.com/rui314/9cc) is a C compiler wirtten by [rui314](https://twitter.com/rui314).
-Codes of [9cc] (https://github.com/rui314/9cc) is very readable and very easy to do transplanting.
+But I want to know about compilers because they are like too blackboxes for me.
+Even though I looked at various books about compilers, 
+I did not understand them at all, so I thought that the only way to do it was to model [9cc](https://github.com/rui314/9cc).
+Anyway, I have been transplanting all of the [9cc](https://github.com/rui314/9cc) first commit to Rust.
+[9cc](https://github.com/rui314/9cc) is a C compiler written by [rui314](https://twitter.com/rui314).
+Codes of [9cc] (https://github.com/rui314/9cc) are very readable and very easy to transplant.
 [9cc](https://github.com/rui314/9cc) is ***God***.
-Perhaps I think that the C compiler you create with this method will require little prior knowledge.
-To be honest, only do it.
-I would be pleased if it would be helpful for those who would like to do the same thing.
+I think that the C compiler you create with this method will require little prior knowledge.
+To be honest, you just have to do it.
+I would be pleased if this would be helpful for those who would like to do the same thing.
 
 ## Deliverable
 **My self-made C compiler: [r9cc](https://github.com/utam0k/r9cc)**   
 
 I was [challenging](https://github.com/utam0k/r8cc) the same thing with 9cc's previous work [8cc](https://github.com/rui314/8cc).
-However It was stalled and [9cc](https://github.com/rui314/9cc) came out.
-So I switched to [9cc](https://github.com/rui314/9cc).
-Actually, This is second challenge.
+However It stalled and [9cc](https://github.com/rui314/9cc) came out,
+so I switched to [9cc](https://github.com/rui314/9cc).
+Actually, this is my second challenge.
 
 In [r9cc](https://github.com/utam0k/r9cc), the first capital letter of the commit message is simply ported commit from [9cc](https://github.com/rui314/9cc).
-Since I was tired of writing in English soon, 
-I show reader that [r9cc](https://github.com/utam0k/r9cc) can compile this code.
+Since I became tired of writing in English quikly, 
+I will show readers that [r9cc](https://github.com/utam0k/r9cc) can compile this code.
 ``` c
 int fibdp[100];
 
@@ -83,9 +82,9 @@ int main() {
 }
 ```
 
-I was surprised that various C codes could be compiled quite a bit by only these features.
+I was surprised that various C codes could be compiled with only using these features.
 
-## Things to be careful
+## Things to be careful of
 #### Understand what I am doing
 It is possible to rewrite to Rust without considering each commit perhaps.
 I think that **continuing despite not understanding anything** is the most avoidable thing.
@@ -96,7 +95,7 @@ I was implementing it after grasping the whole commit by the following procedure
 2. Reading the added test codes.
 3. Reading the entire code of commit.
 
-In addition to this I was grasping the rough flow by looking at the +5 commit position of the commit now doing.
+In addition to this, I was grasping the rough flow by looking at the +5 commit positions of the commit I am now doing.
 I think that it is good to check whether I can properly grasp the code by trying to implement the unique function.
 
 #### Step by step
@@ -109,17 +108,17 @@ It is not a policy to make syntactic analysis only first, but whole of up to whe
 Although I wanted to make big things, I did it a bit at a time.
 
 ## Motivation
-**I don't have anyone to talk about the compiler because I don't have friends who are interested in compiler in the real world.**  
-So I had to keep my motivation by somehow trying my best with strong will.
+**I don't have anyone to talk with about the compiler because I don't have friends who are interested in compilers in the real world.**  
+So, I had to keep my motivation by somehow trying my best with strong will.
 Because I had no confidence to have a strong will, I thought about a way to keep motivation.
 I think that here is the big wall when I do it by myself.
-I think that it is possible to keep motivation by having a goal.
-I would like to set a self host as a big goal, but I could not do it because [r9cc](https://github.com/rui314/9cc) is written by Rust.
-So, I settled parent host as a big goal.
+I think that it is possible to keep my motivation by having a goal.
+I would like to set a self-host as a big goal, but I could not do it because [r9cc](https://github.com/rui314/9cc) is written by Rust.
+So, I settled with a parent host as a big goal.
 The word `parent host` means that r9cc can compile [9cc](https://github.com/rui314/9cc).
-However, I thought about a little smaller goal because I was unlikely to keep motivation with just this goal.
-A small goal aimed at a reasonable commit of [9cc] (https://github.com/rui314/9cc).
-I chose commits that makes me exciting.  
+However, I thought about a smaller goal because I was unlikely to keep motivation with just this goal.
+The small goal is aimed at a reasonable commit of [9cc] (https://github.com/rui314/9cc).
+I chose commits that make me excited.  
 I chose:
 
 - [Compile a single number to a program that exits with the given number.](https://github.com/rui314/9cc/commit/56e94442ae8844688d5390851e5b29ba0c946e2f)
@@ -132,12 +131,10 @@ I chose:
 - [Add pre/post increment/decrement operators.](https://github.com/rui314/9cc/commit/a406a04660d848e083d7b39610409fd9ba497142)
 - [Implement "#include".](https://github.com/rui314/9cc/commit/a382606b9728ca33f5dedae4f6ca5cc3c9404838)
 
-コミットメッセージのタイトルだけでもわくわくしませんか。うん、しますね。  
-Do you feel excited about just only the title of the commit message? Yes, you do.
-ここのコミットまでできれば`#include`が動くとか楽しみすぎでしょというモチベーションで少しずつやっていきました。  
-I got it little by little with the motivation that `#include` will work or if it can be done to commit here, it is too fun.
+Do you feel excited by just seeing the title of the commit message? Yes, you do.
+I got it little by little with the motivation that `#include` will work or if it can be done by commit here, it is really fun.
 
-As you add examples, the tension also increases a lot.
+As you add examples, tension also increases a lot.
 It is only [nqueen.c](https://github.com/rui314/9cc/blob/master/examples/nqueen.c) if it is [9cc](https://github.com/rui314/9cc),
 but [fib.c](https://github.com/utam0k/r9cc/blob/master/examples/fib.c) and [prime.c](https://github.com/utam0k/r9cc/blob/master/examples/prime.c) 
 have also been added in [r9cc](https://github.com/utam0k/r9cc).
@@ -145,11 +142,11 @@ It's fun when I compiled my code.
 
 ## Conclusion
 For the time being I was able to compile `#include`, so I made an article.
-Creating [r9cc] (https://github.com/utam0k/r9cc) improves programming skil, 
-furthermore I think that the world of the compiler that I did not understand at all was a glimpse.
+Creating [r9cc] (https://github.com/utam0k/r9cc) improves programming skills, 
+and furthermore, I think that the world of the compiler that I did not understand at all was just a glimpse.
 In the future, I will aim for a `parent host` and go on a little by little.
-I think that it would be interesting if self-made C compiler population increased even a little.
-Because self-made C compiler is doing it is very fun and recommended!
+I think that it would be interesting if the self-made C compiler population increased even a little,
+because self-made C compiling is very fun and recommended!
 ***I am still a beginner about Rust so I'm waiting for a good pull request.***  
 I'd like to write another article about the technical point unique to Rust.
 Even if I say  
@@ -159,7 +156,7 @@ Special thanks for [9cc](https://github.com/rui314/9cc) and [rui314](https://twi
 plz awesome.
 
 ## Additional detail information
-It took me about 1.5 weeks to be able to compile like a general C compiler.
+It took me about 1.5 weeks to be able to compile somthing like a general C compiler.
 It was about 2 months until `#include` was made.
 If you have any questions please do not hesitate to contact me on [Twitter](https://twitter.com/utam0k).
 
@@ -171,5 +168,5 @@ I learned:
 - Stack
 
 ## tcfm
-Finally I introduce [Turing Complete FM](https://turingcomplete.fm/) which [rui314](https://twitter.com/rui314) is doing.
+Finally, I will introduce [Turing Complete FM](https://turingcomplete.fm/), which [rui314](https://twitter.com/rui314) is doing.
 You can listen mainly about low layer stories such as C compiler's story.
