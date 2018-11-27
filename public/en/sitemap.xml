@@ -3,6 +3,21 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://www.utam0k.jp/en/blog/2018/10/12/r9cc/</loc>
+    <lastmod>2018-10-12T12:15:41+09:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="https://www.utam0k.jp/blog/2018/10/12/r9cc/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.utam0k.jp/en/blog/2018/10/12/r9cc/"
+                />
+  </url>
+  
+  <url>
     <loc>https://www.utam0k.jp/en/page/about/</loc>
     <lastmod>2018-05-24T13:12:48+09:00</lastmod>
     <xhtml:link
@@ -14,20 +29,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://www.utam0k.jp/en/page/about/"
-                />
-  </url>
-  
-  <url>
-    <loc>https://www.utam0k.jp/en/blog/1/01/01/r9cc/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="https://www.utam0k.jp/blog/2018/10/12/r9cc/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://www.utam0k.jp/en/blog/1/01/01/r9cc/"
                 />
   </url>
   
@@ -48,6 +49,7 @@
   
   <url>
     <loc>https://www.utam0k.jp/en/tags/compiler/</loc>
+    <lastmod>2018-10-12T12:15:41+09:00</lastmod>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
@@ -79,6 +81,7 @@
   
   <url>
     <loc>https://www.utam0k.jp/en/post/</loc>
+    <lastmod>2018-10-12T12:15:41+09:00</lastmod>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
@@ -94,6 +97,7 @@
   
   <url>
     <loc>https://www.utam0k.jp/en/tags/rust/</loc>
+    <lastmod>2018-10-12T12:15:41+09:00</lastmod>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
@@ -109,6 +113,7 @@
   
   <url>
     <loc>https://www.utam0k.jp/en/tags/</loc>
+    <lastmod>2018-10-12T12:15:41+09:00</lastmod>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
@@ -124,7 +129,7 @@
   
   <url>
     <loc>https://www.utam0k.jp/en/</loc>
-    <lastmod>2018-05-24T13:12:48+09:00</lastmod>
+    <lastmod>2018-10-12T12:15:41+09:00</lastmod>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"

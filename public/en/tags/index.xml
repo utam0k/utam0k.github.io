@@ -7,6 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>koma@utam0k.jp (Toru Komatsu)</managingEditor>
     <webMaster>koma@utam0k.jp (Toru Komatsu)</webMaster>
+    <lastBuildDate>Fri, 12 Oct 2018 12:15:41 +0900</lastBuildDate>
     
 	<atom:link href="https://www.utam0k.jp/en/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +15,7 @@
     <item>
       <title>Compiler</title>
       <link>https://www.utam0k.jp/en/tags/compiler/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 12 Oct 2018 12:15:41 +0900</pubDate>
       <author>koma@utam0k.jp (Toru Komatsu)</author>
       <guid>https://www.utam0k.jp/en/tags/compiler/</guid>
       <description></description>
@@ -23,7 +24,7 @@
     <item>
       <title>Rust</title>
       <link>https://www.utam0k.jp/en/tags/rust/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 12 Oct 2018 12:15:41 +0900</pubDate>
       <author>koma@utam0k.jp (Toru Komatsu)</author>
       <guid>https://www.utam0k.jp/en/tags/rust/</guid>
       <description></description>

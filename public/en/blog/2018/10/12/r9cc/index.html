@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
   <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>1人でがんばる自作Cコンパイラ</title>
-  <meta property="og:title" content="1人でがんばる自作Cコンパイラ" />
-  <meta name="twitter:title" content="1人でがんばる自作Cコンパイラ" />
-  <meta name="description" content="Rustで作る自作Cコンパイラ">
-  <meta property="og:description" content="Rustで作る自作Cコンパイラ">
-  <meta name="twitter:description" content="Rustで作る自作Cコンパイラ">
+  <title>A method of self-made C compiler which even a beginner can do</title>
+  <meta property="og:title" content="A method of self-made C compiler which even a beginner can do" />
+  <meta name="twitter:title" content="A method of self-made C compiler which even a beginner can do" />
+  <meta name="description" content="C compiler written by Rust.">
+  <meta property="og:description" content="C compiler written by Rust.">
+  <meta name="twitter:description" content="C compiler written by Rust.">
   <meta name="author" content="Toru Komatsu"/>
   <link href='https://www.utam0k.jp/img/favicon.ico' rel='icon' type='image/x-icon'/>
   <meta property="og:image" content="https://www.utam0k.jp/img/logo.jpg" />
@@ -18,13 +18,13 @@
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:site" content="@utam0k" />
   <meta name="twitter:creator" content="@utam0k" />
-  <meta property="og:url" content="https://www.utam0k.jp/blog/2018/10/12/r9cc/" />
+  <meta property="og:url" content="https://www.utam0k.jp/en/blog/2018/10/12/r9cc/" />
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="うたもく" />
+  <meta property="og:site_name" content="Utam0k" />
 
   <meta name="generator" content="Hugo 0.50-DEV" />
-  <link rel="canonical" href="https://www.utam0k.jp/blog/2018/10/12/r9cc/" />
-  <link rel="alternate" href="https://www.utam0k.jp/index.xml" type="application/rss+xml" title="うたもく">
+  <link rel="canonical" href="https://www.utam0k.jp/en/blog/2018/10/12/r9cc/" />
+  <link rel="alternate" href="https://www.utam0k.jp/index.xml" type="application/rss+xml" title="Utam0k">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -100,12 +100,12 @@ if (!doNotTrack) {
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
-        <span class="sr-only">メニューを切り替え</span>
+        <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://www.utam0k.jp/">うたもく</a>
+      <a class="navbar-brand" href="https://www.utam0k.jp/en/">Utam0k</a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -113,25 +113,25 @@ if (!doNotTrack) {
         
           
             <li>
-              <a title="Posts" href="https://www.utam0k.jp/post/">Posts</a>
+              <a title="Posts" href="https://www.utam0k.jp/en/post/">Posts</a>
             </li>
           
         
           
             <li>
-              <a title="Tags" href="https://www.utam0k.jp/tags">Tags</a>
+              <a title="Tags" href="https://www.utam0k.jp/en/tags">Tags</a>
             </li>
           
         
           
             <li>
-              <a title="About" href="https://www.utam0k.jp/page/about/">About</a>
+              <a title="About" href="https://www.utam0k.jp/en/page/about/">About</a>
             </li>
           
         
           
             <li>
-              <a title="Atom" href="https://www.utam0k.jp/index.xml">Atom</a>
+              <a title="Atom" href="https://www.utam0k.jp/en/index.xml">Atom</a>
             </li>
           
         
@@ -141,9 +141,9 @@ if (!doNotTrack) {
             <li>
               
                 
-              
+                  <a href="https://www.utam0k.jp/ja" lang="ja">ja</a>
                 
-                  <a href="https://www.utam0k.jp/en" lang="en">en</a>
+              
                 
               
             </li>
@@ -157,8 +157,8 @@ if (!doNotTrack) {
     <div class="avatar-container">
       <div class="avatar-img-border">
         
-          <a title="うたもく" href="https://www.utam0k.jp/">
-            <img class="avatar-img" src="https://www.utam0k.jp/img/logo.jpg" alt="うたもく" />
+          <a title="Utam0k" href="https://www.utam0k.jp/en/">
+            <img class="avatar-img" src="https://www.utam0k.jp/img/logo.jpg" alt="Utam0k" />
           </a>
         
       </div>
@@ -188,23 +188,23 @@ if (!doNotTrack) {
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="post-heading">
-              <h1>1人でがんばる自作Cコンパイラ</h1>
+              <h1>A method of self-made C compiler which even a beginner can do</h1>
                 
                   
-                    <h2 class="post-subheading">Rustで作る自作Cコンパイラ</h2>
+                    <h2 class="post-subheading">C compiler written by Rust.</h2>
                   
                 
                 
                   <span class="post-meta">
   
   
-  <i class="fa fa-calendar-o"></i>&nbsp;October 12, 2018に投稿
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on October 12, 2018
   
   
   &nbsp;|&nbsp;
-  <i class="fa fa-clock-o"></i> 2 分間 (242 言葉)
+  <i class="fa fa-clock-o"></i> 6 minutes (1103 words)
   
-  &nbsp;&bull;&nbsp; 翻訳：<a href="https://www.utam0k.jp/en/blog/2018/10/12/r9cc/" lang="en">en</a>
+  &nbsp;&bull;&nbsp; Other languages: <a href="https://www.utam0k.jp/blog/2018/10/12/r9cc/" lang="ja">ja</a>
 </span>
 
 
@@ -224,34 +224,36 @@ if (!doNotTrack) {
       <article role="main" class="blog-post">
         
 
-<h2 id="はじめに">はじめに</h2>
+<h2 id="introduction">Introduction</h2>
 
-<p>セキュリティキャンを皮切りに自作Cコンパイラがとてもはやっていました。<br />
-たのしそー僕もやりたい！！！！でもどうやるんだ？？？<br />
-しかし僕の周りには知る限りではコンパイラに強い人はいませんでした。<br />
-※ <strong>友達がいないわけではありません</strong><br />
-誰にも頼ることなくCコンパイラを作るのは難しいのでは!?<br />
-でもコンパイラは魔法みたいでいやだから知りたい。
-本とかいろいろ眺めてみてもさっぱりわからなかったので誰でもできる方法はないかなーと考えたのが<a href="https://github.com/rui314/9cc">9cc</a>をお手本にすることでした。
-ということで<a href="https://github.com/rui314/9cc">9cc</a>のファーストコミットからすべてRustにしてみました。
-<a href="https://github.com/rui314/9cc">9cc</a>は<a href="https://twitter.com/rui314">rui314</a>さんがやられているCコンパイラです。
-<a href="https://github.com/rui314/9cc">9cc</a>のコードは可読性がとても高くとてもやりやすかったです。<a href="https://github.com/rui314/9cc">9cc</a> <strong><em>神</em></strong> です。<br />
-おそらくこの方法で作るCコンパイラは事前知識はほとんど必要なくできると思います。<br />
-正直、やるだけだと思います(本当に <em>ｼｭｯ</em> です(ﾎﾝﾏ))。<br />
-もし同じようなことをやりたい人の参考になればawesomeです。</p>
+<p>Recently, self-made C compilers are popular in Japan because a lecture was held to teach about who to make them.
+I did not participate in it but it seemed fun!!! However, how can I do this???
+There were no compiler experts around me. Oh My God&hellip;<br />
+※ <strong>I have many many friends!</strong><br />
+It is difficult to make a C compiler without relying on anyone!?
+But I want to know about compilers because they are like too blackboxes for me.
+Even though I looked at various books about compilers,
+I did not understand them at all, so I thought that the only way to do it was to model <a href="https://github.com/rui314/9cc">9cc</a>.
+Anyway, I have been transplanting all of the <a href="https://github.com/rui314/9cc">9cc</a> first commit to Rust.
+<a href="https://github.com/rui314/9cc">9cc</a> is a C compiler written by <a href="https://twitter.com/rui314">rui314</a>.
+Codes of <a href="https://github.com/rui314/9cc">9cc</a> are very readable and very easy to transplant.
+<a href="https://github.com/rui314/9cc">9cc</a> is <strong><em>God</em></strong>.
+I think that the C compiler you create with this method will require little prior knowledge.
+To be honest, you just have to do it.
+I would be pleased if this would be helpful for those who would like to do the same thing.</p>
 
-<h2 id="できたもの">できたもの</h2>
+<h2 id="deliverable">Deliverable</h2>
 
-<p>できあがっているブツ: <a href="https://github.com/utam0k/r9cc">r9cc</a></p>
+<p><strong>My self-made C compiler: <a href="https://github.com/utam0k/r9cc">r9cc</a></strong></p>
 
-<p><a href="https://github.com/rui314/9cc">9cc</a>の前作である<a href="https://github.com/rui314/8cc">8cc</a>でも同じことを<a href="https://github.com/utam0k/r8cc">チャレンジしていた</a>のですが<br />
-行き詰っていた &amp; <a href="https://github.com/rui314/9cc">9cc</a>がでた<br />
-ということで<a href="https://github.com/rui314/9cc">9cc</a>の方に切り替えました。
-ということで実は2度目のチャレンジです。</p>
+<p>I was <a href="https://github.com/utam0k/r8cc">challenging</a> the same thing with 9cc&rsquo;s previous work <a href="https://github.com/rui314/8cc">8cc</a>.
+However It stalled and <a href="https://github.com/rui314/9cc">9cc</a> came out,
+so I switched to <a href="https://github.com/rui314/9cc">9cc</a>.
+Actually, this is my second challenge.</p>
 
-<p><a href="https://github.com/utam0k/r9cc">r9cc</a>ではコミットメッセージが大文字で始まるものが<a href="https://github.com/rui314/9cc">9cc</a>から単純に移植しているものです。
-小文字で始まるものは独自のリファクタリングだったり独自機能だったりします。
-そろそろ日本語で書くのが疲れたので趣味で作った<a href="https://github.com/utam0k/r9cc">r9cc</a>でもこのくらいのコードならコンパイルできるぜっていうのを読者に見せつけます。</p>
+<p>In <a href="https://github.com/utam0k/r9cc">r9cc</a>, the first capital letter of the commit message is simply ported commit from <a href="https://github.com/rui314/9cc">9cc</a>.
+Since I became tired of writing in English quikly,
+I will show readers that <a href="https://github.com/utam0k/r9cc">r9cc</a> can compile this code.</p>
 <div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="n">fibdp</span><span class="p">[</span><span class="mi">100</span><span class="p">];</span>
 
 <span class="kt">int</span> <span class="nf">fib</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
@@ -272,84 +274,75 @@ if (!doNotTrack) {
   <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">ans</span><span class="p">);</span>
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span></code></pre></div>
-<p>他にもこれくらいなら動きます。</p>
+<p>There are other features:</p>
 
 <ul>
-<li>四則演算</li>
-<li>論理演算</li>
-<li>ローカル変数</li>
-<li>グローバル変数</li>
-<li>引数[あり|なし]の関数呼び出し</li>
-<li>引数[あり|なし]の関数定義</li>
-<li>配列</li>
-<li>ポインタ</li>
+<li>Four arithmetic operations</li>
+<li>Logical operation</li>
+<li>Local variable</li>
+<li>Global variable</li>
+<li>Function call with arguments</li>
+<li>Function definition</li>
+<li>Array</li>
+<li>Pointer</li>
 <li>++/--</li>
-<li>char/int型</li>
-<li>文字列リテラル</li>
-<li>構造体</li>
+<li>char/int</li>
+<li>String literal</li>
+<li>Struct</li>
 <li>extern</li>
 <li>#include</li>
-<li>コメント文</li>
+<li>Comment</li>
 </ul>
 
-<p><a href="https://github.com/utam0k/r9cc">r9cc</a>の独自機能として配列の初期化時の代入も作ってみたのでこんなのも動きます。</p>
+<p>I also made assignments at the initialization of array as <a href="https://github.com/utam0k/r9cc">r9cc</a>&rsquo;s unique function, so this also works.</p>
 <div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
   <span class="kt">int</span> <span class="n">x</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">};</span>
   <span class="k">return</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
 <span class="p">}</span></code></pre></div>
-<p>これだけでも結構いろいろなCのコードがコンパイルできてびっくりしました。</p>
+<p>I was surprised that various C codes could be compiled with only using these features.</p>
 
-<h2 id="気を付けたこと">気を付けたこと</h2>
+<h2 id="things-to-be-careful-of">Things to be careful of</h2>
 
-<h4 id="なにをしてるか把握する">なにをしてるか把握する</h4>
+<h4 id="understand-what-i-am-doing">Understand what I am doing</h4>
 
-<p>おそらく各コミットを何も考えないででRustに書き換えることも可能です。
-このように<strong>何もわからないままでもやり続けれてしまう</strong>ことが1番怖いところだと思います。
-Rustの力は上がるかもしれませんが本質であるコンパイラを知ることはできません。
-Cじゃないの方が頭を使うかなと思ってRustにしました。
-正直Cでもよいと思います。
-できるだけ自分が作業しているコミットがなにをしているのかを意識して実装しました。
-以下の手順で読んでみてコミット全体を把握してから実装することを徹底していました。</p>
+<p>It is possible to rewrite to Rust without considering each commit perhaps.
+I think that <strong>continuing despite not understanding anything</strong> is the most avoidable thing.
+I implemented it with as much as possible what the commit I was working on was doing.
+I was implementing it after grasping the whole commit by the following procedure.</p>
 
 <ol>
-<li>コミットメッセージを読む</li>
-<li>追加されたテストコードを読んでみる</li>
-<li>コード全体を読む</li>
+<li>Reading a commit message.</li>
+<li>Reading the added test codes.</li>
+<li>Reading the entire code of commit.</li>
 </ol>
 
-<p>これに加えて今やってるコミットの+5コミット位を眺めて大まかな流れを把握していました。<br />
-独自機能を実装してみるのも自分がきちんとコードを把握できているのかチェックするのにはよいと思います。</p>
+<p>In addition to this, I was grasping the rough flow by looking at the +5 commit positions of the commit I am now doing.
+I think that it is good to check whether I can properly grasp the code by trying to implement the unique function.</p>
 
-<h4 id="ちょっとずつ">ちょっとずつ</h4>
+<h4 id="step-by-step">Step by step</h4>
 
-<p><a href="https://github.com/utam0k/r9cc">r9cc</a>の<a href="https://github.com/utam0k/r9cc/commit/b8b44544eb51d6229f19033a5048043e628ab55a">最初のコミット</a>はこんなもんです。
-<a href="https://github.com/rui314/9cc">9cc</a>の<a href="https://github.com/rui314/9cc/commit/56e94442ae8844688d5390851e5b29ba0c946e2f">最初のコミット</a>ももちろんそうです。
-数字を返すだけです。<br />
-<strong>こうみると誰でも出来そうじゃないですか!?</strong><br />
-最初は型なんかありませんでした。<br />
-構文解析だけを先に作るという方針ではなく、アセンブリを出力するところまでの<strong>全体を均等的</strong>に作っていきます。
-でかいものを作りたい気持ちはありましたが、ちょっとずつやっていきました。</p>
+<p><a href="https://github.com/utam0k/r9cc/commit/b8b44544eb51d6229f19033a5048043e628ab55a">First commit</a> of <a href="https://github.com/utam0k/r9cc">r9cc</a> is as simple as this.<br />
+<a href="https://github.com/rui314/9cc/commit/56e94442ae8844688d5390851e5b29ba0c946e2f">Fist commit</a> of <a href="https://github.com/rui314/9cc">9cc</a> also like this.
+It just returns a number.<br />
+<strong>Is anyone likely to be able to look at this!?</strong><br />
+There was not a type in the early days.
+It is not a policy to make syntactic analysis only first, but whole of up to where to output the assembly is made <strong>evenly</strong>.
+Although I wanted to make big things, I did it a bit at a time.</p>
 
-<h4 id="変数名や順序-追記-2018-10-13">変数名や順序(追記 2018-10-13)</h4>
+<h2 id="motivation">Motivation</h2>
 
-<p>変数名や関数の順番を<a href="https://github.com/utam0k/r9cc">r9cc</a>とできるだけ一緒になるようにしました。
-<a href="https://github.com/utam0k/r9cc">r9cc</a>には関数が書かれている場所(?)順番(?)にも意味を持っているところがあります。
-変数名や関数名もできるだけ一緒にしたほうがわかりやすくなると思います。</p>
-
-<h2 id="モチベーション">モチベーション</h2>
-
-<p><strong>僕の周りにはコンパイラに興味のある人は少なかったためコンパイラについて話す相手はいませんでした。</strong><br />
-そうなると自分のとても強い意志でがんばるかどうにかしてモチベーションを保つ必要がありました。<br />
-僕には強い意志を持つ自信がなかったのでモチベーションを保つ方法を考えました。<br />
-一人でやるときの大きな壁がここだと思います。<br />
-目標を持つことでモチベーションを保つことができると思います。<br />
-まず、大きな目標として<a href="https://twitter.com/rui314">rui314</a>さんの<a href="https://note.mu/ruiu/n/n00ebc977fd60">記事</a>でも述べられていますがセキュリティキャンプではセルフホストを設定していたみたいです。
-<a href="https://github.com/utam0k/r9cc">r9cc</a>はRustで書いているのでセルフホストはできないので今回はペアレントホストにしました。<br />
-ペアレントホストは勝手に僕が考えたのですが、参考にしている<a href="https://github.com/rui314/9cc">9cc</a>をコンパイルできるということです。<br />
-ただ、この目標だけだとモチベーションを保てそうになかったのでもう少し小さな目標を考えました。<br />
-小さな目標は<a href="https://github.com/rui314/9cc">9cc</a>の適当なコミットを目標にしました。<br />
-コミットの選び方は自分がわくわくするものを選んで勝手に目標にしていました。<br />
-僕が選んだの</p>
+<p><strong>I don&rsquo;t have anyone to talk with about the compiler because I don&rsquo;t have friends who are interested in compilers in the real world.</strong><br />
+So, I had to keep my motivation by somehow trying my best with strong will.
+Because I had no confidence to have a strong will, I thought about a way to keep motivation.
+I think that here is the big wall when I do it by myself.
+I think that it is possible to keep my motivation by having a goal.
+I would like to set a self-host as a big goal, but I could not do it because <a href="https://github.com/rui314/9cc">r9cc</a> is written by Rust.
+So, I settled with a parent host as a big goal.
+The word <code>parent host</code> means that r9cc can compile <a href="https://github.com/rui314/9cc">9cc</a>.
+However, I thought about a smaller goal because I was unlikely to keep motivation with just this goal.
+The small goal is aimed at a reasonable commit of <a href="https://github.com/rui314/9cc">9cc</a>.
+I chose commits that make me excited.<br />
+I chose:</p>
 
 <ul>
 <li><a href="https://github.com/rui314/9cc/commit/56e94442ae8844688d5390851e5b29ba0c946e2f">Compile a single number to a program that exits with the given number.</a></li>
@@ -363,57 +356,58 @@ Cじゃないの方が頭を使うかなと思ってRustにしました。
 <li><a href="https://github.com/rui314/9cc/commit/a382606b9728ca33f5dedae4f6ca5cc3c9404838">Implement &ldquo;#include&rdquo;.</a></li>
 </ul>
 
-<p>コミットメッセージのタイトルだけでもわくわくしませんか。うん、しますね。<br />
-ここまで行くと<code>#include</code>が動くとか楽しみすぎでしょというモチベーションで少しずつやっていきました。</p>
+<p>Do you feel excited by just seeing the title of the commit message? Yes, you do.
+I got it little by little with the motivation that <code>#include</code> will work or if it can be done by commit here, it is really fun.</p>
 
-<p>exampleも積極的に足していくとテンション爆上がりです。<br />
-<a href="https://github.com/rui314/9cc">9cc</a>だと<a href="https://github.com/rui314/9cc/blob/master/examples/nqueen.c">nqueen.c</a>だけですが、
-<a href="https://github.com/utam0k/r9cc">r9cc</a>では<a href="https://github.com/utam0k/r9cc/blob/master/examples/fib.c">fib.c</a>や<a href="https://github.com/utam0k/r9cc/blob/master/examples/prime.c">prime.c</a>も足してみました。
-自分が書いたコードがコンパイルできた時はたのしー。</p>
+<p>As you add examples, tension also increases a lot.
+It is only <a href="https://github.com/rui314/9cc/blob/master/examples/nqueen.c">nqueen.c</a> if it is <a href="https://github.com/rui314/9cc">9cc</a>,
+but <a href="https://github.com/utam0k/r9cc/blob/master/examples/fib.c">fib.c</a> and <a href="https://github.com/utam0k/r9cc/blob/master/examples/prime.c">prime.c</a>
+have also been added in <a href="https://github.com/utam0k/r9cc">r9cc</a>.
+It&rsquo;s fun when I compiled my code.</p>
 
-<h2 id="終わりに">終わりに</h2>
+<h2 id="conclusion">Conclusion</h2>
 
-<p>とりあえず<code>#include</code>までできたので記事にしてみました。
-<a href="https://github.com/utam0k/r9cc">r9cc</a>を作ることでコーディングはもちろんですが全然わからなかったコンパイラの世界が垣間見れたかなと思います。
-今後はペアレントホスト目指してちょっとずつ進んでいきます。
-自作Cコンパイラ人口が少しでも増えれば面白いかなと思います。<br />
-自作Cコンパイラはやっていてめちゃめちゃ楽しいのでおすすめです！<br />
-<strong><em>Rustまだまだ初心者なのでこんな書き方の方がいいよ的なプルリク待ってます。</em></strong><br />
-Rust固有のコンパイラを作るときに難したかった点はまた違う記事で書こうと思います。<br />
-<strong><em>ﾜﾀｼ ｽｺｼ ﾎﾝﾉｽｺｼ ｼｰｹﾞﾝｺﾞﾃﾞｷﾙ</em></strong><br />
-くらいは言っても許されるかもしれない。<br />
-このような機会を与えてくれた<a href="https://github.com/rui314/9cc">9cc</a>に感謝感謝です。
+<p>For the time being I was able to compile <code>#include</code>, so I made an article.
+Creating <a href="https://github.com/utam0k/r9cc">r9cc</a> improves programming skills,
+and furthermore, I think that the world of the compiler that I did not understand at all was just a glimpse.
+In the future, I will aim for a <code>parent host</code> and go on a little by little.
+I think that it would be interesting if the self-made C compiler population increased even a little,
+because self-made C compiling is very fun and recommended!
+<strong><em>I am still a beginner about Rust so I&rsquo;m waiting for a good pull request.</em></strong><br />
+I&rsquo;d like to write another article about the technical point unique to Rust.
+Even if I say<br />
+<strong><em>I can develop C language a little</em></strong><br />
+it may be tolerated.
+Special thanks for <a href="https://github.com/rui314/9cc">9cc</a> and <a href="https://twitter.com/rui314">rui314</a>.
 plz awesome.</p>
 
-<h2 id="追記-2018-10-13">追記(2018-10-13)</h2>
+<h2 id="additional-detail-information">Additional detail information</h2>
 
-<p>C言語ぽくまで動くまでには1.5週間くらいでした。
-<code>#include</code>ができるまでは2ヵ月くらいでした。
-もし自作コンパイラやってみようと思ってくれた方で質問や困ったことあったら<a href="https://twitter.com/utam0k">Twitter</a>で
-DMなりメンションをもらえればできるだけ考えます！</p>
+<p>It took me about 1.5 weeks to be able to compile somthing like a general C compiler.
+It was about 2 months until <code>#include</code> was made.
+If you have any questions please do not hesitate to contact me on <a href="https://twitter.com/utam0k">Twitter</a>.</p>
 
-<p>学べたこと</p>
+<p>I learned:</p>
 
 <ul>
-<li>アセンブリ</li>
-<li>C言語の挙動</li>
-<li>いろいろなレジスタの役割</li>
-<li>スタックについて強くなった</li>
+<li>Assembly</li>
+<li>Behavior of C language</li>
+<li>Role of various registers</li>
+<li>Stack</li>
 </ul>
 
 <h2 id="tcfm">tcfm</h2>
 
-<p><a href="https://twitter.com/rui314">rui314</a>さんがやられている<a href="https://turingcomplete.fm/">Turing Complete FM</a>の紹介をします。<br />
-Cコンパイラの話など主に低レイヤの話が聞けます。<br />
-世の中にはすごい人しかいないのではと思えます。</p>
+<p>Finally, I will introduce <a href="https://turingcomplete.fm/">Turing Complete FM</a>, which <a href="https://twitter.com/rui314">rui314</a> is doing.
+You can listen mainly about low layer stories such as C compiler&rsquo;s story.</p>
 
 
         
           <div class="blog-tags">
             
-              <a href="https://www.utam0k.jp//tags/rust/">rust</a>&nbsp;
+              <a href="https://www.utam0k.jp/en/tags/rust/">rust</a>&nbsp;
             
-              <a href="https://www.utam0k.jp//tags/compiler/">compiler</a>&nbsp;
+              <a href="https://www.utam0k.jp/en/tags/compiler/">compiler</a>&nbsp;
             
           </div>
         
@@ -426,7 +420,7 @@ Cコンパイラの話など主に低レイヤの話が聞けます。<br />
 
 
 <li>
-    <a href="//twitter.com/share?url=https%3a%2f%2fwww.utam0k.jp%2fblog%2f2018%2f10%2f12%2fr9cc%2f&amp;text=1%e4%ba%ba%e3%81%a7%e3%81%8c%e3%82%93%e3%81%b0%e3%82%8b%e8%87%aa%e4%bd%9cC%e3%82%b3%e3%83%b3%e3%83%91%e3%82%a4%e3%83%a9&amp;via=utam0k"
+    <a href="//twitter.com/share?url=https%3a%2f%2fwww.utam0k.jp%2fen%2fblog%2f2018%2f10%2f12%2fr9cc%2f&amp;text=A%20method%20of%20self-made%20C%20compiler%20which%20even%20a%20beginner%20can%20do&amp;via=utam0k"
        target="_blank" alt="" title="Share on Twitter">
         <span class="fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>
@@ -437,7 +431,7 @@ Cコンパイラの話など主に低レイヤの話が聞けます。<br />
 
 
 <li>
-    <a href="//plus.google.com/share?url=https%3a%2f%2fwww.utam0k.jp%2fblog%2f2018%2f10%2f12%2fr9cc%2f" target="_blank" title="Share on Google Plus">
+    <a href="//plus.google.com/share?url=https%3a%2f%2fwww.utam0k.jp%2fen%2fblog%2f2018%2f10%2f12%2fr9cc%2f" target="_blank" title="Share on Google Plus">
          <span class="fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fa fa-google-plus fa-stack-1x fa-inverse"></i>
@@ -447,7 +441,7 @@ Cコンパイラの話など主に低レイヤの話が聞けます。<br />
 
 
 <li>
-    <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.utam0k.jp%2fblog%2f2018%2f10%2f12%2fr9cc%2f" target="_blank" title="Share on Facebook">
+    <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.utam0k.jp%2fen%2fblog%2f2018%2f10%2f12%2fr9cc%2f" target="_blank" title="Share on Facebook">
         <span class="fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -456,7 +450,7 @@ Cコンパイラの話など主に低レイヤの話が聞けます。<br />
 </li>
 
 <li>
-    <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fwww.utam0k.jp%2fblog%2f2018%2f10%2f12%2fr9cc%2f&amp;title=1%e4%ba%ba%e3%81%a7%e3%81%8c%e3%82%93%e3%81%b0%e3%82%8b%e8%87%aa%e4%bd%9cC%e3%82%b3%e3%83%b3%e3%83%91%e3%82%a4%e3%83%a9" target="_blank"
+    <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fwww.utam0k.jp%2fen%2fblog%2f2018%2f10%2f12%2fr9cc%2f&amp;title=A%20method%20of%20self-made%20C%20compiler%20which%20even%20a%20beginner%20can%20do" target="_blank"
        title="Share on LinkedIn">
          <span class="fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>
@@ -479,10 +473,6 @@ Cコンパイラの話など主に低レイヤの話が聞けます。<br />
 
       
         <ul class="pager blog-pager">
-          
-            <li class="previous">
-              <a href="https://www.utam0k.jp/blog/2018/05/28/rust_std_default/" data-toggle="tooltip" data-placement="top" title="Rustのstd::default::Default">&larr; 前ページ</a>
-            </li>
           
           
         </ul>
@@ -553,12 +543,12 @@ Cコンパイラの話など主に低レイヤの話が聞けます。<br />
 
           
             &nbsp;&bull;&nbsp;
-            <a href="https://www.utam0k.jp/">うたもく</a>
+            <a href="https://www.utam0k.jp/en/">Utam0k</a>
           
         </p>
         
         <p class="credits theme-by text-muted">
-          起動力に<a href="http://gohugo.io">Hugo v0.50-DEV</a> &nbsp;&bull;&nbsp; テーマに<a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>に基づいている<a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          <a href="http://gohugo.io">Hugo v0.50-DEV</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
           
         </p>
       </div>

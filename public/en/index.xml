@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>koma@utam0k.jp (Toru Komatsu)</managingEditor>
     <webMaster>koma@utam0k.jp (Toru Komatsu)</webMaster>
-    <lastBuildDate>Thu, 24 May 2018 13:12:48 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 12 Oct 2018 12:15:41 +0900</lastBuildDate>
     
 	<atom:link href="https://www.utam0k.jp/en/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>A method of self-made C compiler which even a beginner can do</title>
+      <link>https://www.utam0k.jp/en/blog/2018/10/12/r9cc/</link>
+      <pubDate>Fri, 12 Oct 2018 12:15:41 +0900</pubDate>
+      <author>koma@utam0k.jp (Toru Komatsu)</author>
+      <guid>https://www.utam0k.jp/en/blog/2018/10/12/r9cc/</guid>
+      <description>Introduction Recently, self-made C compilers are popular in Japan because a lecture was held to teach about who to make them.</description>
+    </item>
     
     <item>
       <title>About</title>
@@ -20,15 +29,6 @@
       <guid>https://www.utam0k.jp/en/page/about/</guid>
       <description>About me I am a student.
 SNS  Twitter: @utam0k Github: utam0k Mastodon: @utam0k  Develop  mican</description>
-    </item>
-    
-    <item>
-      <title>A method of self-made C compiler which even a beginner can do.</title>
-      <link>https://www.utam0k.jp/en/blog/1/01/01/r9cc/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>koma@utam0k.jp (Toru Komatsu)</author>
-      <guid>https://www.utam0k.jp/en/blog/1/01/01/r9cc/</guid>
-      <description>Introduction Recently, self-made C compilers are popular in Japan because a lecture was held to teach about who to make them.</description>
     </item>
     
   </channel>
