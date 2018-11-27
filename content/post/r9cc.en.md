@@ -2,6 +2,7 @@
 title: A method of self-made C compiler which even a beginner can do
 subtitle: C compiler written by Rust.
 date: 2018-10-12T12:15:41+09:00
+lastmod: 2018-11-27T12:00:00+09:00
 tags : [rust, compiler]
 ---
 
