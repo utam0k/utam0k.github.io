@@ -18,6 +18,20 @@
   </url>
   
   <url>
+    <loc>https://www.utam0k.jp/en/blog/1/01/01/r9cc/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="https://www.utam0k.jp/blog/2018/10/12/r9cc/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.utam0k.jp/en/blog/1/01/01/r9cc/"
+                />
+  </url>
+  
+  <url>
     <loc>https://www.utam0k.jp/en/categories/</loc>
     <priority>0</priority>
     <xhtml:link
@@ -29,6 +43,21 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://www.utam0k.jp/en/categories/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://www.utam0k.jp/en/tags/compiler/</loc>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="https://www.utam0k.jp/tags/compiler/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.utam0k.jp/en/tags/compiler/"
                 />
   </url>
   
@@ -45,6 +74,36 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://www.utam0k.jp/en/page/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://www.utam0k.jp/en/post/</loc>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="https://www.utam0k.jp/post/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.utam0k.jp/en/post/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://www.utam0k.jp/en/tags/rust/</loc>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="https://www.utam0k.jp/tags/rust/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.utam0k.jp/en/tags/rust/"
                 />
   </url>
   
