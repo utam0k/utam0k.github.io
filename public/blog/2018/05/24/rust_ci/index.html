@@ -39,7 +39,7 @@ helpのurlに行くと良い感じになぜだめ …">
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="うたもく" />
 
-  <meta name="generator" content="Hugo 0.50-DEV" />
+  <meta name="generator" content="Hugo 0.50" />
   <link rel="canonical" href="https://www.utam0k.jp/blog/2018/05/24/rust_ci/" />
   <link rel="alternate" href="https://www.utam0k.jp/index.xml" type="application/rss+xml" title="うたもく">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
@@ -215,7 +215,7 @@ if (!doNotTrack) {
   
   
   &nbsp;|&nbsp;
-  <i class="fa fa-clock-o"></i> 2 分間 (223 言葉)
+  <i class="fa fa-clock-o"></i> 1 分間 (85 言葉)
   
   
 </span>
@@ -268,7 +268,8 @@ if (!doNotTrack) {
 </span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="o">|</span><span class="n">_____________</span><span class="o">^</span><span class="w"> </span><span class="n">help</span>: <span class="nc">it</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">more</span><span class="w"> </span><span class="n">idiomatic</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">write</span>: <span class="err">`</span><span class="kd">let</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">completer_index</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">completions</span><span class="p">.</span><span class="n">len</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">..;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">completer</span><span class="w"> </span><span class="n">_index</span><span class="w"> </span><span class="p">};</span><span class="err">`</span><span class="w">
 </span><span class="w">   </span><span class="o">|</span><span class="w">
 </span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">note</span>: <span class="cp">#[warn(useless_let_if_seq)]</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="n">default</span><span class="w">
-</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">help</span>: <span class="nc">for</span><span class="w"> </span><span class="n">further</span><span class="w"> </span><span class="n">information</span><span class="w"> </span><span class="n">visit</span><span class="w"> </span><span class="n">https</span>:<span class="o">//</span><span class="n">rust</span><span class="o">-</span><span class="n">lang</span><span class="o">-</span><span class="n">nursery</span><span class="p">.</span><span class="n">github</span><span class="p">.</span><span class="n">io</span><span class="o">/</span><span class="n">rust</span><span class="o">-</span><span class="n">clippy</span><span class="o">/</span><span class="n">v0</span><span class="p">.</span><span class="mf">0.200</span><span class="o">/</span><span class="n">index</span><span class="p">.</span><span class="n">html</span><span class="err">#</span><span class="n">useless_let_if_seq</span></code></pre></div>
+</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">help</span>: <span class="nc">for</span><span class="w"> </span><span class="n">further</span><span class="w"> </span><span class="n">information</span><span class="w"> </span><span class="n">visit</span><span class="w"> </span><span class="n">https</span>:<span class="c1">//rust-lang-nursery.github.io/rust-clippy/v0.0.200/index.html#useless_let_if_seq
+</span><span class="c1"></span></code></pre></div>
 <p>rust-clippyの導入にはnightly版のRustが必要
 CIの導入の際にnightly版のRustが必要になる。<br />
 仕方のないことだが<a href="https://github.com/rust-lang-nursery/rust-clippy">rust-clippy</a>は最新のnightlyだと動かないことがある。<br />
@@ -280,10 +281,10 @@ CIの導入の際にnightly版のRustが必要になる。<br />
 <div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">-<span class="w"> </span>run<span class="p">:</span><span class="w">
 </span><span class="w">  </span>name<span class="p">:</span><span class="w"> </span>lint<span class="w">
 </span><span class="w">  </span>command<span class="p">:</span><span class="w"> </span><span class="sd">|
-</span><span class="sd">    export PATH=~/.cargo/bin:$PATH
-</span><span class="sd">    rustup install nightly-2018-05-16
-</span><span class="sd">    cargo +nightly-2018-05-16 install clippy --vers 0.0.200 --force
-</span><span class="sd">    cargo +nightly-2018-05-16 clippy --release -- -Dclippy_pedantic</span></code></pre></div>
+</span><span class="sd">    export PATH=~/.cargo/bin:$PATH</span><span class="w">
+</span><span class="w">    </span>rustup<span class="w"> </span>install<span class="w"> </span>nightly-<span class="ld">2018-05-16</span><span class="w">
+</span><span class="w">    </span>cargo<span class="w"> </span>+nightly-<span class="ld">2018-05-16</span><span class="w"> </span>install<span class="w"> </span>clippy<span class="w"> </span>--vers<span class="w"> </span><span class="m">0.0</span>.<span class="m">200</span><span class="w"> </span>--force<span class="w">
+</span><span class="w">    </span>cargo<span class="w"> </span>+nightly-<span class="ld">2018-05-16</span><span class="w"> </span>clippy<span class="w"> </span>--release<span class="w"> </span>--<span class="w"> </span>-Dclippy_pedantic</code></pre></div>
 <h2 id="テストカバレージ">テストカバレージ</h2>
 
 <p><a href="http://simonkagstrom.github.io/kcov/">kcov</a>と<a href="https://codecov.io">Codecov</a>を使っていきます。<br />
@@ -300,25 +301,25 @@ CIの導入の際にnightly版のRustが必要になる。<br />
 <div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">-<span class="w"> </span>run<span class="p">:</span><span class="w">
 </span><span class="w">  </span>name<span class="p">:</span><span class="w"> </span>kcov<span class="w">
 </span><span class="w">  </span>command<span class="p">:</span><span class="w"> </span><span class="sd">|
-</span><span class="sd">      wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz
-</span><span class="sd">      tar xzf master.tar.gz
-</span><span class="sd">      cd kcov-master
-</span><span class="sd">      mkdir build
-</span><span class="sd">      cd build
-</span><span class="sd">      cmake ..
-</span><span class="sd">      make
-</span><span class="sd">      make install DESTDIR=../../kcov-build
-</span><span class="sd">      cd ../..
-</span><span class="sd">      rm -rf kcov-master</span></code></pre></div>
+</span><span class="sd">      wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz</span><span class="w">
+</span><span class="w">      </span>tar<span class="w"> </span>xzf<span class="w"> </span>master.tar.gz<span class="w">
+</span><span class="w">      </span>cd<span class="w"> </span>kcov-master<span class="w">
+</span><span class="w">      </span>mkdir<span class="w"> </span>build<span class="w">
+</span><span class="w">      </span>cd<span class="w"> </span>build<span class="w">
+</span><span class="w">      </span>cmake<span class="w"> </span>..<span class="w">
+</span><span class="w">      </span>make<span class="w">
+</span><span class="w">      </span>make<span class="w"> </span>install<span class="w"> </span>DESTDIR=../../kcov-build<span class="w">
+</span><span class="w">      </span>cd<span class="w"> </span>../..<span class="w">
+</span><span class="w">      </span>rm<span class="w"> </span>-rf<span class="w"> </span>kcov-master</code></pre></div>
 <p>じっこう！</p>
 <div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">-<span class="w"> </span>run<span class="p">:</span><span class="w">
 </span><span class="w">  </span>name<span class="p">:</span><span class="w"> </span>coverage<span class="w">
 </span><span class="w">  </span>command<span class="p">:</span><span class="w"> </span><span class="sd">|
-</span><span class="sd">    for file in target/debug/mican-*[^\.d]; do 
-</span><span class="sd">        mkdir -p &#34;target/cov/$(basename $file)&#34;; ./kcov-build/usr/local/bin/kcov --exclude-pattern=/.cargo,/usr/lib --verify &#34;target/cov/$(basename $file)&#34; &#34;$file&#34;; 
-</span><span class="sd">    done
-</span><span class="sd">    bash &lt;(curl -s https://codecov.io/bash)
-</span><span class="sd">    echo &#34;Uploaded code coverage&#34;</span></code></pre></div>
+</span><span class="sd">    for file in target/debug/mican-*[^\.d]; do </span><span class="w">
+</span><span class="w">        </span>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&#34;target/cov/$(basename $file)&#34;</span>;<span class="w"> </span>./kcov-build/usr/local/bin/kcov<span class="w"> </span>--exclude-pattern=/.cargo<span class="p">,</span>/usr/lib<span class="w"> </span>--verify<span class="w"> </span><span class="s2">&#34;target/cov/$(basename $file)&#34;</span><span class="w"> </span><span class="s2">&#34;$file&#34;</span>;<span class="w"> 
+</span><span class="w">    </span>done<span class="w">
+</span><span class="w">    </span>bash<span class="w"> </span>&lt;(curl<span class="w"> </span>-s<span class="w"> </span>https<span class="p">:</span>//codecov.io/bash)<span class="w">
+</span><span class="w">    </span>echo<span class="w"> </span><span class="s2">&#34;Uploaded code coverage&#34;</span></code></pre></div>
 <h2 id="全体">全体</h2>
 
 <p><a href="https://github.com/utam0k/mican">mican</a>の<code>config.yaml</code>全体はこんな感じになります。<br />
@@ -337,53 +338,53 @@ Rust周りのインストールや必要なもののインストールが追加�
 </span><span class="w">      </span>-<span class="w"> </span>run<span class="p">:</span><span class="w">
 </span><span class="w">          </span>name<span class="p">:</span><span class="w"> </span>set<span class="w"> </span>up<span class="w">
 </span><span class="w">          </span>command<span class="p">:</span><span class="w"> </span><span class="sd">|
-</span><span class="sd">            set -eux
-</span><span class="sd">            apt-get update
-</span><span class="sd">            apt-get install -y wget build-essential libcurl4-openssl-dev libelf-dev libdw-dev binutils-dev cmake libiberty-dev pkg-config zlib1g-dev python curl</span><span class="w">
+</span><span class="sd">            set -eux</span><span class="w">
+</span><span class="w">            </span>apt-get<span class="w"> </span>update<span class="w">
+</span><span class="w">            </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>wget<span class="w"> </span>build-essential<span class="w"> </span>libcurl4-openssl-dev<span class="w"> </span>libelf-dev<span class="w"> </span>libdw-dev<span class="w"> </span>binutils-dev<span class="w"> </span>cmake<span class="w"> </span>libiberty-dev<span class="w"> </span>pkg-config<span class="w"> </span>zlib1g-dev<span class="w"> </span>python<span class="w"> </span>curl<span class="w">
 </span><span class="w">      </span>-<span class="w"> </span>run<span class="p">:</span><span class="w">
 </span><span class="w">          </span>name<span class="p">:</span><span class="w"> </span>preparation<span class="w"> 
 </span><span class="w">          </span>command<span class="p">:</span><span class="w"> </span><span class="sd">|
-</span><span class="sd">            wget &#34;https://static.rust-lang.org/rustup/dist/x86_64-unknown-linux-gnu/rustup-init&#34;
-</span><span class="sd">            chmod +x rustup-init
-</span><span class="sd">            ./rustup-init -y --no-modify-path --default-toolchain nightly
-</span><span class="sd">            RUSTUP=~/.cargo/bin/rustup
-</span><span class="sd">            CARGO=~/.cargo/bin/cargo
-</span><span class="sd">            chmod -R a+w $RUSTUP $CARGO
-</span><span class="sd">            rm rustup-init
-</span><span class="sd">            source ~/.cargo/env</span><span class="w">
+</span><span class="sd">            wget &#34;https://static.rust-lang.org/rustup/dist/x86_64-unknown-linux-gnu/rustup-init&#34;</span><span class="w">
+</span><span class="w">            </span>chmod<span class="w"> </span>+x<span class="w"> </span>rustup-init<span class="w">
+</span><span class="w">            </span>./rustup-init<span class="w"> </span>-y<span class="w"> </span>--no-modify-path<span class="w"> </span>--default-toolchain<span class="w"> </span>nightly<span class="w">
+</span><span class="w">            </span>RUSTUP=~/.cargo/bin/rustup<span class="w">
+</span><span class="w">            </span>CARGO=~/.cargo/bin/cargo<span class="w">
+</span><span class="w">            </span>chmod<span class="w"> </span>-R<span class="w"> </span>a+w<span class="w"> </span>$RUSTUP<span class="w"> </span>$CARGO<span class="w">
+</span><span class="w">            </span>rm<span class="w"> </span>rustup-init<span class="w">
+</span><span class="w">            </span>source<span class="w"> </span>~/.cargo/env<span class="w">
 </span><span class="w">      </span>-<span class="w"> </span>run<span class="p">:</span><span class="w">
 </span><span class="w">          </span>name<span class="p">:</span><span class="w"> </span>lint<span class="w">
 </span><span class="w">          </span>command<span class="p">:</span><span class="w"> </span><span class="sd">|
-</span><span class="sd">            export PATH=~/.cargo/bin:$PATH
-</span><span class="sd">            rustup install nightly-2018-05-16
-</span><span class="sd">            cargo +nightly-2018-05-16 install clippy --vers 0.0.200 --force
-</span><span class="sd">            cargo +nightly-2018-05-16 clippy --release -- -Dclippy_pedantic</span><span class="w">
+</span><span class="sd">            export PATH=~/.cargo/bin:$PATH</span><span class="w">
+</span><span class="w">            </span>rustup<span class="w"> </span>install<span class="w"> </span>nightly-<span class="ld">2018-05-16</span><span class="w">
+</span><span class="w">            </span>cargo<span class="w"> </span>+nightly-<span class="ld">2018-05-16</span><span class="w"> </span>install<span class="w"> </span>clippy<span class="w"> </span>--vers<span class="w"> </span><span class="m">0.0</span>.<span class="m">200</span><span class="w"> </span>--force<span class="w">
+</span><span class="w">            </span>cargo<span class="w"> </span>+nightly-<span class="ld">2018-05-16</span><span class="w"> </span>clippy<span class="w"> </span>--release<span class="w"> </span>--<span class="w"> </span>-Dclippy_pedantic<span class="w">
 </span><span class="w">      </span>-<span class="w"> </span>run<span class="p">:</span><span class="w">
 </span><span class="w">          </span>name<span class="p">:</span><span class="w"> </span>kcov<span class="w">
 </span><span class="w">          </span>command<span class="p">:</span><span class="w"> </span><span class="sd">|
-</span><span class="sd">              wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz
-</span><span class="sd">              tar xzf master.tar.gz
-</span><span class="sd">              cd kcov-master
-</span><span class="sd">              mkdir build
-</span><span class="sd">              cd build
-</span><span class="sd">              cmake ..
-</span><span class="sd">              make
-</span><span class="sd">              make install DESTDIR=../../kcov-build
-</span><span class="sd">              cd ../..
-</span><span class="sd">              rm -rf kcov-master</span><span class="w">
+</span><span class="sd">              wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz</span><span class="w">
+</span><span class="w">              </span>tar<span class="w"> </span>xzf<span class="w"> </span>master.tar.gz<span class="w">
+</span><span class="w">              </span>cd<span class="w"> </span>kcov-master<span class="w">
+</span><span class="w">              </span>mkdir<span class="w"> </span>build<span class="w">
+</span><span class="w">              </span>cd<span class="w"> </span>build<span class="w">
+</span><span class="w">              </span>cmake<span class="w"> </span>..<span class="w">
+</span><span class="w">              </span>make<span class="w">
+</span><span class="w">              </span>make<span class="w"> </span>install<span class="w"> </span>DESTDIR=../../kcov-build<span class="w">
+</span><span class="w">              </span>cd<span class="w"> </span>../..<span class="w">
+</span><span class="w">              </span>rm<span class="w"> </span>-rf<span class="w"> </span>kcov-master<span class="w">
 </span><span class="w">      </span>-<span class="w"> </span>run<span class="p">:</span><span class="w">
 </span><span class="w">          </span>name<span class="p">:</span><span class="w"> </span>test<span class="w">
 </span><span class="w">          </span>command<span class="p">:</span><span class="w"> </span><span class="sd">|
-</span><span class="sd">            export PATH=~/.cargo/bin:$PATH
-</span><span class="sd">            cargo test</span><span class="w">
+</span><span class="sd">            export PATH=~/.cargo/bin:$PATH</span><span class="w">
+</span><span class="w">            </span>cargo<span class="w"> </span>test<span class="w">
 </span><span class="w">      </span>-<span class="w"> </span>run<span class="p">:</span><span class="w">
 </span><span class="w">          </span>name<span class="p">:</span><span class="w"> </span>coverage<span class="w">
 </span><span class="w">          </span>command<span class="p">:</span><span class="w"> </span><span class="sd">|
-</span><span class="sd">            for file in target/debug/mican-*[^\.d]; do 
-</span><span class="sd">                mkdir -p &#34;target/cov/$(basename $file)&#34;; ./kcov-build/usr/local/bin/kcov --exclude-pattern=/.cargo,/usr/lib --verify &#34;target/cov/$(basename $file)&#34; &#34;$file&#34;; 
-</span><span class="sd">            done
-</span><span class="sd">            bash &lt;(curl -s https://codecov.io/bash)
-</span><span class="sd">            echo &#34;Uploaded code coverage&#34;</span></code></pre></div>
+</span><span class="sd">            for file in target/debug/mican-*[^\.d]; do </span><span class="w">
+</span><span class="w">                </span>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&#34;target/cov/$(basename $file)&#34;</span>;<span class="w"> </span>./kcov-build/usr/local/bin/kcov<span class="w"> </span>--exclude-pattern=/.cargo<span class="p">,</span>/usr/lib<span class="w"> </span>--verify<span class="w"> </span><span class="s2">&#34;target/cov/$(basename $file)&#34;</span><span class="w"> </span><span class="s2">&#34;$file&#34;</span>;<span class="w"> 
+</span><span class="w">            </span>done<span class="w">
+</span><span class="w">            </span>bash<span class="w"> </span>&lt;(curl<span class="w"> </span>-s<span class="w"> </span>https<span class="p">:</span>//codecov.io/bash)<span class="w">
+</span><span class="w">            </span>echo<span class="w"> </span><span class="s2">&#34;Uploaded code coverage&#34;</span></code></pre></div>
 
         
           <div class="blog-tags">
@@ -539,7 +540,7 @@ Rust周りのインストールや必要なもののインストールが追加�
         </p>
         
         <p class="credits theme-by text-muted">
-          起動力に<a href="http://gohugo.io">Hugo v0.50-DEV</a> &nbsp;&bull;&nbsp; テーマに<a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>に基づいている<a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          起動力に<a href="http://gohugo.io">Hugo v0.50</a> &nbsp;&bull;&nbsp; テーマに<a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>に基づいている<a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
           
         </p>
       </div>
