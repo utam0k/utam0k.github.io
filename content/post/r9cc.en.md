@@ -2,12 +2,14 @@
 title: A method of self-made C compiler which even a beginner can do
 subtitle: C compiler written by Rust.
 date: 2018-10-12T12:15:41+09:00
-lastmod: 2018-11-27T12:00:00+09:00
+lastmod: 2018-11-01T01:20:00+09:00
+aliases:
+    - /en/blog/r9cc
 tags : [rust, compiler]
 ---
 
 ## Introduction
-Recently, self-made C compilers are popular in Japan because a lecture was held to teach about who to make them.
+Recently, self-made C compilers are popular in Japan because a lecture was held to teach about how to make them.
 I did not participate in it but it seemed fun!!! However, how can I do this???
 There were no compiler experts around me. Oh My God...   
 ※ **I have many many friends!**  
