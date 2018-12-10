@@ -2,6 +2,7 @@ baseurl: "https://www.utam0k.jp/"
 canonifyurls: true
 
 DefaultContentLanguage: "ja"
+hasCJKLanguage: true
 title: "うたもく"
 theme: beautifulhugo
 permalinks:
@@ -13,7 +14,7 @@ enableRobotsTXT: true
 pygmentsCodeFences: true
 pygmentsUseClasses: true
 
-summaryLength: 10
+summaryLength: 0
 
 googleAnalytics: "UA-119773781-1"
 
