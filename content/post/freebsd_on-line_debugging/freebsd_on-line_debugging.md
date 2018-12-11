@@ -1,9 +1,8 @@
 ---
 title: "FreeBSDのオンラインカーネルデバッグ with QEMU"
-date: 2018-12-09T00:00:00+09:00
-<!-- date: 2018-12-12T00:00:00+09:00 -->
+date: 2018-12-12T00:00:00+09:00
 isCJKLanguage: true
-draft: true
+tags : [freebsd, os, gdb]
 ---
 
 この記事は[自作OS Advent Calendar 2018](https://adventar.org/calendars/2915)の12日目の記事です。
@@ -13,7 +12,8 @@ draft: true
 xv6の教科書ではQEMUの`-s`オプションを用いたデバッグが推奨されている。  
 `-s`オプションは`-gdb tcp::1234`の省略版でこのオプションを付けてQEMUを使うと`1234`番ポートでgdbserverを立ち上げてくれる。  
 あとはgdbで`target remote :1234`とかをするとQEMUにアタッチされていい感じにデバッグできる。
-FreeBSDでこれができたらコードリーディングとか捗りそう。  
+FreeBSDでこれができたらコードリーディングとか捗りそう...  
+いろいろ試行錯誤してみたらできました。  
 ということでQEMUの`-s`オプションでFreeBSDのカーネルのデバッグをしてみました。
 
 # デバッグ構成
@@ -29,8 +29,8 @@ FreeBSDでこれができたらコードリーディングとか捗りそう。
 ただし、`Source`の方でカーネル再構築を行います。
 
 `Host`の`20022`番ポートが`Target`の`22`番ポートにリダイレクトされるように設定した。
-`Host`と`Source`は`192.168.122.0/24`で通信できるようにした。
-この辺は`Host`からFreeBSDに相互に通信できれば特に問題ない。  
+`Host`と`Source`は`192.168.122.0/24`で通信できるようにした。  
+この辺は`Host`からFreeBSDに相互で通信できれば特に問題ないと思われる。  
 
 {{% figure src="constitution.png" %}}
 
@@ -39,32 +39,48 @@ FreeBSDでこれができたらコードリーディングとか捗りそう。
 まずは`Source`と`Target`を用意します。
 詳しいインストールの方法[^bsdinstall] は割愛します。
 [^bsdinstall]:https://www.freebsd.org/doc/en/books/handbook/bsdinstall.html
-同じバージョン、アーキテクチャでインストールしていきます。
+同じバージョン、アーキテクチャでインストールしていきます。  
 私の環境ではFreeBSD-11.2-RELEASE-amd64を選択しました。  
-**※`Source`は`src`を含むようにしましょう※**  
-`Source`と`Target`ともに起動させます。  
 
-TODO: QEMU
+`Target`のインストール準備として`Host`で以下のコマンド実行します。  
 `-redir tcp:20022::22`のオプションで`Host`の`20022`番ポートが`Target`の`22`番ポートにリダイレクトされるようにしています。
 ```
-$ qemu-system-x86_64 -m 4096 -hda freebsd.img -boot c -cdrom FreeBSD-11.2-RELEASE-amd64-dvd1.iso -redir tcp:20022::22
+$ qemu-img create -f qcow freebsd_debug.img 30G
+$ qemu-system-x86_64 -m 4096 -hda freebsd_debug.img -boot c -cdrom FreeBSD-11.2-RELEASE-amd64-dvd1.iso -redir tcp:20022::22
 ```
+
+**※`Source`は`src`を含むようにしましょう※**  
+
+{{% figure src="include_src.png" %}}
+
+`Source`と`Target`ともに起動させます。  
 
 ### 2. カーネルの再構築
 `Source`のカーネルを再構築してデバッグ情報を含むようにします。
-ここはバージョンによって多少異なる点があるので自分が選択したバージョンに合わせましょう。
+カーネルの再構築はFreeBSDのバージョンによって多少異なる点があるので自分が選択したバージョンに合わせましょう。
+まずはもとの設定ファイルをコピーします。
 ```
 $ cd /usr/src/sys/amd64/conf
 $ cp GENERIC MYKERNEL
 ```
-設定をごにょごにょいじります。
-TODO: 実際のMakefile
+MYKERNELの設定に以下を足します。
+```
+makeoptions DEBUG=-g
+options KDB
+options DDB
+```
+実際のMYKERNELを[gists](https://gist.github.com/utam0k/d46552bf552fb5121d929f8dd444f745)にあげておきます。
+該当箇所は[24](https://gist.github.com/utam0k/d46552bf552fb5121d929f8dd444f745#file-mykernel-L24)/
+[83](https://gist.github.com/utam0k/d46552bf552fb5121d929f8dd444f745#file-mykernel-L83)/
+[85](https://gist.github.com/utam0k/d46552bf552fb5121d929f8dd444f745#file-mykernel-L85)行目です。
+
+再構築をします。
 ```
 $ cd /usr/src
 $ make buildkernel KERNCONF=MYKERNEL
 $ make installkernel KERNCONF=MYKERNEL
 ```
-`make buildkernel`は時間がかかるのでここでコーヒーブレイクです。
+`make buildkernel`は時間がかかるのでここでコーヒーブレイクです。  
 終わったら`Source`を再起動させましょう。
 
 ### 3. 転送
@@ -76,7 +92,7 @@ $ scp -r root@192.168.122.2:/boot/kernel .
 $ scp -P 20022 kernel/* root@127.0.0.1:/boot/kernel
 ```
 
-2行目のコマンドの前に`strip -x`とかするとシンボル情報がなくなってスマートになります。
+2行目のコマンドの前に`Host`で`strip -x`とかするとシンボル情報がなくなってスマートになります。
 ```
 $ du kernel -h
 123M    kernel
@@ -91,16 +107,18 @@ $ du kernel -h
 `Target`を`-s`オプションを付けて起動させます。
 これでgdbserver立ち上げてくれます。
 
-TODO: imgのチェック
 ```
-$ qemu-system-x86_64 -m 4096 -hda freebsd.img -boot c -cdrom FreeBSD-11.2-RELEASE-amd64-dvd1.iso -redir tcp:20022::22  -s
+$ qemu-system-x86_64 -m 4096 -hda freebsd_debug.img -boot c -cdrom FreeBSD-11.2-RELEASE-amd64-dvd1.iso -redir tcp:20022::22  -s
 ```
 これに加えて`-S`オプションを付けると起動からデバッグできます。
 
 ### 5. kgdb
 kgdb[^kgdb]はカーネルデバッグのためのデバッガーです。
 [^kgdb]:https://en.wikipedia.org/wiki/KGDB
-`Source`でkgdbを起動させます。
+`Source`でkgdbを起動させて`Host`で起動しているQEMUにアタッチします。
+この時点で`Target`は停止します。  
+ここからは好きにデバッグしてみてください。
+ここでは動作の確認のために`sys_mkdir`にブレイクポイントを設定して、`Source`の動作を再開させます。
 
 ```
 $ kgdb /boot/kernel/kernel
@@ -127,11 +145,12 @@ Continuing.
 
 
 # 終わりに
-これでいい感じにFreeBSDのカーネルコードリーディングができそうです。
+これでいい感じにFreeBSDのカーネルコードリーディングができそうです。  
+やっぱりコードとにらめっこするよりも実行しながらできると楽しいですね。  
 たぶん、本来は2つをシリアル通信でつなげてやるんだと思うんですがQEMUの機能でやってみました。  
-なぜFreeBSDなのかという疑問については聞かないでください。
+なぜFreeBSDなのかという疑問については聞かないでください。  
 明日の[自作OS Advent Calendar 2018](https://adventar.org/calendars/2915)は[garasubo](https://twitter.com/garasubo)さんの「Rust + Cortex-M (予定)」です。  
-お！Rust好きとしては楽しいです。
+お！Rust好きとしては楽しみです。
 
 ## 参考文献
 - [FreeBSD Documentation](https://www.freebsd.org/doc/en/books/developers-handbook/kerneldebug-online-gdb.html)
