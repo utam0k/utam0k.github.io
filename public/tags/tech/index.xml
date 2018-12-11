@@ -18,11 +18,7 @@
       <pubDate>Mon, 28 May 2018 21:56:49 +0900</pubDate>
       <author>koma@utam0k.jp (Toru Komatsu)</author>
       <guid>https://www.utam0k.jp/blog/2018/05/28/rust_std_default/</guid>
-      <description>RustのstdにDefaultというのがある。
-構造体のデフォルト値を決めることができる。
-実用例からlibcoreでのどのような実装になっているかを見てみた。
-traitはこんな感じ。
-pubtraitDefault{fn default()-&amp;gt; Self;} Example  Defaultなし</description>
+      <description></description>
     </item>
     
     <item>
@@ -31,13 +27,7 @@ pubtraitDefault{fn default()-&amp;gt; Self;} Example  Defaultなし</description
       <pubDate>Thu, 24 May 2018 16:34:42 +0900</pubDate>
       <author>koma@utam0k.jp (Toru Komatsu)</author>
       <guid>https://www.utam0k.jp/blog/2018/05/24/rust_ci/</guid>
-      <description>最近初めてのRust開発で自作シェルのmicanを作っている。
-そこでCircleCiをがんばった。
-lint Rustのlintとしてrust-clippyが有名。
-結構便利で&amp;quot;if let&amp;quot;でもっとよくなるよ！とかも教えてくれて助かる。よく怒られて神ってなる。
-僕もだが初心者だとRustっぽい構文がわからないので導入すると助かる。
-helpのurlに行くと良い感じになぜだめなのか教えて頂けます。
-warning: writing`&amp;amp;Vec&amp;lt;_&amp;gt;`insteadof`&amp;amp;[_]`involvesonemorereferenceandcannotbeusedwithnon-Vec-basedslices.</description>
+      <description></description>
     </item>
     
   </channel>
