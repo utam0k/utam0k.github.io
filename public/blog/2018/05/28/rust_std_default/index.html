@@ -245,12 +245,11 @@ Defaultを利用しないとこんな感じで<code>new()</code>を作るよう�
 </span><span class="w"></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">options</span>: <span class="nc">SomeOptions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SomeOptions</span>::<span class="n">new</span><span class="p">();</span><span class="w">
 </span><span class="w"></span><span class="p">}</span><span class="w">
-</span><span class="w"></span></code></pre></div>
-<ol>
-<li>Defaultを使う<br />
+</span><span class="w"></span></code></pre></div></li>
+
+<li><p>Defaultを使う<br />
 以下は<a href="https://doc.rust-lang.org/std/default/trait.Default.html">ドキュメント</a>のコードです。<br />
-<code>#[derive]</code><a href="http://rust-lang-ja.org/rust-by-example/attribute.html">アトリビュート</a>で<a href="https://doc.rust-lang.org/std/default/trait.Default.html">Default</a>を使うことで<code>Default::default()</code>が<code>SomeOptions::new()</code>の代わりになって<code>new()</code>を定義する必要がなくなりました！はい、便利。</li>
-</ol>
+<code>#[derive]</code><a href="http://rust-lang-ja.org/rust-by-example/attribute.html">アトリビュート</a>で<a href="https://doc.rust-lang.org/std/default/trait.Default.html">Default</a>を使うことで<code>Default::default()</code>が<code>SomeOptions::new()</code>の代わりになって<code>new()</code>を定義する必要がなくなりました！はい、便利。</p>
 <div class="highlight"><pre class="chroma"><code class="language-rust" data-lang="rust"><span class="cp">#[derive(Default)]</span><span class="w">
 </span><span class="w"></span><span class="k">struct</span> <span class="nc">SomeOptions</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span><span class="w">    </span><span class="n">foo</span>: <span class="kt">i32</span><span class="p">,</span><span class="w">
@@ -268,12 +267,11 @@ Defaultを利用しないとこんな感じで<code>new()</code>を作るよう�
 <div class="highlight"><pre class="chroma"><code class="language-rust" data-lang="rust"><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SomeOptions</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">foo</span>: <span class="mi">42</span><span class="p">,</span><span class="w"> </span><span class="p">..</span><span class="nb">Default</span>::<span class="n">default</span><span class="p">()</span><span class="w"> </span><span class="p">};</span><span class="w">
 </span><span class="w"></span><span class="p">}</span><span class="w">
-</span><span class="w"></span></code></pre></div>
-<ol>
-<li>Defaultを実装する<br />
+</span><span class="w"></span></code></pre></div></li>
+
+<li><p>Defaultを実装する<br />
 Defaultトレイトを自分で実装することももちろん可能。<br />
-ドキュメントではEnumを用いた<a href="https://doc.rust-lang.org/std/default/trait.Default.html#how-can-i-implement-default">コード</a>を紹介していた。</li>
-</ol>
+ドキュメントではEnumを用いた<a href="https://doc.rust-lang.org/std/default/trait.Default.html#how-can-i-implement-default">コード</a>を紹介していた。</p>
 <div class="highlight"><pre class="chroma"><code class="language-rust" data-lang="rust"><span class="k">struct</span> <span class="nc">SomeOptions</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span><span class="w">    </span><span class="n">foo</span>: <span class="kt">i32</span><span class="p">,</span><span class="w">
 </span><span class="w">    </span><span class="n">bar</span>: <span class="kt">f32</span><span class="p">,</span><span class="w">
@@ -303,11 +301,10 @@ Optionを用いた例</p>
 </span><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">options</span>: <span class="nc">SomeOptions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">None</span><span class="p">.</span><span class="n">unwrap_or_default</span><span class="p">();</span><span class="w">
 </span><span class="w">    </span><span class="n">assert_eq</span><span class="o">!</span><span class="p">(</span><span class="n">options</span><span class="p">,</span><span class="w"> </span><span class="nb">Default</span>::<span class="n">default</span><span class="p">());</span><span class="w">
 </span><span class="w"></span><span class="p">}</span><span class="w">
-</span><span class="w"></span></code></pre></div>
-<ol>
-<li>実用例<br />
-<a href="https://github.com/glium/glium">glium</a>というOpenGLのラッパーでは<a href="https://github.com/glium/glium/blob/v0.13.5/src/draw_parameters/mod.rs#L246-L381">DrawParameters</a>というでかい構造体がある。</li>
-</ol>
+</span><span class="w"></span></code></pre></div></li>
+
+<li><p>実用例<br />
+<a href="https://github.com/glium/glium">glium</a>というOpenGLのラッパーでは<a href="https://github.com/glium/glium/blob/v0.13.5/src/draw_parameters/mod.rs#L246-L381">DrawParameters</a>というでかい構造体がある。</p>
 <div class="highlight"><pre class="chroma"><code class="language-rust" data-lang="rust"><span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">DrawParameters</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span><span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">depth</span>: <span class="nc">Depth</span><span class="p">,</span><span class="w">
 </span><span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">stencil</span>: <span class="nc">Stencil</span><span class="p">,</span><span class="w">
@@ -343,7 +340,9 @@ Defaultトレイトを実装することでDefaultから変更したい箇所だ
 </span><span class="w">    </span><span class="n">multisampling</span>: <span class="nc">false</span><span class="p">,</span><span class="w">
 </span><span class="w">    </span><span class="p">..</span><span class="nb">Default</span>::<span class="n">default</span><span class="p">()</span><span class="w">
 </span><span class="w">    </span><span class="p">};</span><span class="w">
-</span><span class="w"></span></code></pre></div>
+</span><span class="w"></span></code></pre></div></li>
+</ol>
+
 <h1 id="詳細">詳細</h1>
 
 <p>Rustのcoreライブラリではデフォルト値が決まっているものがある。
@@ -445,20 +444,18 @@ Defaultトレイトを実装することでDefaultから変更したい箇所だ
 <p>1.26のDefaultのは<code>default_imp!</code>というマクロを用いて実装されている。<br />
 実際の<a href="https://github.com/rust-lang/rust/blob/1.26.0/src/libcore/default.rs#L128-L158">実装コード</a>を見てもらうとがさっきの表の箇所が実装されているのがわかる。</p>
 <div class="highlight"><pre class="chroma"><code class="language-rust" data-lang="rust"><span class="n">macro_rules</span><span class="o">!</span><span class="w"> </span><span class="n">default_impl</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span><span class="w"></span><span class="p">(</span><span class="cp">$t</span>:<span class="nc">ty</span><span class="p">,</span><span class="w"> </span><span class="cp">$v</span>:<span class="nc">expr</span><span class="p">,</span><span class="w"> </span><span class="cp">$doc</span>:<span class="nc">tt</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span><span class="w">    </span><span class="cp">#[stable(feature = </span><span class="s">&#34;rust1&#34;</span><span class="cp">, since = </span><span class="s">&#34;1.0.0&#34;</span><span class="cp">)]</span><span class="w">
-</span><span class="w">    </span><span class="k">impl</span><span class="w"> </span><span class="nb">Default</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="cp">$t</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span><span class="w">        </span><span class="cp">#[inline]</span><span class="w">
-</span><span class="w">        </span><span class="cp">#[doc = $doc]</span><span class="w">
-</span><span class="w">        </span><span class="k">fn</span> <span class="nf">default</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="cp">$t</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cp">$v</span><span class="w"> </span><span class="p">}</span><span class="w">
+</span><span class="w">    </span><span class="p">(</span><span class="cp">$t</span>:<span class="nc">ty</span><span class="p">,</span><span class="w"> </span><span class="cp">$v</span>:<span class="nc">expr</span><span class="p">,</span><span class="w"> </span><span class="cp">$doc</span>:<span class="nc">tt</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="w">        </span><span class="cp">#[stable(feature = </span><span class="s">&#34;rust1&#34;</span><span class="cp">, since = </span><span class="s">&#34;1.0.0&#34;</span><span class="cp">)]</span><span class="w">
+</span><span class="w">        </span><span class="k">impl</span><span class="w"> </span><span class="nb">Default</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="cp">$t</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="w">            </span><span class="cp">#[inline]</span><span class="w">
+</span><span class="w">            </span><span class="cp">#[doc = $doc]</span><span class="w">
+</span><span class="w">            </span><span class="k">fn</span> <span class="nf">default</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="cp">$t</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cp">$v</span><span class="w"> </span><span class="p">}</span><span class="w">
+</span><span class="w">        </span><span class="p">}</span><span class="w">
 </span><span class="w">    </span><span class="p">}</span><span class="w">
-</span><span class="w"></span><span class="p">}</span><span class="w">
 </span><span class="w"></span><span class="p">}</span><span class="w">
 </span><span class="w">
 </span><span class="w"></span><span class="n">default_impl</span><span class="o">!</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kt">bool</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;Returns the default value of `false`&#34;</span><span class="w"> </span><span class="p">}</span><span class="w">
-</span><span class="w"></span></code></pre></div></li>
-</ol>
-
+</span><span class="w"></span></code></pre></div>
 <p>これ以外にも<code>tuple</code>でも<a href="https://github.com/rust-lang/rust/blob/1.26.0/src/libcore/tuple.rs#L73-L78">実装</a>されていた。<br />
 他にも<a href="https://doc.rust-lang.org/std/default/trait.Default.html#implementors">いっぱい</a>あるみたいです。</p>
 
