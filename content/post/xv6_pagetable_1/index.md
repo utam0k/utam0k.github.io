@@ -4,7 +4,12 @@ date: 2019-03-04T15:45:23+09:00
 draft: true
 ---
 
-## 略語説明
+# 略語説明
+- PA(Physical Address): 物理アドレス
+- VA(Virtual Address): 仮想アドレス
+
+#### ページング関係
+- [ページングについて参考にしたサイト](http://softwaretechnique.jp/OS_Development/kernel_development07.html)
 - PTE: ページテーブルエントリ
     - xv6では1PTEで4KBのアドレス空間を表現する
 
@@ -49,7 +54,7 @@ Page Directory Table         4MB*1024=4GB
    Page Table            Page Table                     Page Table
 ```
 
-##  Code: creating an address space
+#  Code: creating an address space
 - シーケンス図
     {{% figure src="sequence.png" %}}
 - `kvmalloc()`:  カーネル用のページテーブルを作成して作成したページテーブルに切り替える
