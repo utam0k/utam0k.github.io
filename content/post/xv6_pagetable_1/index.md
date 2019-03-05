@@ -1,10 +1,13 @@
 ---
 title: "詳解xv6 Page tables 1"
-date: 2019-03-04T15:45:23+09:00
-draft: true
+date: 2019-03-05T18:35:02+09:00
+tags : [xv6, os]
 ---
 
-# 略語説明
+[詳解xv6の目次]({{< ref "post/xv6_index">}})
+***
+
+# 単語説明
 - PA(Physical Address): 物理アドレス
 - VA(Virtual Address): 仮想アドレス
 
@@ -56,21 +59,48 @@ Page Directory Table         4MB*1024=4GB
 ```
 
 #  Code: creating an address space
-TODO: 軽い解説
+本章ではxv6が作るカーネルのアドレス空間、つまりページングの設定を行うコードの解説です。
+カーネルのアドレス空間のVAとPAは図のようにマッピングしていきます。  
+**本章の解説するコードの目的は図のマッピングを作ることです。**
 
-- Fig2.2のようなマッピングを作る
-- カーネル領域はどのプロセスにもある
+> {{% figure src="memorylayout.png" %}}
+Source: [commentary/textbook](https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf)
 
-#### シーケンス図
+どのプロセスにもカーネル用の仮想アドレス空間が設定されています。
+図のように1プロセスには4GBの仮想メモリ空間が割り当てられますが、
+KERNBASE~4GBまではカーネル用の仮想アドレス空間になっています。
+カーネル用のアドレス空間はVAとPAが必ず図のように固定でマッピングされます。
+
+### シーケンス図
 エラー処理等を省いたざっくりとしたシーケンスです。
 今見ている関数はどこから呼ばれるんだっけとなったときに見てもらえればと思います。
-{{% figure src="sequence.png" %}}
+{{% figure src="sequence_withoud_error_handling.png" %}}
 
-#### kvmalloc()
+### main()
+メイン関数
+
+- `main.c`
+
+    ```c
+    14 // Bootstrap processor starts running C code here.
+    15 // Allocate a real stack and switch to it, first
+    16 // doing some setup required for memory allocator to work.
+    17 int
+    18 main(void)
+    19 {
+    20   kinit1(end, P2V(4*1024*1024)); // phys page allocator
+    21   kvmalloc();      // kernel page table
+    ~~~
+    37   mpmain();        // finish this processor's setup
+    38 }
+    ```
+- L21: カーネル用ページテーブルの作成
+
+### kvmalloc()
 カーネル用のページテーブルを作成して作成したページテーブルに切り替える
 
 - 作成するのはページディレクトリエントリを1つのみ  
-- [setupkvm()]({{< ref "#setupkvm">}})はpdeを返すがそれを先頭アドレスとしたpdtとも見れる
+- [setupkvm()]({{< ref "#setupkvm">}})はPDEを返すがそれを先頭アドレスとしたPDTとも見れる
 - `vm.c`  
 
     ```c
@@ -98,12 +128,12 @@ TODO: 軽い解説
     152   lcr3(V2P(kpgdir));   // switch to the kernel page table
     153 }
     ```
-- L152: `cr3`を更新
-    - ページディレクトリの変更、つまりメモリ空間を変える
+- L152: `cr3`レジスタを更新
+    - PDTの変更、つまりメモリ空間を変える
     - `cr3` を別のページディレクトリに切り替える = プロセス空間の切り替えに相当
         - `cr3`が`pde[0]`を指せばおっけ
 
-#### V2P()
+### V2P()
 
 - `memlayout.h`
 
@@ -112,12 +142,12 @@ TODO: 軽い解説
     ~~~
     11 #define V2P(a) (((uint) (a)) - KERNBASE)
     ```
-- カーネルのメモリは決め打ちでわかる
-- > [![Image](https://gyazo.com/c3dbef2734ca29759e6b3c518a638cd5/thumb/1000)](https://gyazo.com/c3dbef2734ca29759e6b3c518a638cd5)
+- L11: カーネルの物理メモリは決め打ちでわかる
+- > {{% figure src="memorylayout_red.png" %}}
 Source: [commentary/textbook](https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf) + 赤色書き加え
 
-#### setupkvm()
-カーネルのページテーブルを作成(Fig2-2)
+### setupkvm()
+カーネルのPDEを作成
 
 - `vm.c`
 
@@ -158,6 +188,8 @@ Source: [commentary/textbook](https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev
     136 }
     ```
  
+- L105 - 115: `kmap[]`はカーネル用のページングの設定
+    - メモリレイアウトの図(Fig2.2)と照らし合わせるとわかりやすい
 - L124 - 126: `pgdir`の領域を確保
     - 4096/32 = 128 pte
         - 4エントリしか使用しない(`kmap[]`より)
@@ -184,9 +216,9 @@ Source: [commentary/textbook](https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev
             94   return (char*)r;
             95 }
         ```
-- L129 - 134: `pgdir`を`kmap[]`にあわせてカーネルのページテーブルを作っていく
+- L129 - 134: `pgdir`を`kmap[]`にあわせていく
 
-#### mappages()
+### mappages()
 仮想アドレスと物理アドレスを紐づける
 
 - `vm.c`
@@ -220,7 +252,7 @@ Source: [commentary/textbook](https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev
 - 引数
     - `pgdir`: ページディレクトリテーブルの先頭アドレス
     - `va`: 仮想アドレス
-    - `size`: 確保するサイズ
+    - `size`: マッピングするサイズ
     - `pa`: 物理アドレス
     - `perm`: permission
 - L66 - 67: PGSIZEにそろえる
@@ -239,8 +271,8 @@ Source: [commentary/textbook](https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev
         ```
 - L76 - 77: `PGSIZE`を増やして繰り返す
 
-#### walkpgdir() 
-`va`に対応するページエントリを見つける
+### walkpgdir() 
+`pgdir`の`va`に対応するPTEを見つける
 
 - `vm.c`
 
@@ -270,7 +302,7 @@ Source: [commentary/textbook](https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev
     54   return &pgtab[PTX(va)];
     55 }
     ```
-- L41: ページディレクトリエントリをげっちゅ
+- L41: PDEを取得
     - `mmu.h`
 
         ```c
@@ -291,6 +323,9 @@ Source: [commentary/textbook](https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev
         87 #define PTXSHIFT        12      // offset of PTX in a linear address
         88 #define PDXSHIFT        22      // offset of PDX in a linear address
         ```
+    - L67 - 71: 仮想アドレスの構成
+        - 前半10bitがPDEのインデックス
+        - 次の10bitがPTEのインデックス
     - `pgdir[PDX(va)]`: 該当するPDEを見つける
     - `pgtab[PTX(va)]`: 該当のPTEを見つける
 - L42 - 43: PDEが存在した場合
@@ -304,7 +339,9 @@ Source: [commentary/textbook](https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev
         Source: [０から作るOS開発　ページングその１　ページとPTEとPDE](http://softwaretechnique.jp/OS_Development/kernel_development07.html)
 - L44 - 53: 引数の`alloc`が真ならば新たにページテーブルを作成し`pde`を更新
 
+### まとめ
+{{% figure src="sequence.png" %}}
+
 ---
 コメントや間違いなどがある場合は[Twitter](https://twitter.com/utam0k)に連絡してもらうか
 [Issue](https://github.com/utam0k/utam0k.github.io/issues/1)に書いていただくと助かります。
-また、[Pull Request](https://github.com/utam0k/utam0k.github.io/blob/source/content/post/xv6_pagetable_1/index.md)もお待ちしています。

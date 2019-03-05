@@ -1,19 +1,20 @@
 ---
 title: "教育版UNIX v6解説 ~詳解xv6~"
 subtitle: "詳解xv6 目次"
-date: 2019-03-04T15:04:55+09:00
-draft: true
+date: 2019-03-05T18:35:00+09:00
+tags : [xv6, os]
 ---
 
 ### はじめに
 本記事はMITのOSの授業で使われているxv6の解説をコードレベルでする記事です。  
-xv6はUNIX v6をベースとし、x86やC99で動くように再実装されたOSです。
+xv6はUNIX v6をベースとし、x86で動くようにANSI Cで再実装されたOSです。
 
 [もっとはじめに]({{<ref "post/xv6_intro">}})
 
-- 想定読者
 - xv6の特徴
+- 書くこと書かないこと
 - 本記事の読み方
+- xv6の動かし方、デバッグ方法
 
 ### 本編
 1. [Page tables 1]({{< ref "post/xv6_pagetable_1" >}})
@@ -49,4 +50,3 @@ xv6はUNIX v6をベースとし、x86やC99で動くように再実装されたO
 ---
 コメントや間違いなどがある場合は[Twitter](https://twitter.com/utam0k)に連絡してもらうか
 [Issue](https://github.com/utam0k/utam0k.github.io/issues/1)に書いていただくと助かります。
-また、[Pull Request](https://github.com/utam0k/utam0k.github.io/blob/source/content/post/xv6_index/index.md)もお待ちしています。
