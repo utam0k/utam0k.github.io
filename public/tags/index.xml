@@ -42,7 +42,7 @@
     <item>
       <title>Os</title>
       <link>https://www.utam0k.jp/tags/os/</link>
-      <pubDate>Wed, 12 Dec 2018 00:00:00 +0900</pubDate>
+      <pubDate>Tue, 05 Mar 2019 18:35:02 +0900</pubDate>
       <author>koma@utam0k.jp (Toru Komatsu)</author>
       <guid>https://www.utam0k.jp/tags/os/</guid>
       <description></description>
@@ -63,6 +63,15 @@
       <pubDate>Mon, 28 May 2018 21:56:49 +0900</pubDate>
       <author>koma@utam0k.jp (Toru Komatsu)</author>
       <guid>https://www.utam0k.jp/tags/tech/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Xv6</title>
+      <link>https://www.utam0k.jp/tags/xv6/</link>
+      <pubDate>Tue, 05 Mar 2019 18:35:02 +0900</pubDate>
+      <author>koma@utam0k.jp (Toru Komatsu)</author>
+      <guid>https://www.utam0k.jp/tags/xv6/</guid>
       <description></description>
     </item>
     

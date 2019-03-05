@@ -5,9 +5,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Tech</title>
-  <meta property="og:title" content="Tech" />
-  <meta name="twitter:title" content="Tech" />
+  <title>教育版UNIX v6解説 ~詳解xv6~</title>
+  <meta property="og:title" content="教育版UNIX v6解説 ~詳解xv6~" />
+  <meta name="twitter:title" content="教育版UNIX v6解説 ~詳解xv6~" />
+  <meta name="description" content="詳解xv6 目次">
+  <meta property="og:description" content="詳解xv6 目次">
+  <meta name="twitter:description" content="詳解xv6 目次">
   <meta name="author" content="Toru Komatsu"/>
   <link href='https://www.utam0k.jp/img/favicon.ico' rel='icon' type='image/x-icon'/>
   <meta property="og:image" content="https://www.utam0k.jp/img/logo.jpg" />
@@ -15,13 +18,13 @@
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:site" content="@utam0k" />
   <meta name="twitter:creator" content="@utam0k" />
-  <meta property="og:url" content="https://www.utam0k.jp/tags/tech/" />
+  <meta property="og:url" content="https://www.utam0k.jp/blog/2019/03/05/xv6_index/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="うたもく" />
 
   <meta name="generator" content="Hugo 0.50" />
-  <link rel="canonical" href="https://www.utam0k.jp/tags/tech/" />
-  <link rel="alternate" href="https://www.utam0k.jp/tags/tech/index.xml" type="application/rss+xml" title="うたもく">
+  <link rel="canonical" href="https://www.utam0k.jp/blog/2019/03/05/xv6_index/" />
+  <link rel="alternate" href="https://www.utam0k.jp/index.xml" type="application/rss+xml" title="うたもく">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -168,14 +171,44 @@ if (!doNotTrack) {
 
 
     
+  
+  
+  
+
+
+
+
+  
+
   <header class="header-section ">
+    
     <div class="intro-header no-img">
+      
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <div class="page-heading">
-              <h1>#Tech</h1>
-              <hr class="small">
+            <div class="post-heading">
+              <h1>教育版UNIX v6解説 ~詳解xv6~</h1>
+                
+                  
+                    <h2 class="post-subheading">詳解xv6 目次</h2>
+                  
+                
+                
+                  <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;March 5, 2019に投稿
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 1 分間 (383 言葉)
+  
+  
+</span>
+
+
+                
             </div>
           </div>
         </div>
@@ -183,100 +216,188 @@ if (!doNotTrack) {
     </div>
   </header>
 
+
     
-  <div class="container" role="main">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
         
-        <div class="posts-list">
-          
-            <article class="post-preview">
-              <a href="https://www.utam0k.jp/blog/2018/05/28/rust_std_default/">
-                <h2 class="post-title">Rustのstd::default::Default</h2>
 
-                
-              </a>
+<h3 id="はじめに">はじめに</h3>
 
-              <p class="post-meta">
-                <span class="post-meta">
-  
-  
-  <i class="fa fa-calendar-o"></i>&nbsp;May 28, 2018に投稿
-  
-  
-  &nbsp;|&nbsp;
-  <i class="fa fa-clock-o"></i> 3 分間 (1270 言葉)
-  
-  
-</span>
+<p>本記事はMITのOSの授業で使われているxv6の解説をコードレベルでする記事です。<br />
+xv6はUNIX v6をベースとし、x86で動くようにANSI Cで再実装されたOSです。</p>
+
+<p><a href="https://www.utam0k.jp/blog/2019/03/05/xv6_intro/">もっとはじめに</a></p>
+
+<ul>
+<li>xv6の特徴</li>
+<li>書くこと書かないこと</li>
+<li>本記事の読み方</li>
+<li>xv6の動かし方、デバッグ方法</li>
+</ul>
+
+<h3 id="本編">本編</h3>
+
+<ol>
+<li><a href="https://www.utam0k.jp/blog/2019/03/05/xv6_pagetable_1/">Page tables 1</a>
+
+<ul>
+<li>アドレススペースの作成</li>
+<li>カーネルのページング設定</li>
+</ul></li>
+<li>Page tabels 2 (<strong>coming soon</strong>)
+
+<ul>
+<li>メモリアロケータ</li>
+</ul></li>
+<li>Traps interrupts, and drivers (<strong>coming soon</strong>)
+
+<ul>
+<li>システムコール</li>
+<li>割り込み</li>
+<li>ディスクドライバ</li>
+</ul></li>
+<li>Locking (<strong>coming soon</strong>)
+
+<ul>
+<li>並列処理</li>
+</ul></li>
+<li>Scheduling (<strong>coming soon</strong>)
+
+<ul>
+<li>スケジューリング</li>
+<li>sleepとwakeup</li>
+<li>パイプ</li>
+<li>wait, exit, kill</li>
+</ul></li>
+<li>File system 1 (<strong>coming soon</strong>)
+
+<ul>
+<li>ファイルシステムの概要</li>
+<li>Bufferキャッシュ層</li>
+<li>Logging層</li>
+<li>ジャーナリング</li>
+<li>ブロックアロケータ</li>
+</ul></li>
+<li>File system 2 (<strong>coming soon</strong>)
+
+<ul>
+<li>Inode層</li>
+</ul></li>
+<li>File system 3 (<strong>coming soon</strong>)
+
+<ul>
+<li>Directory層</li>
+<li>Path name</li>
+</ul></li>
+<li>File system 4 (<strong>coming soon</strong>)
+
+<ul>
+<li>Descriptor層</li>
+</ul></li>
+</ol>
+
+<hr />
+
+<p>コメントや間違いなどがある場合は<a href="https://twitter.com/utam0k">Twitter</a>に連絡してもらうか
+<a href="https://github.com/utam0k/utam0k.github.io/issues/1">Issue</a>に書いていただくと助かります。</p>
 
 
-              </p>
-              <div class="post-entry">
-                
-                  
-                  <a href="https://www.utam0k.jp/blog/2018/05/28/rust_std_default/" class="post-read-more">[続きを読む]</a>
-                
-              </div>
-
-              
-                <div class="blog-tags">
-                  
-                    <a href="https://www.utam0k.jp//tags/tech/">tech</a>&nbsp;
-                  
-                    <a href="https://www.utam0k.jp//tags/rust/">rust</a>&nbsp;
-                  
-                </div>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://www.utam0k.jp/blog/2018/05/24/rust_ci/">
-                <h2 class="post-title">RustでのCircleCiの導入</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                <span class="post-meta">
-  
-  
-  <i class="fa fa-calendar-o"></i>&nbsp;May 24, 2018に投稿
-  
-  
-  &nbsp;|&nbsp;
-  <i class="fa fa-clock-o"></i> 2 分間 (881 言葉)
-  
-  
-</span>
-
-
-              </p>
-              <div class="post-entry">
-                
-                  
-                  <a href="https://www.utam0k.jp/blog/2018/05/24/rust_ci/" class="post-read-more">[続きを読む]</a>
-                
-              </div>
-
-              
-                <div class="blog-tags">
-                  
-                    <a href="https://www.utam0k.jp//tags/tech/">tech</a>&nbsp;
-                  
-                    <a href="https://www.utam0k.jp//tags/rust/">rust</a>&nbsp;
-                  
-                </div>
-              
-
-            </article>
-          
-        </div>
         
-      </div>
+          <div class="blog-tags">
+            
+              <a href="https://www.utam0k.jp//tags/xv6/">xv6</a>&nbsp;
+            
+              <a href="https://www.utam0k.jp//tags/os/">os</a>&nbsp;
+            
+          </div>
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <ul class="list-inline footer-links">
+                
+
+
+<li>
+    <a href="//twitter.com/share?url=https%3a%2f%2fwww.utam0k.jp%2fblog%2f2019%2f03%2f05%2fxv6_index%2f&amp;text=%e6%95%99%e8%82%b2%e7%89%88UNIX%20v6%e8%a7%a3%e8%aa%ac%20~%e8%a9%b3%e8%a7%a3xv6~&amp;via=utam0k"
+       target="_blank" alt="" title="Share on Twitter">
+        <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+    </a>
+</li>
+
+
+<li>
+    <a href="//plus.google.com/share?url=https%3a%2f%2fwww.utam0k.jp%2fblog%2f2019%2f03%2f05%2fxv6_index%2f" target="_blank" title="Share on Google Plus">
+         <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-google-plus fa-stack-1x fa-inverse"></i>
+              </span>
+    </a>
+</li>
+
+
+<li>
+    <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.utam0k.jp%2fblog%2f2019%2f03%2f05%2fxv6_index%2f" target="_blank" title="Share on Facebook">
+        <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+              </span>
+    </a>
+</li>
+
+<li>
+    <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fwww.utam0k.jp%2fblog%2f2019%2f03%2f05%2fxv6_index%2f&amp;title=%e6%95%99%e8%82%b2%e7%89%88UNIX%20v6%e8%a7%a3%e8%aa%ac%20~%e8%a9%b3%e8%a7%a3xv6~" target="_blank"
+       title="Share on LinkedIn">
+         <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+              </span>
+    </a>
+</li>
+
+</br>
+</br>
+<a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="vertical-normal" data-hatena-bookmark-lang="en" title="add to your hatena bookmark">
+    <img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="add to your hatena bookmark" width="20" height="100" style="border: none;" />
+</a>
+<script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+
+              </ul>
+            </section>
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://www.utam0k.jp/blog/2018/12/12/freebsd_on-line_debugging/" data-toggle="tooltip" data-placement="top" title="FreeBSDのオンラインカーネルデバッグ with QEMU">&larr; 前ページ</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://www.utam0k.jp/blog/2019/03/05/xv6_intro/" data-toggle="tooltip" data-placement="top" title="詳解xv6 はじめに">次ページ &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+        
+        
+      
+
     </div>
   </div>
+</div>
 
     <footer>
   <div class="container">
@@ -311,7 +432,7 @@ if (!doNotTrack) {
           
           <li>
             
-            <a href="https://www.utam0k.jp/tags/tech/index.xml" title="RSS">
+            <a href="https://www.utam0k.jp/index.xml" title="RSS">
             
               <span class="fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>

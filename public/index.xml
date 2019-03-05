@@ -7,10 +7,37 @@
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>koma@utam0k.jp (Toru Komatsu)</managingEditor>
     <webMaster>koma@utam0k.jp (Toru Komatsu)</webMaster>
-    <lastBuildDate>Wed, 12 Dec 2018 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 05 Mar 2019 18:35:02 +0900</lastBuildDate>
     
 	<atom:link href="https://www.utam0k.jp/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>詳解xv6 Page tables 1</title>
+      <link>https://www.utam0k.jp/blog/2019/03/05/xv6_pagetable_1/</link>
+      <pubDate>Tue, 05 Mar 2019 18:35:02 +0900</pubDate>
+      <author>koma@utam0k.jp (Toru Komatsu)</author>
+      <guid>https://www.utam0k.jp/blog/2019/03/05/xv6_pagetable_1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>詳解xv6 はじめに</title>
+      <link>https://www.utam0k.jp/blog/2019/03/05/xv6_intro/</link>
+      <pubDate>Tue, 05 Mar 2019 18:35:01 +0900</pubDate>
+      <author>koma@utam0k.jp (Toru Komatsu)</author>
+      <guid>https://www.utam0k.jp/blog/2019/03/05/xv6_intro/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>教育版UNIX v6解説 ~詳解xv6~</title>
+      <link>https://www.utam0k.jp/blog/2019/03/05/xv6_index/</link>
+      <pubDate>Tue, 05 Mar 2019 18:35:00 +0900</pubDate>
+      <author>koma@utam0k.jp (Toru Komatsu)</author>
+      <guid>https://www.utam0k.jp/blog/2019/03/05/xv6_index/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>FreeBSDのオンラインカーネルデバッグ with QEMU</title>

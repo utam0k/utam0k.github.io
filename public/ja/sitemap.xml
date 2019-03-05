@@ -3,6 +3,21 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://www.utam0k.jp/blog/2019/03/05/xv6_pagetable_1/</loc>
+    <lastmod>2019-03-05T18:35:02+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.utam0k.jp/blog/2019/03/05/xv6_intro/</loc>
+    <lastmod>2019-03-05T18:35:01+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.utam0k.jp/blog/2019/03/05/xv6_index/</loc>
+    <lastmod>2019-03-05T18:35:00+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://www.utam0k.jp/blog/2018/12/12/freebsd_on-line_debugging/</loc>
     <lastmod>2018-12-13T12:00:00+09:00</lastmod>
   </url>
@@ -103,7 +118,7 @@
   
   <url>
     <loc>https://www.utam0k.jp/tags/os/</loc>
-    <lastmod>2018-12-13T12:00:00+09:00</lastmod>
+    <lastmod>2019-03-05T18:35:02+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -125,7 +140,7 @@
   
   <url>
     <loc>https://www.utam0k.jp/post/</loc>
-    <lastmod>2018-12-13T12:00:00+09:00</lastmod>
+    <lastmod>2019-03-05T18:35:02+09:00</lastmod>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
@@ -178,8 +193,14 @@
   </url>
   
   <url>
+    <loc>https://www.utam0k.jp/tags/xv6/</loc>
+    <lastmod>2019-03-05T18:35:02+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://www.utam0k.jp/</loc>
-    <lastmod>2018-12-13T12:00:00+09:00</lastmod>
+    <lastmod>2019-03-05T18:35:02+09:00</lastmod>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
