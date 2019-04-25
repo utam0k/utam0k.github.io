@@ -4,8 +4,9 @@ date: 2019-03-05T18:35:02+09:00
 tags : [xv6, os]
 ---
 
-[詳解xv6の目次]({{< ref "post/xv6_index">}})
-***
+[詳解xv6の目次]({{< ref "post/xv6_index">}})  
+[次の記事]({{< ref "post/xv6_pagetable_2">}})
+- - -
 
 # 単語説明
 - PA(Physical Address): 物理アドレス

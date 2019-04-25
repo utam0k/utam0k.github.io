@@ -20,8 +20,10 @@ xv6はUNIX v6をベースとし、x86で動くようにANSI Cで再実装され�
 1. [Page tables 1]({{< ref "post/xv6_pagetable_1" >}})
     - アドレススペースの作成
     - カーネルのページング設定
-1. Page tabels 2 (__coming soon__)
+1. [Page tabels 2]({{< ref "post/xv6_pagetable_2" >}})
     - メモリアロケータ
+    - sbrk()
+    - exec()
 1. Traps interrupts, and drivers (__coming soon__)
     - システムコール
     - 割り込み
