@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://www.utam0k.jp/blog/2019/04/25/xv6_pagetable_2/</loc>
+    <lastmod>2019-04-25T09:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://www.utam0k.jp/blog/2019/03/05/xv6_pagetable_1/</loc>
     <lastmod>2019-03-05T18:35:02+09:00</lastmod>
   </url>
@@ -118,7 +123,7 @@
   
   <url>
     <loc>https://www.utam0k.jp/tags/os/</loc>
-    <lastmod>2019-03-05T18:35:02+09:00</lastmod>
+    <lastmod>2019-04-25T09:00:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -140,7 +145,7 @@
   
   <url>
     <loc>https://www.utam0k.jp/post/</loc>
-    <lastmod>2019-03-05T18:35:02+09:00</lastmod>
+    <lastmod>2019-04-25T09:00:00+09:00</lastmod>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
@@ -194,13 +199,13 @@
   
   <url>
     <loc>https://www.utam0k.jp/tags/xv6/</loc>
-    <lastmod>2019-03-05T18:35:02+09:00</lastmod>
+    <lastmod>2019-04-25T09:00:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.utam0k.jp/</loc>
-    <lastmod>2019-03-05T18:35:02+09:00</lastmod>
+    <lastmod>2019-04-25T09:00:00+09:00</lastmod>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"

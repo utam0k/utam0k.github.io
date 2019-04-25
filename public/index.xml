@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>koma@utam0k.jp (Toru Komatsu)</managingEditor>
     <webMaster>koma@utam0k.jp (Toru Komatsu)</webMaster>
-    <lastBuildDate>Tue, 05 Mar 2019 18:35:02 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 25 Apr 2019 09:00:00 +0900</lastBuildDate>
     
 	<atom:link href="https://www.utam0k.jp/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>詳解xv6 Page tables 2</title>
+      <link>https://www.utam0k.jp/blog/2019/04/25/xv6_pagetable_2/</link>
+      <pubDate>Thu, 25 Apr 2019 09:00:00 +0900</pubDate>
+      <author>koma@utam0k.jp (Toru Komatsu)</author>
+      <guid>https://www.utam0k.jp/blog/2019/04/25/xv6_pagetable_2/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>詳解xv6 Page tables 1</title>
