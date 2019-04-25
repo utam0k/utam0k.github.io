@@ -1,8 +1,7 @@
 ---
 title: "詳解xv6 Page tables 2"
-date: 2019-04-03T18:35:02+09:00
+date: 2019-04-25T09:00:00+09:00
 tags: [xv6, os]
-draft: true
 ---
 
 [詳解xv6の目次]({{< ref "post/xv6_index">}})  
