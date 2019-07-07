@@ -1,6 +1,6 @@
 ---
 title: "詳解xv6 Traps, interrupts, and drivers 1"
-date: 2019-06-25T09:00:00+09:00
+date: 2019-07-08T00:00:00+09:00
 tags: [xv6, os]
 ---
 
@@ -402,3 +402,7 @@ xv6のシステムコールの処理を追っていきます。
 [回答gist](https://gist.github.com/utam0k/1c04a96d7d1f16885f85562a5747bcf7)
 
 次回は`trap()`から呼び出されるのが割り込みだった場合の処理、ドライバを追っていきます。
+
+---
+コメントや間違いなどがある場合は[Twitter](https://twitter.com/utam0k)に連絡してもらうか
+[Issue](https://github.com/utam0k/utam0k.github.io/issues/1)に書いていただくと助かります
