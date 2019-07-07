@@ -317,13 +317,15 @@ Source: <a href="https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf">comme
 <span class="mi">25</span>
 <span class="mi">26</span>   <span class="n">initlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">tickslock</span><span class="p">,</span> <span class="s">&#34;time&#34;</span><span class="p">);</span>
 <span class="mi">27</span> <span class="p">}</span> </code></pre></div>
-<p>L22-23: 256個のIDTエントリを<code>vectors</code>に対応しているハンドラにセット<br />
-L24: システムコール用のIDTエントリをセット</p>
+<ul>
+<li>L22-23: 256個のIDTエントリを<code>vectors</code>に対応しているハンドラにセット<br /></li>
+
+<li><p>L24: システムコール用のIDTエントリをセット</p>
 
 <ul>
 <li>T_SYSCALL(=64番目のエントリ)だけはユーザレベル(∵ 第4引数がDPL_USER)で呼び出し可能</li>
-
-<li><p>第二引数が1、つまりトラップである</p>
+<li>第二引数が1、つまりトラップである</li>
+</ul>
 <div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="mi">161</span> <span class="c1">// - istrap: 1 for a trap (= exception) gate, 0 for an interrupt gate.
 </span><span class="c1"></span><span class="mi">162</span> <span class="c1">//   interrupt gate clears FL_IF, trap gate leaves FL_IF alone
 </span><span class="c1"></span><span class="mi">163</span> <span class="c1">// - sel: Code segment selector for interrupt/trap handler
