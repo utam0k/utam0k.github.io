@@ -104,12 +104,12 @@ IDT: Interrupt Descriptor Table
         36 #     jmp alltraps
         37 #   ...
         ```
-    - L34 - 35: 後述する`trapframe`に値をセット
-      - L34: `trapframe`の`err`の値  
-        処理によってはCPUによって自動で積まれる(e.x. PageFault)
-      - L35: `trapframe`の`trapno`の値  
-        何の処理なのかを振り分ける値(`trap()`で使われる)
-    - L36: 全てのvectorは`alltraps`に飛ぶ
+      - L34 - 35: 後述する`trapframe`に値をセット
+        - L34: `trapframe`の`err`の値  
+          処理によってはCPUによって自動で積まれる(e.x. PageFault)
+        - L35: `trapframe`の`trapno`の値  
+          何の処理なのかを振り分ける値(`trap()`で使われる)
+      - L36: 全てのvectorは`alltraps`に飛ぶ
 
   - `mmu.h`
 
