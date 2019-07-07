@@ -58,7 +58,7 @@ IDT: Interrupt Descriptor Table
 `ret`ではなく`iret`命令で`int`命令のスタックを回復
 
 # Code: Assembly trap handlers
-`main.c`から呼ばれる`tvinit()`でIDTのセット(not load)  
+`main.c`から呼ばれる`tvinit()`でIDTのセット
 
 - `trap.c`
 
