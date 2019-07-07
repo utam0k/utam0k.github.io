@@ -89,6 +89,7 @@ ex) ページングはなぜ必要なのか
     ```
     $ git clone git://github.com/mit-pdos/xv6-public.git
     $ cd xv6-public
+    $ git checkout xv6-rev11
     ```
 
 1. Make
