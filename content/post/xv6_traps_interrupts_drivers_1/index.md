@@ -75,8 +75,8 @@ IDT: Interrupt Descriptor Table
     26   initlock(&tickslock, "time");
     27 } 
     ```
-    L22-23: 256個のIDTエントリを`vectors`に対応しているハンドラにセット  
-    L24: システムコール用のIDTエントリをセット
+    - L22-23: 256個のIDTエントリを`vectors`に対応しているハンドラにセット  
+    - L24: システムコール用のIDTエントリをセット
      - T_SYSCALL(=64番目のエントリ)だけはユーザレベル(∵ 第4引数がDPL_USER)で呼び出し可能
      - 第二引数が1、つまりトラップである
 
