@@ -343,18 +343,15 @@ L24: システムコール用のIDTエントリをセット</p>
 <span class="mi">34</span> <span class="c1">#     pushl $0</span>
 <span class="mi">35</span> <span class="c1">#     pushl $0</span>
 <span class="mi">36</span> <span class="c1">#     jmp alltraps</span>
-<span class="mi">37</span> <span class="c1">#   ...</span></code></pre></div></li>
-
-<li><p>L34 - 35: 後述する<code>trapframe</code>に値をセット</p>
-
+<span class="mi">37</span> <span class="c1">#   ...</span></code></pre></div>
 <ul>
+<li>L34 - 35: 後述する<code>trapframe</code>に値をセット</li>
 <li>L34: <code>trapframe</code>の<code>err</code>の値<br />
 処理によってはCPUによって自動で積まれる(e.x. PageFault)</li>
 <li>L35: <code>trapframe</code>の<code>trapno</code>の値<br />
 何の処理なのかを振り分ける値(<code>trap()</code>で使われる)</li>
+<li>L36: 全てのvectorは<code>alltraps</code>に飛ぶ</li>
 </ul></li>
-
-<li><p>L36: 全てのvectorは<code>alltraps</code>に飛ぶ</p></li>
 
 <li><p><code>mmu.h</code></p>
 <div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="mi">147</span> <span class="c1">// Gate descriptors for interrupts and traps
