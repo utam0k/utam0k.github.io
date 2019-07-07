@@ -24,8 +24,10 @@ xv6はUNIX v6をベースとし、x86で動くようにANSI Cで再実装され�
     - メモリアロケータ
     - sbrk()
     - exec()
-1. Traps interrupts, and drivers (__coming soon__)
+1. [Traps, interrupts, and drivers 1]({{< ref "post/xv6_traps_interrupts_drivers_1" >}})
+    - IDT
     - システムコール
+1. Traps, interrupts, and drivers 2(__coming soon__)
     - 割り込み
     - ディスクドライバ
 1. Locking (__coming soon__)
