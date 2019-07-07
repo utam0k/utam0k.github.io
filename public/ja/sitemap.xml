@@ -3,8 +3,8 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://www.utam0k.jp/blog/2019/06/25/xv6_traps_interrupts_drivers_1/</loc>
-    <lastmod>2019-06-25T09:00:00+09:00</lastmod>
+    <loc>https://www.utam0k.jp/blog/2019/07/08/xv6_traps_interrupts_drivers_1/</loc>
+    <lastmod>2019-07-08T00:00:00+09:00</lastmod>
   </url>
   
   <url>
@@ -128,7 +128,7 @@
   
   <url>
     <loc>https://www.utam0k.jp/tags/os/</loc>
-    <lastmod>2019-06-25T09:00:00+09:00</lastmod>
+    <lastmod>2019-07-08T00:00:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -150,7 +150,7 @@
   
   <url>
     <loc>https://www.utam0k.jp/post/</loc>
-    <lastmod>2019-06-25T09:00:00+09:00</lastmod>
+    <lastmod>2019-07-08T00:00:00+09:00</lastmod>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
@@ -204,13 +204,13 @@
   
   <url>
     <loc>https://www.utam0k.jp/tags/xv6/</loc>
-    <lastmod>2019-06-25T09:00:00+09:00</lastmod>
+    <lastmod>2019-07-08T00:00:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.utam0k.jp/</loc>
-    <lastmod>2019-06-25T09:00:00+09:00</lastmod>
+    <lastmod>2019-07-08T00:00:00+09:00</lastmod>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
