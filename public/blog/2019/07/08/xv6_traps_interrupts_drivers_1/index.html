@@ -195,7 +195,7 @@ if (!doNotTrack) {
   
   
   &nbsp;|&nbsp;
-  <i class="fa fa-clock-o"></i> 7 分間 (3268 言葉)
+  <i class="fa fa-clock-o"></i> 7 分間 (3270 言葉)
   
   
 </span>
@@ -273,7 +273,7 @@ IDT: Interrupt Descriptor Table<br />
 <ol>
 <li>IDTからn番目のディスクリプタをフェッチ</li>
 <li><code>%cs</code>のCPLフィールドをチェックが<code>DPL</code>以下であることを確認</li>
-<li>ターゲットセグメントセレクタがPL&lt;CPLであった場合にのみ、CPUの内部レジスタである<code>%esp</code>と<code>%ss</code>を保存</li>
+<li>ターゲットセグメントセレクタがDPL=&lt;CPLであった場合にのみ、CPUの内部レジスタである<code>%esp</code>と<code>%ss</code>を保存</li>
 <li><code>%ss</code>と<code>%esp</code>をタスクセグメントディスクリプタからロード</li>
 <li><code>%ss</code> <code>%esp</code> <code>%eflags</code> <code>%cs</code> <code>%eip</code>の順でスタックに積む</li>
 <li><code>%eflags</code>の割り込み可能フラグ(IF)をクリア</li>
