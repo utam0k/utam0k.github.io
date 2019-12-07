@@ -32,8 +32,10 @@ xv6はUNIX v6をベースとし、x86で動くようにANSI Cで再実装され�
     - ディスクドライバ
 1. Locking (__coming soon__)
     - 並列処理
-1. Scheduling (__coming soon__)
+1. [Scheduling 1]({{< ref "post/xv6_scheduling_1" >}})
+    - コンテキストスイッチ
     - スケジューリング
+1. Scheduling 2(__coming soon__)
     - sleepとwakeup
     - パイプ
     - wait, exit, kill
