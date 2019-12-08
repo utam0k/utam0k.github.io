@@ -38,7 +38,8 @@ xv6がどのようにしてプロセスの切り替えを行っているのか�
 1. 各CPUごとにスケジューラが存在している
 1. 各プロセスは自分自身のカーネルスタックを保持している
 
-TODO: 図を入れる
+TODO: 図を入れる  
+
 図は２つのユーザプロセス(shellとcat)がスケジューラによってどのように切り替わるのを説明した大まかな図です。
 
 1. shellプロセスはシステムコールや割り込み(e.g.タイマー割り込み)によってshellプロセスのカーネルスレッドに移行
@@ -75,7 +76,7 @@ TODO: 図を入れる
 28   popl %ebp
 29   ret
 ```
-L11-12: 引数でoldとnewの`context`のポインタが渡されている
+L11-12: 引数で`context`の`**old`と`*new`が渡されている
 
   - `proc.h`
 
@@ -93,19 +94,65 @@ L14-18: 現在のプロセスの`context`の保存
 
   - callによって`eip`は保存されている
 
-L21: 引数で渡されたoldに現在のスタックポインタ、つまり保存した`context`を代入
-L22: 引数で渡されたnewをスタックポインタに変更する
-
+L21: 引数で渡されたoldに現在のスタックポインタ、つまり保存した`context`を代入  
+L22: 引数で渡されたnewをスタックポインタに変更する  
 L24-29: 新しいプロセスの`context`の復元
 
   - retによって`eip`は復元される
 
 # Code: Scheduling
 ## trap()
+タイマー割り込みで`yield()`が呼ばれる。  
+`trap.c`
+```c
+36 void                                                                                                                                                                          
+37 trap(struct trapframe *tf)                                                                                                                                                    
+~~~
+103   // Force process to give up CPU on clock tick.
+104   // If interrupts were on while locks held, would need to check nlock.
+105   if(myproc() && myproc()->state == RUNNING &&
+106      tf->trapno == T_IRQ0+IRQ_TIMER)
+107     yield();
+```
+
 ## yield()
+`proc.c`
+```c
+384 // Give up the CPU for one scheduling round.
+385 void
+386 yield(void)
+387 {
+388   acquire(&ptable.lock);  //DOC: yieldlock
+389   myproc()->state = RUNNABLE;
+390   sched();
+391   release(&ptable.lock);
+392 }
+```
+L388: `ptable`のロックを取得  
+L389: 動かしているプロセスを`RUNNING`から`RUNNABLE`にする  
+L390: `shed()`を呼び出す  
+L391: `ptable`のロックを解放(プロセス再開はここから)  
+
 ## sched()
+`proc.c`
+```c
+365 void
+366 sched(void)
+367 {
+371   if(!holding(&ptable.lock))
+372     panic("sched ptable.lock");
+~~~
+379   intena = mycpu()->intena;
+380   swtch(&p->context, mycpu()->scheduler);
+381   mycpu()->intena = intena;
+382 }
+```
+L371: 他のCPUがプロセスの状態等を書き換える可能性があるためロック  
+L380: スケジューラにコンテキストスイッチ
+
 ## scheduler()
-無限ループになっている  
+いよいよ、メインのスケジューリングの箇所です。  
+次に動かすプロセスを見つけて、コンテキストスイッチします。  
 `proc.c`
 ```c
 322 void
@@ -144,6 +191,29 @@ L24-29: 新しいプロセスの`context`の復元
 355   }
 356 }
 ```
+L329: 無限ループになっている  
+L335-337: 次に動かすプロセス(`RUNNEABLE`なプロセス):`p`を探す  
+L343: `p`のTSS(Task State Segment)をTRにセットして、割り込みなどがあった時に`p`のカーネルスタックになるようにする  
+L342: `myproc()`で実行中のプロセスを取得できるようにセット
+
+  - `proc.c`
+
+     ```c
+     57 struct proc*
+     58 myproc(void) {
+     59   struct cpu *c;
+     60   struct proc *p;
+     61   pushcli();
+     62   c = mycpu();
+     63   p = c->proc;
+     64   popcli();
+     65   return p;
+     66 }
+     ```
+
+L346: `p`にコンテキストスイッチ  
+L347: メモリ空間の切り替え([switchkvm]({{< ref "post/xv6_pagetable_1" >}}/#switchkvm))  
+L351: 動いているプロセスはスケジューラなため、リセットしておく  
 
 ---
 コメントや間違いなどがある場合は[Twitter](https://twitter.com/utam0k)に連絡してもらうか
