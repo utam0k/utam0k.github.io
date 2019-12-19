@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>koma@utam0k.jp (Toru Komatsu)</managingEditor>
     <webMaster>koma@utam0k.jp (Toru Komatsu)</webMaster>
-    <lastBuildDate>Mon, 08 Jul 2019 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 20 Dec 2019 00:00:00 +0900</lastBuildDate>
     
 	<atom:link href="https://www.utam0k.jp/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>詳解xv6 Scheduling 1</title>
+      <link>https://www.utam0k.jp/blog/2019/12/20/xv6_scheduling_1/</link>
+      <pubDate>Fri, 20 Dec 2019 00:00:00 +0900</pubDate>
+      <author>koma@utam0k.jp (Toru Komatsu)</author>
+      <guid>https://www.utam0k.jp/blog/2019/12/20/xv6_scheduling_1/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>詳解xv6 Traps, interrupts, and drivers 1</title>
