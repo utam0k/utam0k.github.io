@@ -4,7 +4,7 @@ date: 2018-05-24T13:12:48+09:00
 ---
 
 ## About me
-スコシエッチな高専学生
+新卒ｴﾝｼﾞﾆｱ
 
 ## SNS
 - Twitter: [@utam0k](https://twitter.com/utam0k)
