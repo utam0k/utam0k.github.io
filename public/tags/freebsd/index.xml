@@ -5,8 +5,8 @@
     <link>https://www.utam0k.jp/tags/freebsd/</link>
     <description>Recent content in Freebsd on うたもく</description>
     <generator>Hugo -- gohugo.io</generator>
-    <managingEditor>koma@utam0k.jp (Toru Komatsu)</managingEditor>
-    <webMaster>koma@utam0k.jp (Toru Komatsu)</webMaster>
+    <managingEditor>k0ma@utam0k.jp (Toru Komatsu)</managingEditor>
+    <webMaster>k0ma@utam0k.jp (Toru Komatsu)</webMaster>
     <lastBuildDate>Wed, 12 Dec 2018 00:00:00 +0900</lastBuildDate>
     
 	<atom:link href="https://www.utam0k.jp/tags/freebsd/index.xml" rel="self" type="application/rss+xml" />
@@ -16,7 +16,7 @@
       <title>FreeBSDのオンラインカーネルデバッグ with QEMU</title>
       <link>https://www.utam0k.jp/blog/2018/12/12/freebsd_on-line_debugging/</link>
       <pubDate>Wed, 12 Dec 2018 00:00:00 +0900</pubDate>
-      <author>koma@utam0k.jp (Toru Komatsu)</author>
+      <author>k0ma@utam0k.jp (Toru Komatsu)</author>
       <guid>https://www.utam0k.jp/blog/2018/12/12/freebsd_on-line_debugging/</guid>
       <description></description>
     </item>

@@ -5,8 +5,8 @@
     <link>https://www.utam0k.jp/tags/rust/</link>
     <description>Recent content in Rust on うたもく</description>
     <generator>Hugo -- gohugo.io</generator>
-    <managingEditor>koma@utam0k.jp (Toru Komatsu)</managingEditor>
-    <webMaster>koma@utam0k.jp (Toru Komatsu)</webMaster>
+    <managingEditor>k0ma@utam0k.jp (Toru Komatsu)</managingEditor>
+    <webMaster>k0ma@utam0k.jp (Toru Komatsu)</webMaster>
     <lastBuildDate>Fri, 12 Oct 2018 12:15:41 +0900</lastBuildDate>
     
 	<atom:link href="https://www.utam0k.jp/tags/rust/index.xml" rel="self" type="application/rss+xml" />
@@ -16,7 +16,7 @@
       <title>1人でがんばる自作Cコンパイラ</title>
       <link>https://www.utam0k.jp/blog/2018/10/12/r9cc/</link>
       <pubDate>Fri, 12 Oct 2018 12:15:41 +0900</pubDate>
-      <author>koma@utam0k.jp (Toru Komatsu)</author>
+      <author>k0ma@utam0k.jp (Toru Komatsu)</author>
       <guid>https://www.utam0k.jp/blog/2018/10/12/r9cc/</guid>
       <description></description>
     </item>
@@ -25,7 +25,7 @@
       <title>Rustのstd::default::Default</title>
       <link>https://www.utam0k.jp/blog/2018/05/28/rust_std_default/</link>
       <pubDate>Mon, 28 May 2018 21:56:49 +0900</pubDate>
-      <author>koma@utam0k.jp (Toru Komatsu)</author>
+      <author>k0ma@utam0k.jp (Toru Komatsu)</author>
       <guid>https://www.utam0k.jp/blog/2018/05/28/rust_std_default/</guid>
       <description></description>
     </item>
@@ -34,7 +34,7 @@
       <title>RustでのCircleCiの導入</title>
       <link>https://www.utam0k.jp/blog/2018/05/24/rust_ci/</link>
       <pubDate>Thu, 24 May 2018 16:34:42 +0900</pubDate>
-      <author>koma@utam0k.jp (Toru Komatsu)</author>
+      <author>k0ma@utam0k.jp (Toru Komatsu)</author>
       <guid>https://www.utam0k.jp/blog/2018/05/24/rust_ci/</guid>
       <description></description>
     </item>
