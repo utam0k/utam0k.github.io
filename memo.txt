@@ -1,0 +1,1 @@
+git push -f git@github.com:utam0k/utam0k.github.io.git `git subtree split --prefix=public --onto=origin/master`:master
