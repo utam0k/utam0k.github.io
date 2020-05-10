@@ -5,9 +5,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>詳解xv6 はじめに</title>
-  <meta property="og:title" content="詳解xv6 はじめに" />
-  <meta name="twitter:title" content="詳解xv6 はじめに" />
+  <title>GWにフロントエンド力を鍛えつつ飲食店の手助けをちょっとできた話</title>
+  <meta property="og:title" content="GWにフロントエンド力を鍛えつつ飲食店の手助けをちょっとできた話" />
+  <meta name="twitter:title" content="GWにフロントエンド力を鍛えつつ飲食店の手助けをちょっとできた話" />
   <meta name="author" content="Toru Komatsu"/>
   <link href='https://www.utam0k.jp/img/favicon.ico' rel='icon' type='image/x-icon'/>
   <meta property="og:image" content="https://www.utam0k.jp/img/logo.jpg" />
@@ -15,12 +15,12 @@
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:site" content="@utam0k" />
   <meta name="twitter:creator" content="@utam0k" />
-  <meta property="og:url" content="https://www.utam0k.jp/blog/2019/03/05/xv6_intro/" />
+  <meta property="og:url" content="https://www.utam0k.jp/blog/2020/05/10/vineria-sorcuore/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="うたもく" />
 
   <meta name="generator" content="Hugo 0.51" />
-  <link rel="canonical" href="https://www.utam0k.jp/blog/2019/03/05/xv6_intro/" />
+  <link rel="canonical" href="https://www.utam0k.jp/blog/2020/05/10/vineria-sorcuore/" />
   <link rel="alternate" href="https://www.utam0k.jp/index.xml" type="application/rss+xml" title="うたもく">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -185,17 +185,17 @@ if (!doNotTrack) {
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="post-heading">
-              <h1>詳解xv6 はじめに</h1>
+              <h1>GWにフロントエンド力を鍛えつつ飲食店の手助けをちょっとできた話</h1>
                 
                 
                   <span class="post-meta">
   
   
-  <i class="fa fa-calendar-o"></i>&nbsp;March 5, 2019に投稿
+  <i class="fa fa-calendar-o"></i>&nbsp;May 10, 2020に投稿
   
   
   &nbsp;|&nbsp;
-  <i class="fa fa-clock-o"></i> 3 分間 (1382 言葉)
+  <i class="fa fa-clock-o"></i> 4 分間 (1691 言葉)
   
   
 </span>
@@ -217,168 +217,132 @@ if (!doNotTrack) {
       <article role="main" class="blog-post">
         
 
-<p><a href="https://www.utam0k.jp/blog/2019/03/05/xv6_index/">詳解xv6の目次</a></p>
+<h1 id="はじめに">はじめに</h1>
 
-<hr />
+<p>GW を機に初めて、ちょっと本格的なフロントエンドに触れてみました。<br />
+僕は本格的なフロントエンドに触れてこないまま生きてきたので、そろそろ重い腰をあげてお気持ちくらいはわかるようになろうかなと思ってやってみました。
+プラスアルファでこのご時世で困っていたよく行く飲食店のお手伝いができました。<br />
+そこの飲食店では世間的にテイクアウトを始めたが、ホームページの更新を自力でするのが大変&hellip;<br />
+そこで前々から「作ってくれない？」みたいな話を冗談っぽく話していたので、この GW を機会に本当に挑戦してみました。</p>
 
-<h3 id="はじめに">はじめに</h3>
+<h3 id="成果物">成果物</h3>
 
-<p>xv6はMITが開発している現代版Unix V6です。
-x86アーキテクチャで動作するようになっています。
-お手元のPCで簡単に動作させれます。</p>
+<p>そして GW の暇を持て余した出来上がったサイトは<a href="https://vineria-sorcuore.netlify.app">こちら</a>です。初挑戦にしてはなかなかいい感じになったかなと思ってます。<br />
+MIT ライセンスで公開しているので、他の飲食店とか用に使ってもらっても構いません。<br />
+<a href="https://github.com/utam0k/vineria-sorcuore">https://github.com/utam0k/vineria-sorcuore</a></p>
 
-<p>本記事ではその詳細についてMITが公開している。
-<a href="https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf">xv6, a simple, Unix-like teaching operating system</a>(以下 commentary/textbook)
-を元にソースコードレベルで解説していきます。
-そのため、基本的には<a href="https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf">commentary/textbook</a>に書いてあることを
-要約したり説明を付け足したりした記事になります。</p>
-
-<p>筆者もOS初心者であり、OS入門するために半年前位<sup class="footnote-ref" id="fnref:-"><a href="#fn:-">1</a></sup>からxv6のコードリーディングを始めました。
-しかし、初心者には難しい面もありました。
-本記事は筆者がxv6のコードリーディングを始めた時にこういう解説記事があったらうれしかったなという思いで本記事を書いています。
-今からxv6のコードリーディングを始める人の助けになればと思います。
-間違った解説をしている可能性も十分にあるためその際は指摘した頂けると幸いです。
-また、筆者はLinux等の実際のOSに詳しいわけではありません。
-Linuxだとこんな風にやってるなどアドバイスを頂けると喜びます。
-コメントや間違いなどがある場合は<a href="https://twitter.com/utam0k">Twitter</a>に連絡してもらうか
-<a href="https://github.com/utam0k/utam0k.github.io/issues/1">Issue</a>に書いていただくと助かります。</p>
-
-<h3 id="xv6の特徴">xv6の特徴</h3>
-
-<ul>
-<li>Unix 6vがベース</li>
-<li>OSの基本的なアイディアが詰まっている</li>
-<li>ANSI Cで書かれている</li>
-<li>x86(2019年版からはRISC-V)</li>
-<li>コード量が1万行ないくらい</li>
-</ul>
-
-<h3 id="書くこと書かないこと">書くこと書かないこと</h3>
-
-<h4 id="書くこと">書くこと</h4>
-
-<ul>
-<li>xv6のコードの解説</li>
-<li>x86の仕組み</li>
-<li>OS特有の用語についての説明</li>
-</ul>
-
-<h4 id="書かないこと">書かないこと</h4>
-
-<ul>
-<li>なぜその機能がOSに必要なのか<br />
-e.g. ページングはなぜ必要なのか</li>
-<li>アセンブリやC言語のこと</li>
-</ul>
-
-<h3 id="本記事の読み方">本記事の読み方</h3>
-
-<p>章のタイトルが日本語なのは本記事の独自解説です。
-英語タイトルの場合は<a href="https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf">commentary/textbook</a>
-にも同じタイトル名があり、その章の解説になります。</p>
-
-<p>以下コード解説のサンプルです。</p>
-
-<ul>
-<li><p><code>filename.c</code></p>
-<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="mi">1</span> <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
-<span class="mi">2</span> <span class="p">{</span>
-<span class="mi">3</span>     <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Hello world!&#34;</span><span class="p">);</span>
-<span class="o">~~~</span>
-<span class="mi">8</span>     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="mi">9</span> <span class="p">}</span></code></pre></div></li>
-
-<li><p>L1: 関数宣言</p></li>
-
-<li><p>L3: 表示</p></li>
-
-<li><p>L4: 返り値</p></li>
-</ul>
-
-<p><code>L行数</code>がソースコードの何行目のことかを指しており、右側に解説を書きます。
-<code>~~~</code>は省略を表します。</p>
-
-<h3 id="xv6の動かし方">xv6の動かし方</h3>
-
-<p>筆者はUbuntu 18.04とDebian GNU/Linux 9.4 (stretch)で動かしています。
-他のOSでも基本的には<code>gcc</code>と<code>qemu</code>があれば動かせれると思います。
-<code>Makefile</code>を見ると<code>Mac OS X</code>の記述もあるのでコメントアウトしてみるとできるかもしれません。</p>
-
-<h4 id="動かす">動かす</h4>
-
-<p><a href="https://gcallah.github.io/OperatingSystems/xv6Install.html">このサイト</a>が参考になりそうです。</p>
+<h3 id="制約">制約</h3>
 
 <ol>
-<li><p>必要なツールのインストール</p>
-
-<pre><code>$ sudo apt install git nasm build-essential qemu gdb
-</code></pre></li>
-
-<li><p>コードをもってくる</p>
-
-<pre><code>$ git clone git://github.com/mit-pdos/xv6-public.git
-$ cd xv6-public
-$ git checkout xv6-rev11
-</code></pre></li>
-
-<li><p>Make
-一度動かすと<code>kill</code>コマンドで消すしかなさそうです。</p>
-
-<pre><code>$ make qemu     # GUIありの起動
-$ make qemu-nox # GUIなしの起動
-</code></pre></li>
+<li>僕たちが介入せずにメニューの更新が簡単にできるようにする</li>
+<li>なんとなくそれっぽデザインにする</li>
+<li>レスポンシブデザイン</li>
+<li>0 円<sup class="footnote-ref" id="fnref:-"><a href="#fn:-">1</a></sup></li>
 </ol>
 
-<h4 id="デバッグ-gdb">デバッグ(GDB)</h4>
+<h3 id="動機">動機</h3>
 
-<ol>
-<li><p>起動</p>
+<ul>
+<li>業務でフロントエンドに触れる機会が増えてきた</li>
+<li>ほとんど触れてこなかったフロントエンドにそろそろ重い腰をあげてやろう</li>
+<li>良い題材が見つかった</li>
+</ul>
 
-<pre><code>$ make qemu-nox-gdb # Booting with gdbserver
-</code></pre></li>
+<h1 id="利用したツール-サービス">利用したツール・サービス</h1>
 
-<li><p>アタッチ<br />
-xv6を動かした状態で別でシェルを起動させてgdbを起動させます。</p>
+<h3 id="storybook">Storybook</h3>
 
-<pre><code>$ cd &lt;path to xv6&gt;
-$ gdb
-</code></pre>
+<p>今回は複数人で開発したため、PR のレビュー用に <a href="https://storybook.js.org">Storybook</a> を使いました。
+GitHub Actions を使って <code>@deploy-storybook</code>ってコマンドを作り、このコマンドが PR のコメントに出現するのをトリガーとして、gh-pages にデプロイする感じにしてすごくありがたく使えました。
+この技は色々なところに使えそうでよかったです。
 
-<p>gdbで以下のコマンド実行します。</p>
+<link rel="stylesheet" href="https://www.utam0k.jp/css/hugo-easy-gallery.css" />
+<div class="box" >
+  <figure  itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+    <div class="img">
+      <img itemprop="thumbnail" src="deploy-storybook.png" />
+    </div>
+    <a href="deploy-storybook.png" itemprop="contentUrl"></a>
+  </figure>
+</div></p>
 
-<pre><code>(gdb) source .gdbinit
-</code></pre></li>
+<h3 id="メニューを簡単に更新できるようにする">メニューを簡単に更新できるようにする</h3>
 
-<li><p>デバッグ<br />
-僕はよくgdbで変数の値などを見て動かしながらコードを読んでいました。<br />
-<strong>gdbで試しながらするのは結構おすすめです。</strong><br />
-試しに<code>mkdir</code>のコマンドを少し覗いてみます。
-gdb側で以下のコマンドを実行します。</p>
+<p>今回最も特徴的だったのはここかなと思います。
+結論から言うと google スプレッドシートを api にしました。</p>
 
-<pre><code>(gdb) b sys_mkdir
-(gdb) layout src
-(gdb) continue
-</code></pre>
 
-<p>起動したxv6側で<code>mkdir</code>を実行します。</p>
 
-<pre><code>$ mkdir test
-</code></pre>
+<div class="box" >
+  <figure  itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+    <div class="img">
+      <img itemprop="thumbnail" src="takeout.png" />
+    </div>
+    <a href="takeout.png" itemprop="contentUrl"></a>
+  </figure>
+</div>
 
-<p>するとgdb側で反応があると成功です。</p></li>
+<p>苦労した点としてはレスポンスが遅いところですね。
+ここは Google Apps Script にキャッシュ機能があったのでそれを使って 1s くらいに収まるようになんとかなりました。
+そして、レスポンスが返ってくるまでの誤魔化しとして、スケルトンってやつを学びました。</p>
 
-<li><p>xv6を落とす<br />
-gdb側でxv6を落とします。</p>
+<h3 id="画像">画像</h3>
 
-<pre><code>(gdb) kill
-</code></pre></li>
-</ol>
+<p>飲食店のホームページとなると素敵な写真が必要です。
+僕たちは<a href="https://www.google.com/intl/ja/photos/about/">Google フォト</a>を画像のホスティングサービスとして利用しました。
+無料かつ、お店の人も写真をあげて更新しやすいと言う点で採用しました。</p>
+
+<h3 id="next-js">next.js</h3>
+
+<p>React で開発するのに便利なやつ</p>
+
+<h3 id="netflify">netflify</h3>
+
+<p>ホスティングには netlify を使いました。無料枠でそこそこ使えればよかったので、すごい理由があったわけではないです。<br />
+<a href="https://www.netlify.com">https://www.netlify.com</a></p>
+
+<h3 id="chakra-ui">chakra-ui</h3>
+
+<p>それっぽいデザインをするやつ<br />
+レスポンシブデザインにするのにすごい役立ちました！<br />
+<a href="https://chakra-ui.com">https://chakra-ui.com</a></p>
+
+<h3 id="ペアプロツール">ペアプロツール</h3>
+
+<ul>
+<li>VSCode の Live Share<br />
+超便利でした。特に shared server とかはびっくりしました。本当に便利ですね。
+ちなみに僕は普段は vim を使っています。</li>
+<li>Slack の通話<br />
+お絵かきができて、フロントエンド開発ではすごくいいですね。</li>
+</ul>
+
+<h2 id="やり残している事">やり残している事</h2>
+
+<p>ドメインの取得ですね。これはお金がかかる事なのでメリットとデメリットを伝えて判断してもらっているところです。
+狙いとしては、もし僕たちがバスに轢かれたりしても違うドメインに変更せず、新しいサイトを作れるかなと言うのが狙いです。</p>
+
+<h1 id="謝辞">謝辞</h1>
+
+<p>今回はフロントエンドプロのお友達の<a href="https://twitter.com/succie319">succie</a>とペアプロして教わりながらやりました。ありがとうございます。
+またコントリビュータの<a href="https://twitter.com/chao7150">chao</a>くん、<a href="https://twitter.com/asakura_dev">asakura</a>くんにも助けてもらいました。ありがとうございます。
+<a href="https://www.sbcr.jp/product/4797398892/">1 冊ですべて身につく HTML &amp; CSS と Web デザイン入門講座</a>を参考書として使わせてもらいました。</p>
+
+<h1 id="終わりに">終わりに</h1>
+
+<p>最後に無事に robots.txt を消し去り、リリースできました。お店の人たちも喜んでくれたみたいでよかったです。
+ちなみに画像や文言はインスタの DM とかでやってました。
+一通りやってなんとなく雰囲気でフロントエンドが書けるようになった気になってきて、やってよかったなって気分に今、浸っています。<br />
+エコシステム周り・CSS とか特に難しかったです。
+flex ってやつ難しいですね&hellip;
+他にもこんな感じでやるといいんじゃないとかあったら教えてもらえると助かります！ PR もお待ちしてます。<br />
+ところで、明日から労働ってまじですか。</p>
 <div class="footnotes">
 
 <hr />
 
 <ol>
-<li id="fn:-">執筆時は2019-03
+<li id="fn:-">僕も勉強がてらやっているのでもちろんお金等は受け取っていません。その代わりに OSS にすることは許してもらいました。
  <a class="footnote-return" href="#fnref:-"><sup>[return]</sup></a></li>
 </ol>
 </div>
@@ -387,9 +351,9 @@ gdb側でxv6を落とします。</p>
         
           <div class="blog-tags">
             
-              <a href="https://www.utam0k.jp//tags/xv6/">xv6</a>&nbsp;
+              <a href="https://www.utam0k.jp//tags/tech/">tech</a>&nbsp;
             
-              <a href="https://www.utam0k.jp//tags/os/">os</a>&nbsp;
+              <a href="https://www.utam0k.jp//tags/frontend/">frontend</a>&nbsp;
             
           </div>
         
@@ -402,7 +366,7 @@ gdb側でxv6を落とします。</p>
 
 
 <li>
-    <a href="//twitter.com/share?url=https%3a%2f%2fwww.utam0k.jp%2fblog%2f2019%2f03%2f05%2fxv6_intro%2f&amp;text=%e8%a9%b3%e8%a7%a3xv6%20%e3%81%af%e3%81%98%e3%82%81%e3%81%ab&amp;via=utam0k"
+    <a href="//twitter.com/share?url=https%3a%2f%2fwww.utam0k.jp%2fblog%2f2020%2f05%2f10%2fvineria-sorcuore%2f&amp;text=GW%e3%81%ab%e3%83%95%e3%83%ad%e3%83%b3%e3%83%88%e3%82%a8%e3%83%b3%e3%83%89%e5%8a%9b%e3%82%92%e9%8d%9b%e3%81%88%e3%81%a4%e3%81%a4%e9%a3%b2%e9%a3%9f%e5%ba%97%e3%81%ae%e6%89%8b%e5%8a%a9%e3%81%91%e3%82%92%e3%81%a1%e3%82%87%e3%81%a3%e3%81%a8%e3%81%a7%e3%81%8d%e3%81%9f%e8%a9%b1&amp;via=utam0k"
        target="_blank" alt="" title="Share on Twitter">
         <span class="fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>
@@ -413,7 +377,7 @@ gdb側でxv6を落とします。</p>
 
 
 <li>
-    <a href="//plus.google.com/share?url=https%3a%2f%2fwww.utam0k.jp%2fblog%2f2019%2f03%2f05%2fxv6_intro%2f" target="_blank" title="Share on Google Plus">
+    <a href="//plus.google.com/share?url=https%3a%2f%2fwww.utam0k.jp%2fblog%2f2020%2f05%2f10%2fvineria-sorcuore%2f" target="_blank" title="Share on Google Plus">
          <span class="fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fa fa-google-plus fa-stack-1x fa-inverse"></i>
@@ -423,7 +387,7 @@ gdb側でxv6を落とします。</p>
 
 
 <li>
-    <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.utam0k.jp%2fblog%2f2019%2f03%2f05%2fxv6_intro%2f" target="_blank" title="Share on Facebook">
+    <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.utam0k.jp%2fblog%2f2020%2f05%2f10%2fvineria-sorcuore%2f" target="_blank" title="Share on Facebook">
         <span class="fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -432,7 +396,7 @@ gdb側でxv6を落とします。</p>
 </li>
 
 <li>
-    <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fwww.utam0k.jp%2fblog%2f2019%2f03%2f05%2fxv6_intro%2f&amp;title=%e8%a9%b3%e8%a7%a3xv6%20%e3%81%af%e3%81%98%e3%82%81%e3%81%ab" target="_blank"
+    <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fwww.utam0k.jp%2fblog%2f2020%2f05%2f10%2fvineria-sorcuore%2f&amp;title=GW%e3%81%ab%e3%83%95%e3%83%ad%e3%83%b3%e3%83%88%e3%82%a8%e3%83%b3%e3%83%89%e5%8a%9b%e3%82%92%e9%8d%9b%e3%81%88%e3%81%a4%e3%81%a4%e9%a3%b2%e9%a3%9f%e5%ba%97%e3%81%ae%e6%89%8b%e5%8a%a9%e3%81%91%e3%82%92%e3%81%a1%e3%82%87%e3%81%a3%e3%81%a8%e3%81%a7%e3%81%8d%e3%81%9f%e8%a9%b1" target="_blank"
        title="Share on LinkedIn">
          <span class="fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>
@@ -457,13 +421,9 @@ gdb側でxv6を落とします。</p>
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="https://www.utam0k.jp/blog/2019/03/05/xv6_index/" data-toggle="tooltip" data-placement="top" title="教育版UNIX v6解説 ~詳解xv6~">&larr; 前ページ</a>
+              <a href="https://www.utam0k.jp/blog/2019/12/20/xv6_scheduling_1/" data-toggle="tooltip" data-placement="top" title="詳解xv6 Scheduling 1">&larr; 前ページ</a>
             </li>
           
-          
-            <li class="next">
-              <a href="https://www.utam0k.jp/blog/2019/03/05/xv6_pagetable_1/" data-toggle="tooltip" data-placement="top" title="詳解xv6 Page tables 1">次ページ &rarr;</a>
-            </li>
           
         </ul>
       
