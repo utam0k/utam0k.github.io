@@ -7,7 +7,7 @@ BLOG_ORIGIN=$(SOURCE_ORIGIN)
 default: preview
 
 preview:
-	hugo server -Dtrue -vw -t $(THEME)
+	hugo server -D true -vw -t $(THEME)
 
 build:
 	hugo -v
