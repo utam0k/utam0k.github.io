@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>A method of self-made C compiler which even a beginner can do.</title>
+  <meta property="og:title" content="A method of self-made C compiler which even a beginner can do." />
+  <meta name="twitter:title" content="A method of self-made C compiler which even a beginner can do." />
+  <meta name="description" content="C compiler written by Rust.">
+  <meta property="og:description" content="C compiler written by Rust.">
+  <meta name="twitter:description" content="C compiler written by Rust.">
+  <meta name="author" content="Toru Komatsu"/>
+  <link href='https://www.utam0k.jp/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta property="og:image" content="https://www.utam0k.jp/img/logo.jpg" />
+  <meta name="twitter:image" content="https://www.utam0k.jp/img/logo.jpg" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@utam0k" />
+  <meta name="twitter:creator" content="@utam0k" />
+  <meta property="og:url" content="https://www.utam0k.jp/en/blog/1/01/01/r9cc/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Utam0k" />
+
+  <meta name="generator" content="Hugo 0.50-DEV" />
+  <link rel="canonical" href="https://www.utam0k.jp/en/blog/1/01/01/r9cc/" />
+  <link rel="alternate" href="https://www.utam0k.jp/index.xml" type="application/rss+xml" title="Utam0k">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://www.utam0k.jp/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="https://www.utam0k.jp/css/syntax.css" /><link rel="stylesheet" href="https://www.utam0k.jp/css/codeblock.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-119773781-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://www.utam0k.jp/en/">Utam0k</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Posts" href="https://www.utam0k.jp/en/post/">Posts</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="https://www.utam0k.jp/en/tags">Tags</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="https://www.utam0k.jp/en/page/about/">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Atom" href="https://www.utam0k.jp/en/index.xml">Atom</a>
+            </li>
+          
+        
+
+        
+          
+            <li>
+              
+                
+                  <a href="https://www.utam0k.jp/ja" lang="ja">ja</a>
+                
+              
+                
+              
+            </li>
+          
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="Utam0k" href="https://www.utam0k.jp/en/">
+            <img class="avatar-img" src="https://www.utam0k.jp/img/logo.jpg" alt="Utam0k" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>A method of self-made C compiler which even a beginner can do.</h1>
+                
+                  
+                    <h2 class="post-subheading">C compiler written by Rust.</h2>
+                  
+                
+                
+                  <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on January 1, 0001
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 6 minutes (1103 words)
+  
+  &nbsp;&bull;&nbsp; Other languages: <a href="https://www.utam0k.jp/blog/2018/10/12/r9cc/" lang="ja">ja</a>
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        
+
+<h2 id="introduction">Introduction</h2>
+
+<p>Recently, self-made C compilers are popular in Japan because a lecture was held to teach about who to make them.
+I did not participate in it but it seemed fun!!! However, how can I do this???
+There were no compiler experts around me. Oh My God&hellip;<br />
+※ <strong>I have many many friends!</strong><br />
+It is difficult to make a C compiler without relying on anyone!?
+But I want to know about compilers because they are like too blackboxes for me.
+Even though I looked at various books about compilers,
+I did not understand them at all, so I thought that the only way to do it was to model <a href="https://github.com/rui314/9cc">9cc</a>.
+Anyway, I have been transplanting all of the <a href="https://github.com/rui314/9cc">9cc</a> first commit to Rust.
+<a href="https://github.com/rui314/9cc">9cc</a> is a C compiler written by <a href="https://twitter.com/rui314">rui314</a>.
+Codes of <a href="https://github.com/rui314/9cc">9cc</a> are very readable and very easy to transplant.
+<a href="https://github.com/rui314/9cc">9cc</a> is <strong><em>God</em></strong>.
+I think that the C compiler you create with this method will require little prior knowledge.
+To be honest, you just have to do it.
+I would be pleased if this would be helpful for those who would like to do the same thing.</p>
+
+<h2 id="deliverable">Deliverable</h2>
+
+<p><strong>My self-made C compiler: <a href="https://github.com/utam0k/r9cc">r9cc</a></strong></p>
+
+<p>I was <a href="https://github.com/utam0k/r8cc">challenging</a> the same thing with 9cc&rsquo;s previous work <a href="https://github.com/rui314/8cc">8cc</a>.
+However It stalled and <a href="https://github.com/rui314/9cc">9cc</a> came out,
+so I switched to <a href="https://github.com/rui314/9cc">9cc</a>.
+Actually, this is my second challenge.</p>
+
+<p>In <a href="https://github.com/utam0k/r9cc">r9cc</a>, the first capital letter of the commit message is simply ported commit from <a href="https://github.com/rui314/9cc">9cc</a>.
+Since I became tired of writing in English quikly,
+I will show readers that <a href="https://github.com/utam0k/r9cc">r9cc</a> can compile this code.</p>
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="n">fibdp</span><span class="p">[</span><span class="mi">100</span><span class="p">];</span>
+
+<span class="kt">int</span> <span class="nf">fib</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">n</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">fibdp</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">fibdp</span><span class="p">[</span><span class="n">n</span><span class="p">];</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="n">fibdp</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">fibdp</span><span class="p">[</span><span class="n">n</span><span class="p">];</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="n">fibdp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">fib</span><span class="p">(</span><span class="mi">46</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">ans</span><span class="p">);</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+<p>There are other features:</p>
+
+<ul>
+<li>Four arithmetic operations</li>
+<li>Logical operation</li>
+<li>Local variable</li>
+<li>Global variable</li>
+<li>Function call with arguments</li>
+<li>Function definition</li>
+<li>Array</li>
+<li>Pointer</li>
+<li>++/--</li>
+<li>char/int</li>
+<li>String literal</li>
+<li>Struct</li>
+<li>extern</li>
+<li>#include</li>
+<li>Comment</li>
+</ul>
+
+<p>I also made assignments at the initialization of array as <a href="https://github.com/utam0k/r9cc">r9cc</a>&rsquo;s unique function, so this also works.</p>
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">x</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">};</span>
+  <span class="k">return</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+<span class="p">}</span></code></pre></div>
+<p>I was surprised that various C codes could be compiled with only using these features.</p>
+
+<h2 id="things-to-be-careful-of">Things to be careful of</h2>
+
+<h4 id="understand-what-i-am-doing">Understand what I am doing</h4>
+
+<p>It is possible to rewrite to Rust without considering each commit perhaps.
+I think that <strong>continuing despite not understanding anything</strong> is the most avoidable thing.
+I implemented it with as much as possible what the commit I was working on was doing.
+I was implementing it after grasping the whole commit by the following procedure.</p>
+
+<ol>
+<li>Reading a commit message.</li>
+<li>Reading the added test codes.</li>
+<li>Reading the entire code of commit.</li>
+</ol>
+
+<p>In addition to this, I was grasping the rough flow by looking at the +5 commit positions of the commit I am now doing.
+I think that it is good to check whether I can properly grasp the code by trying to implement the unique function.</p>
+
+<h4 id="step-by-step">Step by step</h4>
+
+<p><a href="https://github.com/utam0k/r9cc/commit/b8b44544eb51d6229f19033a5048043e628ab55a">First commit</a> of <a href="https://github.com/utam0k/r9cc">r9cc</a> is as simple as this.<br />
+<a href="https://github.com/rui314/9cc/commit/56e94442ae8844688d5390851e5b29ba0c946e2f">Fist commit</a> of <a href="https://github.com/rui314/9cc">9cc</a> also like this.
+It just returns a number.<br />
+<strong>Is anyone likely to be able to look at this!?</strong><br />
+There was not a type in the early days.
+It is not a policy to make syntactic analysis only first, but whole of up to where to output the assembly is made <strong>evenly</strong>.
+Although I wanted to make big things, I did it a bit at a time.</p>
+
+<h2 id="motivation">Motivation</h2>
+
+<p><strong>I don&rsquo;t have anyone to talk with about the compiler because I don&rsquo;t have friends who are interested in compilers in the real world.</strong><br />
+So, I had to keep my motivation by somehow trying my best with strong will.
+Because I had no confidence to have a strong will, I thought about a way to keep motivation.
+I think that here is the big wall when I do it by myself.
+I think that it is possible to keep my motivation by having a goal.
+I would like to set a self-host as a big goal, but I could not do it because <a href="https://github.com/rui314/9cc">r9cc</a> is written by Rust.
+So, I settled with a parent host as a big goal.
+The word <code>parent host</code> means that r9cc can compile <a href="https://github.com/rui314/9cc">9cc</a>.
+However, I thought about a smaller goal because I was unlikely to keep motivation with just this goal.
+The small goal is aimed at a reasonable commit of <a href="https://github.com/rui314/9cc">9cc</a>.
+I chose commits that make me excited.<br />
+I chose:</p>
+
+<ul>
+<li><a href="https://github.com/rui314/9cc/commit/56e94442ae8844688d5390851e5b29ba0c946e2f">Compile a single number to a program that exits with the given number.</a></li>
+<li><a href="https://github.com/rui314/9cc/commit/42e403e3de0c6457bc11ab14c55a9dad27ed82be">Add variable.</a></li>
+<li><a href="https://github.com/rui314/9cc/commit/c7933acab4e410aa0c0c7a38358092208ace822d">Add zero-arity function definition.</a></li>
+<li><a href="https://github.com/rui314/9cc/commit/b487b30ab0c600b764ea3a94e2502b68f5ee4194">Add &ldquo;for&rdquo;.</a></li>
+<li><a href="https://github.com/rui314/9cc/commit/e43b738d6bb6ecd397e09b46346e0825a00d89e6">Add pointer.</a></li>
+<li><a href="https://github.com/rui314/9cc/commit/63739ad7ef08ee7e037862dfa05739ce00abac5f">Add examples/nqueen.c.</a></li>
+<li><a href="https://github.com/rui314/9cc/commit/bf717fa5e53ebbae9f949515d3662f77af4ff4dd">Add struct definition. Only sizeof() is applicable. No member access.</a></li>
+<li><a href="https://github.com/rui314/9cc/commit/a406a04660d848e083d7b39610409fd9ba497142">Add pre/post increment/decrement operators.</a></li>
+<li><a href="https://github.com/rui314/9cc/commit/a382606b9728ca33f5dedae4f6ca5cc3c9404838">Implement &ldquo;#include&rdquo;.</a></li>
+</ul>
+
+<p>Do you feel excited by just seeing the title of the commit message? Yes, you do.
+I got it little by little with the motivation that <code>#include</code> will work or if it can be done by commit here, it is really fun.</p>
+
+<p>As you add examples, tension also increases a lot.
+It is only <a href="https://github.com/rui314/9cc/blob/master/examples/nqueen.c">nqueen.c</a> if it is <a href="https://github.com/rui314/9cc">9cc</a>,
+but <a href="https://github.com/utam0k/r9cc/blob/master/examples/fib.c">fib.c</a> and <a href="https://github.com/utam0k/r9cc/blob/master/examples/prime.c">prime.c</a>
+have also been added in <a href="https://github.com/utam0k/r9cc">r9cc</a>.
+It&rsquo;s fun when I compiled my code.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>For the time being I was able to compile <code>#include</code>, so I made an article.
+Creating <a href="https://github.com/utam0k/r9cc">r9cc</a> improves programming skills,
+and furthermore, I think that the world of the compiler that I did not understand at all was just a glimpse.
+In the future, I will aim for a <code>parent host</code> and go on a little by little.
+I think that it would be interesting if the self-made C compiler population increased even a little,
+because self-made C compiling is very fun and recommended!
+<strong><em>I am still a beginner about Rust so I&rsquo;m waiting for a good pull request.</em></strong><br />
+I&rsquo;d like to write another article about the technical point unique to Rust.
+Even if I say<br />
+<strong><em>I can develop C language a little</em></strong><br />
+it may be tolerated.
+Special thanks for <a href="https://github.com/rui314/9cc">9cc</a> and <a href="https://twitter.com/rui314">rui314</a>.
+plz awesome.</p>
+
+<h2 id="additional-detail-information">Additional detail information</h2>
+
+<p>It took me about 1.5 weeks to be able to compile somthing like a general C compiler.
+It was about 2 months until <code>#include</code> was made.
+If you have any questions please do not hesitate to contact me on <a href="https://twitter.com/utam0k">Twitter</a>.</p>
+
+<p>I learned:</p>
+
+<ul>
+<li>Assembly</li>
+<li>Behavior of C language</li>
+<li>Role of various registers</li>
+<li>Stack</li>
+</ul>
+
+<h2 id="tcfm">tcfm</h2>
+
+<p>Finally, I will introduce <a href="https://turingcomplete.fm/">Turing Complete FM</a>, which <a href="https://twitter.com/rui314">rui314</a> is doing.
+You can listen mainly about low layer stories such as C compiler&rsquo;s story.</p>
+
+
+        
+          <div class="blog-tags">
+            
+              <a href="https://www.utam0k.jp/en/tags/rust/">rust</a>&nbsp;
+            
+              <a href="https://www.utam0k.jp/en/tags/compiler/">compiler</a>&nbsp;
+            
+          </div>
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <ul class="list-inline footer-links">
+                
+
+
+<li>
+    <a href="//twitter.com/share?url=https%3a%2f%2fwww.utam0k.jp%2fen%2fblog%2f1%2f01%2f01%2fr9cc%2f&amp;text=A%20method%20of%20self-made%20C%20compiler%20which%20even%20a%20beginner%20can%20do.&amp;via=utam0k"
+       target="_blank" alt="" title="Share on Twitter">
+        <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+    </a>
+</li>
+
+
+<li>
+    <a href="//plus.google.com/share?url=https%3a%2f%2fwww.utam0k.jp%2fen%2fblog%2f1%2f01%2f01%2fr9cc%2f" target="_blank" title="Share on Google Plus">
+         <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-google-plus fa-stack-1x fa-inverse"></i>
+              </span>
+    </a>
+</li>
+
+
+<li>
+    <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.utam0k.jp%2fen%2fblog%2f1%2f01%2f01%2fr9cc%2f" target="_blank" title="Share on Facebook">
+        <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+              </span>
+    </a>
+</li>
+
+<li>
+    <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fwww.utam0k.jp%2fen%2fblog%2f1%2f01%2f01%2fr9cc%2f&amp;title=A%20method%20of%20self-made%20C%20compiler%20which%20even%20a%20beginner%20can%20do." target="_blank"
+       title="Share on LinkedIn">
+         <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+              </span>
+    </a>
+</li>
+
+</br>
+</br>
+<a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="vertical-normal" data-hatena-bookmark-lang="en" title="add to your hatena bookmark">
+    <img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="add to your hatena bookmark" width="20" height="100" style="border: none;" />
+</a>
+<script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+
+              </ul>
+            </section>
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+          
+        </ul>
+      
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:koma@utam0k.jp" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/utam0k" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/utam0k" title="Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            
+            <a href="https://www.utam0k.jp/index.xml" title="RSS">
+            
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              Toru Komatsu
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://www.utam0k.jp/en/">Utam0k</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.50-DEV</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://www.utam0k.jp/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script>
+<script src="https://www.utam0k.jp/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+

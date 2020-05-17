@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Rust Clippy on うたもく</title>
+    <link>//www.utam0k.jp/tags/rust-clippy/</link>
+    <description>Recent content in Rust Clippy on うたもく</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-jp</language>
+    <managingEditor>koma@utam0k.jp (Toru Komatsu)</managingEditor>
+    <webMaster>koma@utam0k.jp (Toru Komatsu)</webMaster>
+    <lastBuildDate>Thu, 24 May 2018 16:34:42 +0900</lastBuildDate>
+    
+	<atom:link href="//www.utam0k.jp/tags/rust-clippy/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>RustでのCircleCiの導入</title>
+      <link>//www.utam0k.jp/blog/2018/05/24/rust_ci/</link>
+      <pubDate>Thu, 24 May 2018 16:34:42 +0900</pubDate>
+      <author>koma@utam0k.jp (Toru Komatsu)</author>
+      <guid>//www.utam0k.jp/blog/2018/05/24/rust_ci/</guid>
+      <description>最近初めてのRust開発で自作シェルのmicanを作っている。
+そこでCircleCiをがんばった。
+lint Rustのlintとしてrust-clippyが有名。
+結構便利で&amp;quot;if let&amp;quot;でもっとよくなるよ！とかも教えてくれて助かる。よく怒られて神ってなる。
+僕もだが初心者だとRustっぽい構文がわからないので導入すると助かる。
+helpのurlに行くと良い感じになぜだめなのか教えて頂けます。
+warning: writing `&amp;amp;Vec&amp;lt;_&amp;gt;` instead of `&amp;amp;[_]` involves one more reference and cannot be used with non-Vec-based slices. --&amp;gt; src/readline/reader.rs:154:29 | 154 | fn find_bind(&amp;amp;self, ch: &amp;amp;Vec&amp;lt;u8&amp;gt;) -&amp;gt; Option&amp;lt;Keybind&amp;gt; { | ^^^^^^^^ help: change this to: `&amp;amp;[u8]` | = note: #[warn(ptr_arg)] on by default = help: for further information visit https://rust-lang-nursery.github.io/rust-clippy/v0.0.200/index.html#ptr_arg  warning: `if _ { .. } else { .. }` is an expression --&amp;gt; src/readline/editor.</description>
+    </item>
+    
+  </channel>
+</rss>
