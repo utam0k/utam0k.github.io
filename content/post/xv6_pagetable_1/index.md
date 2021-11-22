@@ -1,6 +1,8 @@
 ---
 title: "詳解xv6 Page tables 1"
 date: 2019-03-05T18:35:02+09:00
+description: xv6のページテーブルについての解説のPart1です。
+local_share_img: sequence_without_error_handling.png
 tags : [xv6, os]
 ---
 
