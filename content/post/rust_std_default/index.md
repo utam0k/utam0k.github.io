@@ -16,7 +16,7 @@ pub trait Default {
 }
 ```
 
-# Example
+## Example
 1. Defaultなし  
 Defaultを利用しないとこんな感じで`new()`を作るようになる。
 
@@ -145,7 +145,7 @@ Optionを用いた例
         };
     ```
 
-# 詳細
+## 詳細
 Rustのcoreライブラリではデフォルト値が決まっているものがある。
 1.26時点では以下のようになっている。
 
@@ -216,7 +216,6 @@ fn main() {
 `Option`のデフォルトは`None`なので`NoDefault構造体`は`Default`を実装する必要がありません。  
 コンパイルを通するには`Default`を実装します。  
 
-{{< columns >}}
 *NG:*
 ```rust
 // Struct with no default impl.
@@ -237,7 +236,6 @@ fn main() {
     let _ = SomeOptions::<NoDefault>::default(); // NG
 }
 ```
-{{< column >}}
 *OK:*
 ```rust
 // Struct with no default impl.
@@ -261,7 +259,6 @@ fn main() {
     let _ = SomeOptions::<NoDefault>::default(); // OK
 }
 ```
-{{< endcolumns >}}
 
 [qnighyさんの記事](http://qnighy.hatenablog.com/entry/2017/06/01/070000)や[lo48576さんの記事](https://blog.cardina1.red/2016/03/24/rust-default-wont-compile/)
 の記事が参考になると思います。 

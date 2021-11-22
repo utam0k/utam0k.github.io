@@ -4,17 +4,19 @@ canonifyurls: true
 DefaultContentLanguage: "ja"
 hasCJKLanguage: true
 title: "うたもく"
-theme: beautifulhugo
+theme: hugo-primer
 permalinks:
   post: /blog/:year/:month/:day/:filename
 
 MetaDataFormat: "yaml"
 enableRobotsTXT: true
 
+disqusShortname: "utam0k"
+
 pygmentsCodeFences: true
 pygmentsUseClasses: true
 
-summaryLength: 0
+summaryLength: 70
 
 googleAnalytics: "UA-119773781-1"
 
@@ -22,19 +24,14 @@ languages:
   ja:
     weight: 1
   en:
-    title: Utam0k
+    title: utam0k
     weight: 2
 
 Params:
-  logo: img/logo.jpg
-  favicon: img/favicon.ico
-  socialShare: true
-  comments: true
-  commit: false
-  rss: true
-  readingTime: true
-  categories: true
-  dateFormat: January 2, 2006
+  description: "utam0k"
+  shareTo: ["Twitter", "Hatena", "Facebook"]
+  showFooterCredits: false
+  twitter: utam0k
 
 menu:
   main:
@@ -42,9 +39,9 @@ menu:
       url: /post/
       weight: 1
     - name: About
-      url: "page/about/"
+      url: /page/about/
     - name: Tags
-      url: tags
+      url: /tags
       weight: 3
     - name: Atom
       url: /index.xml

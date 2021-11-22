@@ -1,4 +1,4 @@
-THEME=beautifulhugo
+THEME=hugo-primer
 
 default: preview
 
@@ -8,6 +8,5 @@ preview:
 init:
 	git submodule update --init --recursive
 	git pull --recurse-submodules
-
 
 .PHONY: preview init

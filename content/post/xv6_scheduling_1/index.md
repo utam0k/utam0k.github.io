@@ -5,9 +5,7 @@ tags: [xv6, os]
 ---
 
 [詳解xv6の目次]({{< ref "post/xv6_index">}})  
-{{< columns >}}
 [前の記事]({{< ref "post/xv6_traps_interrupts_drivers_1">}})
-{{< endcolumns >}}
 - - -
 
 - - -
