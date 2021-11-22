@@ -72,3 +72,8 @@ Author:
   email: k0ma@utam0k.jp
   twitter: utam0k
   github: utam0k
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
