@@ -23,28 +23,39 @@ googleAnalytics: "UA-119773781-1"
 languages:
   ja:
     weight: 1
+    menu:
+      main:
+        - name: Posts
+          url: /post/
+          weight: 1
+        - name: About
+          url: /page/about/
+        - name: Tags
+          url: /tags
+          weight: 3
+        - name: Atom
+          url: /index.xml
   en:
     title: utam0k
     weight: 2
+    menu:
+      main:
+        - name: Posts
+          url: /en/post/
+          weight: 1
+        - name: About
+          url: /en/page/about/
+        - name: Tags
+          url: /tags
+          weight: 3
+        - name: Atom
+          url: /en/index.xml
 
 Params:
   description: "utam0k"
   shareTo: ["Twitter", "Hatena", "Facebook"]
   showFooterCredits: false
   twitter: utam0k
-
-menu:
-  main:
-    - name: Posts
-      url: /post/
-      weight: 1
-    - name: About
-      url: /page/about/
-    - name: Tags
-      url: /tags
-      weight: 3
-    - name: Atom
-      url: /index.xml
 
 Author:
   name: Toru Komatsu
