@@ -16,7 +16,7 @@ disqusShortname: "utam0k"
 pygmentsCodeFences: true
 pygmentsUseClasses: true
 
-summaryLength: 70
+summaryLength: 0
 
 googleAnalytics: "UA-119773781-1"
 
@@ -30,9 +30,13 @@ languages:
           weight: 1
         - name: About
           url: /page/about/
+          weight: 2
         - name: Tags
           url: /tags
           weight: 3
+        - name: EN
+          url: /en/
+          weight: 4
         - name: Atom
           url: /index.xml
   en:
@@ -45,9 +49,13 @@ languages:
           weight: 1
         - name: About
           url: /en/page/about/
+          weight: 2
         - name: Tags
           url: /tags
           weight: 3
+        - name: JP
+          url: /
+          weight: 4
         - name: Atom
           url: /en/index.xml
 
@@ -57,6 +65,7 @@ Params:
   showFooterCredits: false
   twitter: utam0k
   useTwitterCard: true
+  logo: img/logo.jpg
 
 Author:
   name: Toru Komatsu
