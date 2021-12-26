@@ -60,6 +60,7 @@ Params:
   twitter: utam0k
   useTwitterCard: true
   logo: img/logo.png
+  comments: false
 
 Author:
   name: Toru Komatsu
