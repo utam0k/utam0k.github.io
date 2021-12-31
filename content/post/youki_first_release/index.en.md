@@ -20,6 +20,12 @@ description: "First release of youki, an OCI container runtime written in Rust"
 
 Youki is a low level container runtime written in Rust that implements the [OCI Runtime Specification](https://github.com/opencontainers/runtime-spec/blob/main/spec.md). Simply put, youki is a commandline tool that can create containers. Other runtimes in the same category you might have heard about are [runc](https://github.com/opencontainers/runc) and [crun](https://github.com/containers/crun). When you create a container using Docker or Podman the actual container creation is delegated to a tool like youki.
 
+<div class="my-4">
+  <center>
+  <a href="https://github.com/containers/youki"><img src="link_card_youki.svg"></a>
+  </center>
+</div>
+
 
 ## Why another container runtime?
 
