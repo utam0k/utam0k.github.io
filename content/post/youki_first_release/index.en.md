@@ -11,7 +11,7 @@ description: "First release of youki, an OCI container runtime written in Rust"
   <p class="my-12 h1 text-underline text-center text-mono"> Hello, youki! </p>
   <p>
   Hi, I'm Toru Komatsu(<a href="https://twitter.com/utam0k" target="_blank" rel="noopener noreferrer">@utam0k</a>), first committer of youki.<br> 
-  This article was written in celebration of youki's v0.1.0 release
+  This article was written in celebration of youki's v0.0.1 release
   </p>
   <a href= "https://github.com/containers/youki/releases/tag/v0.0.1" target="_blank" rel="noopener noreferrer" class="btn btn-primary" type="button">View Relase Note</a>
 </div>
@@ -114,7 +114,7 @@ Youki has the potential to be faster and use less memory than runc, and therefor
 
 ## Implementation status
 
-A container runtime needs to to implement many features that users have come to expect from a container runtime, that have not yet been incorporated into the OCI Runtime Specification. Despite this being the first release of youki, many features have already been implemented.
+A container runtime needs to implement many features that users have come to expect from a container runtime, that have not yet been incorporated into the OCI Runtime Specification. Despite this being the first release of youki, many features have already been implemented.
 
 |        Feature        |                   Description                   |                                                State                                                |
 | :-------------------: | :---------------------------------------------: | :-------------------------------------------------------------------------------------------------: |
