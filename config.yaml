@@ -4,12 +4,15 @@ canonifyurls: true
 DefaultContentLanguage: "ja"
 hasCJKLanguage: true
 title: "うたもく"
-theme: hugo-primer
+theme: utam0k
 permalinks:
-  post: /blog/:year/:month/:day/:filename
+  post: /blog/:year/:month/:day/:contentbasename
 
 MetaDataFormat: "yaml"
 enableRobotsTXT: true
+
+pagination:
+  pagerSize: 30
 
 disqusShortname: "utam0k"
 
@@ -61,6 +64,10 @@ Params:
   useTwitterCard: true
   logo: img/logo.png
   comments: false
+  author:
+    name: Toru Komatsu
+    twitter: utam0k
+    github: utam0k
 
 Author:
   name: Toru Komatsu

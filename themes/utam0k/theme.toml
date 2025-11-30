@@ -1,0 +1,10 @@
+name = "utam0k"
+license = "MIT"
+licenselink = "https://opensource.org/licenses/MIT"
+description = "Custom handcrafted theme for utam0k.jp"
+homepage = "https://www.utam0k.jp/"
+min_version = "0.115.0"
+
+[author]
+  name = "Toru Komatsu"
+  homepage = "https://www.utam0k.jp/"

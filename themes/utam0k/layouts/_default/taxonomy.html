@@ -1,0 +1,18 @@
+{{ define "title" }}{{ .Title }} | {{ .Site.Title }}{{ end }}
+
+{{ define "main" }}
+{{ $p := .Paginate .Pages }}
+<section class="page-header">
+  <p class="eyebrow">Tagged</p>
+  <h1>{{ .Title }}</h1>
+  <p class="muted">{{ $p.TotalNumberOfElements }} posts</p>
+</section>
+
+<div class="post-grid">
+  {{ range $p.Pages }}
+    {{ partial "post-card.html" . }}
+  {{ end }}
+</div>
+
+{{ partial "pagination.html" $p }}
+{{ end }}

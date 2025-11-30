@@ -1,0 +1,57 @@
+{{ define "title" }}{{ .Title }} | {{ .Site.Title }}{{ end }}
+
+{{ define "main" }}
+{{ $hasToc := .TableOfContents }}
+<div class="article-layout">
+  <article class="article">
+    <p class="eyebrow">{{ .Section | title }}</p>
+    <h1 class="article-title">{{ .Title }}</h1>
+
+    <div class="article-meta">
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+      <span aria-hidden="true">·</span>
+      <span>{{ printf "%d min" .ReadingTime }}</span>
+      {{ with .Translations }}
+        <span class="divider" aria-hidden="true">·</span>
+        <span class="muted">{{ i18n "translations" | default "Other languages" }}:</span>
+        {{ range . }}<a class="chip" href="{{ .RelPermalink }}">{{ .Lang | upper }}</a>{{ end }}
+      {{ end }}
+    </div>
+
+    {{ with .Params.tags }}
+    <div class="article-tags">
+      {{ range . }}
+        <a class="chip" href="{{ "/tags/" | relLangURL }}{{ urlize . }}">#{{ . }}</a>
+      {{ end }}
+    </div>
+    {{ end }}
+
+    <div class="article-body">
+      {{ .Content }}
+    </div>
+
+    <div class="article-footer">
+      <a class="muted" href="{{ "/post/" | relLangURL }}">← Back to posts</a>
+      {{ if or .PrevInSection .NextInSection }}
+      <div class="article-nav">
+        {{ with .PrevInSection }}<a class="nav-arrow" href="{{ .RelPermalink }}">← {{ .Title }}</a>{{ end }}
+        {{ with .NextInSection }}<a class="nav-arrow" href="{{ .RelPermalink }}">{{ .Title }} →</a>{{ end }}
+      </div>
+      {{ end }}
+    </div>
+  </article>
+
+  {{ if $hasToc }}
+    <aside class="toc-desktop">
+      {{ partial "toc.html" . }}
+    </aside>
+  {{ end }}
+</div>
+
+{{ if $hasToc }}
+<details class="toc-mobile">
+  <summary>目次 / Contents</summary>
+  {{ partial "toc.html" . }}
+</details>
+{{ end }}
+{{ end }}

@@ -1,0 +1,26 @@
+<header class="site-header">
+  <a class="brand" href="{{ "/" | relLangURL }}">
+    {{ with .Site.Params.logo }}
+      <span class="brand-mark" aria-hidden="true" style="background-image:url('{{ . | absURL }}')"></span>
+    {{ else }}
+      <span class="brand-mark brand-mark--fallback" aria-hidden="true">{{ .Site.Title | substr 0 1 | upper }}</span>
+    {{ end }}
+    <div class="brand-text">
+      <span class="brand-name">{{ .Site.Title }}</span>
+      {{ with .Site.Params.description }}<span class="brand-tagline">{{ . }}</span>{{ end }}
+    </div>
+  </a>
+
+  <div class="header-actions">
+    {{ with .Site.Menus.main }}
+    <nav class="main-nav" aria-label="Primary">
+      {{ $current := $.RelPermalink }}
+      {{ range sort . "Weight" }}
+        {{ $url := .URL | relLangURL }}
+        <a class="nav-item{{ if eq $current (relLangURL .URL) }} is-active{{ end }}" href="{{ $url }}">{{ .Name }}</a>
+      {{ end }}
+    </nav>
+    {{ end }}
+    <button class="theme-toggle" type="button" aria-label="Toggle dark mode" onclick="window.__toggleTheme && window.__toggleTheme();">🌗</button>
+  </div>
+</header>

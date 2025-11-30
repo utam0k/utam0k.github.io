@@ -1,0 +1,13 @@
+<article class="post-card">
+  <a class="post-card__body" href="{{ .RelPermalink }}">
+    <p class="post-card__meta">{{ .Date.Format "2006-01-02" }} · {{ printf "%d min" .ReadingTime }}</p>
+    <h2 class="post-card__title">{{ .Title }}</h2>
+    {{ $excerpt := .Params.description | default (.Summary | plainify) }}
+    <p class="post-card__excerpt">{{ $excerpt | truncate 180 }}</p>
+    {{ with .Params.tags }}
+    <div class="post-card__tags">
+      {{ range . }}<span class="tag">{{ . }}</span>{{ end }}
+    </div>
+    {{ end }}
+  </a>
+</article>

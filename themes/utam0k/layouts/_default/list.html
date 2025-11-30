@@ -1,0 +1,14 @@
+{{ define "title" }}{{ .Title }} | {{ .Site.Title }}{{ end }}
+
+{{ define "main" }}
+{{ $p := .Paginate .Pages }}
+{{ $start := add (mul (sub $p.PageNumber 1) $p.PagerSize) 1 }}
+<div class="post-list-wrap">
+  <ol class="post-list" start="{{ $start }}">
+    {{ range $idx, $pg := $p.Pages }}
+      {{ partial "post-line.html" (dict "page" $pg "number" (add $start $idx)) }}
+    {{ end }}
+  </ol>
+  {{ partial "pagination.html" $p }}
+</div>
+{{ end }}

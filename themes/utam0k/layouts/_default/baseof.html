@@ -1,0 +1,72 @@
+{{ $styles := resources.Get "css/main.css" | resources.Minify | resources.Fingerprint }}
+{{ $desc := "" }}
+{{ if .Description }}
+  {{ $desc = .Description | plainify }}
+{{ else if .IsPage }}
+  {{ $desc = .Summary | plainify }}
+{{ else }}
+  {{ $desc = .Site.Params.description }}
+{{ end }}
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ block "title" . }}{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}{{ end }}</title>
+  <meta name="description" content="{{ $desc }}">
+  <meta property="og:description" content="{{ $desc }}">
+  <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+  <meta property="og:site_name" content="{{ .Site.Title }}">
+  {{ with .Permalink }}<meta property="og:url" content="{{ . }}">{{ end }}
+  {{ with .Title }}<meta property="og:title" content="{{ . }}">{{ end }}
+  {{ with .Params.image | default .Site.Params.logo }}<meta property="og:image" content="{{ . | absURL }}">{{ end }}
+  <link rel="alternate" type="application/rss+xml" href="{{ "index.xml" | relLangURL }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}">
+  <script>
+    (() => {
+      const media = window.matchMedia('(prefers-color-scheme: dark)');
+      const apply = (mode) => {
+        document.documentElement.dataset.theme = mode;
+        if (document.body) {
+          document.body.dataset.theme = mode;
+          document.body.classList.toggle('theme-dark', mode === 'dark');
+          document.body.classList.toggle('theme-light', mode === 'light');
+        }
+      };
+      const load = () => {
+        const stored = localStorage.getItem('color-scheme');
+        const system = media.matches ? 'dark' : 'light';
+        apply(stored || system);
+      };
+      media.addEventListener('change', (e) => {
+        const stored = localStorage.getItem('color-scheme');
+        if (!stored) apply(e.matches ? 'dark' : 'light');
+      });
+      window.__toggleTheme = () => {
+        const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('color-scheme', next);
+        apply(next);
+      };
+      load();
+    })();
+  </script>
+  {{ hugo.Generator }}
+</head>
+<body class="{{ if .IsHome }}home{{ else }}page{{ end }}">
+  <div class="page-shell">
+    {{ partial "header.html" . }}
+    <main class="layout">
+      {{ block "main" . }}{{ end }}
+    </main>
+    {{ partial "footer.html" . }}
+  </div>
+
+  {{ if or .Params.math ( default true .Site.Params.math ) }}
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script defer type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
+  {{ end }}
+</body>
+</html>

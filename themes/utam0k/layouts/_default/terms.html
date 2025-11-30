@@ -1,0 +1,18 @@
+{{ define "title" }}{{ .Title }} | {{ .Site.Title }}{{ end }}
+
+{{ define "main" }}
+<section class="page-header">
+  <p class="eyebrow">Taxonomy</p>
+  <h1>{{ .Title }}</h1>
+  <p class="muted">{{ len .Data.Terms.Alphabetical }} items</p>
+</section>
+
+<ul class="terms">
+  {{ range .Data.Terms.Alphabetical }}
+    <li class="terms__item">
+      <a href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a>
+      <span class="muted">{{ .Count }}</span>
+    </li>
+  {{ end }}
+</ul>
+{{ end }}

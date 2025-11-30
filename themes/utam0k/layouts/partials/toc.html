@@ -1,0 +1,7 @@
+{{ $toc := .TableOfContents }}
+{{ if $toc }}
+  <nav class="toc" aria-label="Table of contents">
+    <p class="toc__title">Contents</p>
+    <div class="toc__body">{{ $toc }}</div>
+  </nav>
+{{ end }}
