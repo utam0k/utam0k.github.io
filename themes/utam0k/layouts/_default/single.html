@@ -22,6 +22,9 @@
 
     <header class="article-hero article-hero--stack">
       <h1 class="article-title">{{ .Title }}</h1>
+      <div class="share-block share-block--mobile">
+        {{ partial "share-buttons.html" . }}
+      </div>
       <div class="article-meta article-meta--stack">
         <div class="meta-row">date: <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" }}</time></div>
         <div class="meta-row">author: {{ if $authorLink }}<a class="meta-link" href="{{ $authorLink | relLangURL }}">{{ $authorHandle }}</a>{{ else }}{{ $authorHandle }}{{ end }}</div>
@@ -74,6 +77,9 @@
   {{ if $hasToc }}
     <aside class="toc-desktop">
       {{ partial "toc.html" . }}
+      <div class="share-block share-block--desktop">
+        {{ partial "share-buttons.html" . }}
+      </div>
     </aside>
   {{ end }}
 </div>

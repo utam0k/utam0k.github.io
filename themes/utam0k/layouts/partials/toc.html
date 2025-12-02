@@ -1,23 +1,8 @@
 {{ $toc := .TableOfContents }}
-{{ if $toc }}
+{{ $hasToc := gt (len ($toc | plainify)) 0 }}
+{{ if $hasToc }}
   <nav class="toc" aria-label="Table of contents">
     <p class="toc__title">{{ i18n "toc_title" | default "Contents" }}</p>
     <div class="toc__body">{{ $toc }}</div>
   </nav>
-  {{ $shareURL := .Permalink | absURL }}
-  {{ $shareTitle := .Title | htmlEscape }}
-  <div class="toc-share" aria-label="Share this post">
-    <a class="share-btn" href="https://twitter.com/intent/tweet?text={{ $shareTitle }}&url={{ $shareURL }}" target="_blank" rel="noopener noreferrer">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h5.3l3.4 4.8L14.8 3H21l-6.8 9.2L21 21h-5.3l-3.7-5.2L8.2 21H3l6.8-8.9L3 3z"/></svg>
-      <span class="sr-only">Share on X</span>
-    </a>
-    <a class="share-btn" href="http://b.hatena.ne.jp/add?mode=confirm&url={{ $shareURL }}&title={{ $shareTitle }}" target="_blank" rel="noopener noreferrer">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.47 0C22.42 0 24 1.58 24 3.53v16.94c0 1.95-1.58 3.53-3.53 3.53H3.53C1.58 24 0 22.42 0 20.47V3.53C0 1.58 1.58 0 3.53 0h16.94zM8.61 17.25c1.2 0 2.06-.04 2.58-.12.53-.08.98-.22 1.32-.41.45-.23.78-.56 1.02-.99.24-.43.36-.91.36-1.48 0-.78-.21-1.4-.63-1.87-.42-.48-.99-.74-1.74-.79.66-.18 1.16-.45 1.46-.81.32-.34.47-.82.47-1.42 0-.48-.1-.88-.3-1.26-.21-.36-.5-.65-.88-.87-.35-.2-.74-.32-1.22-.4-.46-.08-1.29-.12-2.48-.12H5.65v10.46H8.6zm.74-4.19c.7 0 1.18.09 1.44.27.27.18.4.5.4.93 0 .4-.14.69-.42.86-.27.18-.76.25-1.44.25H8.31v-2.31h1.03zm8.66.71v-7.06h-2.46v7.06h2.46zM8.93 9.08c.71 0 1.19.08 1.43.24.25.16.37.44.37.84 0 .38-.13.65-.39.8-.27.16-.75.24-1.45.24h-.57V9.08h.61z"/></svg>
-      <span class="sr-only">はてなブックマーク</span>
-    </a>
-    <a class="share-btn" href="https://www.linkedin.com/shareArticle?mini=true&url={{ $shareURL }}&title={{ $shareTitle }}" target="_blank" rel="noopener noreferrer">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 3.5H3.55A1.55 1.55 0 0 0 2 5.05v13.9A1.55 1.55 0 0 0 3.55 20.5h16.9a1.55 1.55 0 0 0 1.55-1.55V5.05A1.55 1.55 0 0 0 20.45 3.5zM7.14 18.1H4.54V9.88h2.6V18.1zm-1.3-9.36a1.51 1.51 0 1 1 0-3.02 1.51 1.51 0 0 1 0 3.02zM19 18.1h-2.6v-4.96c0-1.18-.42-1.99-1.48-1.99-.81 0-1.3.55-1.51 1.09-.08.19-.1.46-.1.73v5.13H10.7s.03-8.32 0-9.18h2.6v1.3c.35-.54.98-1.31 2.39-1.31 1.74 0 3.31 1.13 3.31 3.56V18.1z"/></svg>
-      <span class="sr-only">Share on LinkedIn</span>
-    </a>
-  </div>
 {{ end }}

@@ -570,6 +570,9 @@ blockquote.twitter-tweet a { color: var(--accent-2); }
   background: var(--surface);
   margin: 12px 0 6px;
 }
+.share-block { width: 100%; }
+.share-block--mobile { display: flex; }
+.share-block--desktop { display: none; }
 .toc-inline summary {
   cursor: pointer;
   font-weight: 700;
@@ -589,6 +592,8 @@ blockquote.twitter-tweet a { color: var(--accent-2); }
   background: transparent;
 }
 .toc-inline .toc__title { display: none; }
+.share-block--mobile { display: flex; }
+.share-block--desktop { display: none; }
 
 .pagination { display: flex; justify-content: center; align-items: center; gap: 14px; margin: 28px 0 10px; }
 .page-link { padding: 10px 12px; border-radius: 12px; border: 1px solid var(--border); background: var(--surface); color: var(--text); text-decoration: none; }
@@ -608,6 +613,8 @@ blockquote.twitter-tweet a { color: var(--accent-2); }
   .article-layout { grid-template-columns: 1fr; }
   .toc-desktop { display: none; }
   .toc-inline { display: block; }
+  .share-block--mobile { display: flex; }
+  .share-block--desktop { display: none; }
 }
 
 @media (max-width: 720px) {
@@ -616,4 +623,9 @@ blockquote.twitter-tweet a { color: var(--accent-2); }
   .article-title { font-size: 30px; }
   .hero-text h1 { font-size: 32px; }
   .post-line { grid-template-columns: 1fr; }
+}
+
+@media (min-width: 1025px) {
+  .share-block--mobile { display: none; }
+  .share-block--desktop { display: flex; }
 }

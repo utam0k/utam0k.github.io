@@ -6,7 +6,8 @@
     {{ partial "speakerdeck-embed.html" . }}
   </div>
 
-  {{ $hasToc := .TableOfContents }}
+  {{ $toc := .TableOfContents }}
+  {{ $hasToc := gt (len ($toc | plainify)) 0 }}
   {{ $authorName := .Params.author | default (.Site.Params.author.name | default "") }}
   {{ $authorHandle := cond (and (not (isset .Params "author")) (.Site.Params.author.twitter)) (printf "@%s" .Site.Params.author.twitter) ($authorName | default (.Site.Params.author.name | default "unknown")) }}
   {{ $authorLink := "/page/about/" | relLangURL }}
