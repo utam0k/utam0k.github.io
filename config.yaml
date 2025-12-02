@@ -7,6 +7,7 @@ title: "うたもく"
 theme: utam0k
 permalinks:
   post: /blog/:year/:month/:day/:contentbasename
+  slides: /slides/:slug/
 
 MetaDataFormat: "yaml"
 enableRobotsTXT: true
@@ -31,14 +32,12 @@ languages:
         - name: Posts
           url: /post/
           weight: 1
+        - name: Slides
+          url: /slides/
+          weight: 2
         - name: About
           url: /page/about/
-          weight: 2
-        - name: EN
-          url: /en/
           weight: 3
-        - name: Atom
-          url: /index.xml
   en:
     title: utam0k
     weight: 2
@@ -47,14 +46,12 @@ languages:
         - name: Posts
           url: /en/post/
           weight: 1
+        - name: Slides
+          url: /en/slides/
+          weight: 2
         - name: About
           url: /en/page/about/
-          weight: 2
-        - name: JP
-          url: /
           weight: 3
-        - name: Atom
-          url: /en/index.xml
 
 Params:
   description: "utam0k"
@@ -79,3 +76,7 @@ markup:
   goldmark:
     renderer:
       unsafe: true
+  tableOfContents:
+    startLevel: 1
+    endLevel: 5
+    ordered: false

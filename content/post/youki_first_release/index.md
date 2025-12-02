@@ -10,7 +10,7 @@ description: "Rust版OCIコンテナランタイムyoukiのファーストリリ
 <div class="blankslate">
   <p class="my-12 h1 text-underline text-center text-mono"> Hello, youki! </p>
   <p>この記事はyoukiのv0.0.1リリースの思い出に書いた記事です</p>
-  <a href="https://github.com/containers/youki/releases/tag/v0.0.1" target="_blank" rel="noopener noreferrer" class="btn btn-primary" type="button">View Relase Note</a>
+<a href="https://github.com/containers/youki/releases/tag/v0.0.1" target="_blank" rel="noopener noreferrer" class="btn-legacy btn-primary" type="button">View Relase Note</a>
 </div>
 
 <div class="flash">

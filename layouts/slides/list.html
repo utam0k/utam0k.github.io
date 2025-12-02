@@ -1,0 +1,15 @@
+{{ define "title" }}Slides | {{ .Site.Title }}{{ end }}
+
+{{ define "main" }}
+{{ $pages := .Pages.ByDate.Reverse }}
+{{ $p := .Paginate $pages }}
+{{ $start := add (mul (sub $p.PageNumber 1) $p.PagerSize) 1 }}
+<div class="post-list-wrap">
+  <ol class="post-list" start="{{ $start }}">
+    {{ range $idx, $pg := $p.Pages }}
+      {{ partial "slide-line.html" (dict "page" $pg "number" (add $start $idx)) }}
+    {{ end }}
+  </ol>
+  {{ partial "pagination.html" $p }}
+</div>
+{{ end }}

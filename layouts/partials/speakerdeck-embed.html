@@ -1,0 +1,11 @@
+{{ $id := .Params.speakerdeck_id }}
+{{ if $id }}
+  {{ $ratio := .Params.speakerdeck_ratio | default "1.77777777778" }}
+  <div class="speakerdeck-embed-wrap">
+    <script async class="speakerdeck-embed" data-id="{{ $id }}" data-ratio="{{ $ratio }}" src="https://speakerdeck.com/assets/embed.js"></script>
+  </div>
+{{ else }}
+  <div class="speakerdeck-embed-wrap">
+    <p class="muted">Speaker Deck ID が設定されていません。</p>
+  </div>
+{{ end }}

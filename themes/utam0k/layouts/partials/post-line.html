@@ -1,7 +1,6 @@
 {{ $p := .page }}
 {{ $n := .number }}
 <li class="post-line">
-  <span class="post-line__index">{{ printf "%02d" $n }}</span>
   <a class="post-line__one" href="{{ $p.RelPermalink }}">
     <span class="post-line__title">{{ $p.Title }}</span>
     <span class="post-line__meta">

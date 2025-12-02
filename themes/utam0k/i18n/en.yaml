@@ -1,0 +1,10 @@
+- id: newer
+  translation: "Newer"
+- id: older
+  translation: "Older"
+- id: page_x_of_y
+  translation: "Page {{ .current }} / {{ .total }}"
+- id: toc_title
+  translation: "Contents"
+- id: toc_summary
+  translation: "Show table of contents"

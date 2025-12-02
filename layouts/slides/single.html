@@ -1,30 +1,36 @@
-{{ define "title" }}{{ .Title }} | {{ .Site.Title }}{{ end }}
+{{ define "title" }}{{ .Title }} | Slides | {{ .Site.Title }}{{ end }}
 
 {{ define "main" }}
-{{ $hasToc := .TableOfContents }}
-<div class="article-layout">
-  <article class="article">
-    {{ $authorName := .Params.author | default (.Site.Params.author.name | default "") }}
-    {{ $authorHandle := cond (and (not (isset .Params "author")) (.Site.Params.author.twitter)) (printf "@%s" .Site.Params.author.twitter) ($authorName | default (.Site.Params.author.name | default "unknown")) }}
-    {{ $authorLink := "/page/about/" | relLangURL }}
-    {{ with .Site.Menus.main }}
-      {{ $about := where . "Name" "About" }}
-      {{ if gt (len $about) 0 }}
-        {{ $authorLink = (index $about 0).URL | relLangURL }}
-      {{ end }}
-    {{ end }}
-    {{ $langs := slice (dict "label" (.Lang | upper) "url" .RelPermalink) }}
-    {{ with .Translations }}
-      {{ range . }}
-        {{ $langs = $langs | append (dict "label" (.Lang | upper) "url" .RelPermalink) }}
-      {{ end }}
-    {{ end }}
+<div class="slides-shell">
+  <div class="slides-embed">
+    {{ partial "speakerdeck-embed.html" . }}
+  </div>
 
+  {{ $hasToc := .TableOfContents }}
+  {{ $authorName := .Params.author | default (.Site.Params.author.name | default "") }}
+  {{ $authorHandle := cond (and (not (isset .Params "author")) (.Site.Params.author.twitter)) (printf "@%s" .Site.Params.author.twitter) ($authorName | default (.Site.Params.author.name | default "unknown")) }}
+  {{ $authorLink := "/page/about/" | relLangURL }}
+  {{ with .Site.Menus.main }}
+    {{ $about := where . "Name" "About" }}
+    {{ if gt (len $about) 0 }}
+      {{ $authorLink = (index $about 0).URL | relLangURL }}
+    {{ end }}
+  {{ end }}
+  {{ $langs := slice (dict "label" (.Lang | upper) "url" .RelPermalink) }}
+  {{ with .Translations }}
+    {{ range . }}
+      {{ $langs = $langs | append (dict "label" (.Lang | upper) "url" .RelPermalink) }}
+    {{ end }}
+  {{ end }}
+
+  <article class="article slides-article">
     <header class="article-hero article-hero--stack">
       <h1 class="article-title">{{ .Title }}</h1>
+      {{ partial "share-buttons.html" . }}
       <div class="article-meta article-meta--stack">
-        <div class="meta-row">date: <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" }}</time></div>
+        <div class="meta-row">date: <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time></div>
         <div class="meta-row">author: {{ if $authorLink }}<a class="meta-link" href="{{ $authorLink | relLangURL }}">{{ $authorHandle }}</a>{{ else }}{{ $authorHandle }}{{ end }}</div>
+        {{ with .Params.event }}<div class="meta-row">event: {{ . }}</div>{{ end }}
         {{ with .Params.tags }}<div class="meta-row">tags: [{{ range $i, $tag := . }}{{ if $i }}, {{ end }}<a class="meta-link" href="{{ "/tags/" | relLangURL }}{{ urlize $tag }}">{{ $tag }}</a>{{ end }}]</div>{{ end }}
         {{ if gt (len $langs) 1 }}
         <div class="meta-row">languages: [
@@ -38,14 +44,9 @@
           {{ end }}
         ]</div>
         {{ end }}
+        {{ with .Params.speakerdeck_url }}<div class="meta-row">slides: <a class="meta-link" href="{{ . }}" target="_blank" rel="noopener">Speaker Deck</a></div>{{ end }}
       </div>
     </header>
-
-    {{ with .Params.image }}
-      <figure class="hero-cover">
-        <img src="{{ . | absURL }}" alt="">
-      </figure>
-    {{ end }}
 
     <div class="meta-separator" aria-hidden="true">---</div>
 
@@ -59,9 +60,8 @@
     <div class="article-body">
       {{ .Content }}
     </div>
-
     <div class="article-footer">
-      <a class="muted" href="{{ "/post/" | relLangURL }}">← Back to posts</a>
+      <a class="muted" href="{{ "/slides/" | relLangURL }}">← Back to slides</a>
       {{ if or .PrevInSection .NextInSection }}
       <div class="article-nav">
         {{ with .PrevInSection }}<a class="nav-arrow" href="{{ .RelPermalink }}">← {{ .Title }}</a>{{ end }}
@@ -70,11 +70,5 @@
       {{ end }}
     </div>
   </article>
-
-  {{ if $hasToc }}
-    <aside class="toc-desktop">
-      {{ partial "toc.html" . }}
-    </aside>
-  {{ end }}
 </div>
 {{ end }}

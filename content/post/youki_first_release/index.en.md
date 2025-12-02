@@ -13,7 +13,7 @@ description: "First release of youki, an OCI container runtime written in Rust"
   Hi, I'm Toru Komatsu(<a href="https://twitter.com/utam0k" target="_blank" rel="noopener noreferrer">@utam0k</a>), first committer of youki.<br> 
   This article was written in celebration of youki's v0.0.1 release
   </p>
-  <a href= "https://github.com/containers/youki/releases/tag/v0.0.1" target="_blank" rel="noopener noreferrer" class="btn btn-primary" type="button">View Relase Note</a>
+<a href= "https://github.com/containers/youki/releases/tag/v0.0.1" target="_blank" rel="noopener noreferrer" class="btn-legacy btn-primary" type="button">View Relase Note</a>
 </div>
 
 ## 🤔 What is youki?

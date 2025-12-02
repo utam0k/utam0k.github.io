@@ -1,16 +1,19 @@
 {{ $p := . }}
 {{ if gt $p.TotalPages 1 }}
+  {{ $labelNewer := i18n "newer" | default "Newer" }}
+  {{ $labelOlder := i18n "older" | default "Older" }}
+  {{ $labelPage := i18n "page_x_of_y" (dict "current" $p.PageNumber "total" $p.TotalPages) | default (printf "Page %d / %d" $p.PageNumber $p.TotalPages) }}
 <nav class="pagination" role="navigation" aria-label="Pagination">
   {{ if $p.HasPrev }}
-    <a class="page-link" href="{{ $p.Prev.URL }}">← Newer</a>
+    <a class="page-link" href="{{ $p.Prev.URL }}">← {{ $labelNewer }}</a>
   {{ else }}
-    <span class="page-link is-disabled">← Newer</span>
+    <span class="page-link is-disabled">← {{ $labelNewer }}</span>
   {{ end }}
-  <span class="page-current">Page {{ $p.PageNumber }} / {{ $p.TotalPages }}</span>
+  <span class="page-current">{{ $labelPage }}</span>
   {{ if $p.HasNext }}
-    <a class="page-link" href="{{ $p.Next.URL }}">Older →</a>
+    <a class="page-link" href="{{ $p.Next.URL }}">{{ $labelOlder }} →</a>
   {{ else }}
-    <span class="page-link is-disabled">Older →</span>
+    <span class="page-link is-disabled">{{ $labelOlder }} →</span>
   {{ end }}
 </nav>
 {{ end }}

@@ -1,0 +1,10 @@
+- id: newer
+  translation: "新しい投稿"
+- id: older
+  translation: "過去の投稿"
+- id: page_x_of_y
+  translation: "ページ {{ .current }} / {{ .total }}"
+- id: toc_title
+  translation: "目次"
+- id: toc_summary
+  translation: "目次を開く"

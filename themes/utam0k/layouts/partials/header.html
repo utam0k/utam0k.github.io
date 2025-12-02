@@ -20,7 +20,45 @@
         <a class="nav-item{{ if eq $current (relLangURL .URL) }} is-active{{ end }}" href="{{ $url }}">{{ .Name }}</a>
       {{ end }}
     </nav>
+    <span class="header-divider" aria-hidden="true"></span>
     {{ end }}
-    <button class="theme-toggle" type="button" aria-label="Toggle dark mode" onclick="window.__toggleTheme && window.__toggleTheme();">🌗</button>
+
+    {{/* Language switch */}}
+    {{ $cur := .Lang }}
+    {{ $alt := "" }}
+    {{ with .Translations }}{{ $alt = (index . 0).RelPermalink }}{{ end }}
+    {{/* Language switch popover */}}
+    {{ $cur := .Lang }}
+    {{ $trJa := index (where .Translations "Lang" "ja") 0 }}
+    {{ $trEn := index (where .Translations "Lang" "en") 0 }}
+    {{ $jaUrl := cond $trJa $trJa.RelPermalink "/" }}
+    {{ $enUrl := cond $trEn $trEn.RelPermalink "/en/" }}
+    {{ $langs := slice
+        (dict "label" "JA" "url" $jaUrl "active" (eq $cur "ja"))
+        (dict "label" "EN" "url" $enUrl "active" (eq $cur "en"))
+    }}
+    <div class="lang-menu">
+      <button class="lang-trigger" type="button" aria-haspopup="true" aria-expanded="false" onclick="window.__toggleLangMenu && window.__toggleLangMenu(this);">
+        <span class="lang-trigger__label">{{ $cur | upper }}</span>
+      </button>
+      <div class="lang-popover" hidden role="menu">
+        {{ range $langs }}
+          {{ $name := cond (eq .label "JA") "日本語" "English" }}
+          <button class="lang-choice" type="button" data-lang="{{ .label }}" aria-checked="{{ if .active }}true{{ else }}false{{ end }}" role="menuitemradio" onclick="window.__switchLang && window.__switchLang('{{ .url }}', '{{ .label }}');">{{ $name }}</button>
+        {{ end }}
+      </div>
+    </div>
+
+    <div class="theme-menu">
+      <button class="theme-trigger" type="button" aria-haspopup="true" aria-expanded="false" onclick="window.__toggleThemeMenu && window.__toggleThemeMenu(this);">
+        <span class="theme-trigger__icon" aria-hidden="true" data-theme-icon data-state="system"></span>
+        <span class="sr-only" data-theme-label>Theme</span>
+      </button>
+      <div class="theme-popover" hidden>
+        <button class="theme-choice" type="button" data-mode="system" aria-checked="false" role="menuitemradio" onclick="window.__setTheme && window.__setTheme('system');">Auto (System)</button>
+        <button class="theme-choice" type="button" data-mode="light" aria-checked="false" role="menuitemradio" onclick="window.__setTheme && window.__setTheme('light');">Light</button>
+        <button class="theme-choice" type="button" data-mode="dark" aria-checked="false" role="menuitemradio" onclick="window.__setTheme && window.__setTheme('dark');">Dark</button>
+      </div>
+    </div>
   </div>
 </header>

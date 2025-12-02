@@ -24,33 +24,102 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hack-font/3.3.0/web/hack.min.css" crossorigin="anonymous">
   <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}">
   <script>
     (() => {
       const media = window.matchMedia('(prefers-color-scheme: dark)');
-      const apply = (mode) => {
-        document.documentElement.dataset.theme = mode;
-        if (document.body) {
-          document.body.dataset.theme = mode;
-          document.body.classList.toggle('theme-dark', mode === 'dark');
-          document.body.classList.toggle('theme-light', mode === 'light');
+      const syncToggleButton = (mode) => {
+        const options = document.querySelectorAll('.theme-option');
+        options.forEach((opt) => {
+          const isActive = opt.dataset.mode === mode;
+          opt.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        });
+        const single = document.querySelector('.theme-toggle');
+        if (single) single.setAttribute('aria-pressed', mode === 'dark' ? 'true' : 'false');
+        const choices = document.querySelectorAll('.theme-choice');
+        choices.forEach((c) => c.setAttribute('aria-checked', c.dataset.mode === mode ? 'true' : 'false'));
+        const icon = document.querySelector('[data-theme-icon]');
+        if (icon) {
+          const effectiveState = mode === 'system' ? document.documentElement.dataset.theme || 'light' : mode;
+          icon.dataset.state = effectiveState;
         }
+      };
+      const resolve = (mode) => mode === 'system' ? (media.matches ? 'dark' : 'light') : mode;
+      const apply = (mode) => {
+        const effective = resolve(mode);
+        document.documentElement.dataset.theme = effective;
+        if (document.body) {
+          document.body.dataset.theme = effective;
+          document.body.classList.toggle('theme-dark', effective === 'dark');
+          document.body.classList.toggle('theme-light', effective === 'light');
+        }
+        syncToggleButton(mode);
       };
       const load = () => {
         const stored = localStorage.getItem('color-scheme');
-        const system = media.matches ? 'dark' : 'light';
-        apply(stored || system);
+        const initial = stored || 'system';
+        apply(initial);
       };
       media.addEventListener('change', (e) => {
         const stored = localStorage.getItem('color-scheme');
-        if (!stored) apply(e.matches ? 'dark' : 'light');
+        if (!stored || stored === 'system') apply('system');
       });
-      window.__toggleTheme = () => {
-        const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+      window.__setTheme = (mode) => {
+        const next = mode || (document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
         localStorage.setItem('color-scheme', next);
         apply(next);
       };
+      window.__toggleTheme = () => window.__setTheme();
+      window.__toggleThemeMenu = (btn) => {
+        const pop = btn?.nextElementSibling;
+        if (!pop) return;
+        const isOpen = !pop.hidden;
+        document.querySelectorAll('.theme-popover').forEach(el => el.hidden = true);
+        document.querySelectorAll('.theme-trigger').forEach(el => el.setAttribute('aria-expanded','false'));
+        if (!isOpen) {
+          pop.hidden = false;
+          btn.setAttribute('aria-expanded','true');
+        }
+      };
+      document.addEventListener('click', (e) => {
+        const pop = document.querySelector('.theme-popover');
+        if (!pop) return;
+        if (e.target.closest('.theme-menu')) return;
+        pop.hidden = true;
+        const trig = document.querySelector('.theme-trigger');
+        trig?.setAttribute('aria-expanded','false');
+      });
+
+      /* Language popover */
+      window.__toggleLangMenu = (btn) => {
+        const pop = btn?.nextElementSibling;
+        if (!pop) return;
+        const isOpen = !pop.hidden;
+        document.querySelectorAll('.lang-popover').forEach(el => el.hidden = true);
+        document.querySelectorAll('.lang-trigger').forEach(el => el.setAttribute('aria-expanded','false'));
+        if (!isOpen) {
+          pop.hidden = false;
+          btn.setAttribute('aria-expanded','true');
+        }
+      };
+      window.__switchLang = (url, label) => {
+        if (!url) return;
+        window.location.href = url;
+      };
+      document.addEventListener('click', (e) => {
+        const pop = document.querySelector('.lang-popover');
+        if (!pop) return;
+        if (e.target.closest('.lang-menu')) return;
+        pop.hidden = true;
+        const trig = document.querySelector('.lang-trigger');
+        trig?.setAttribute('aria-expanded','false');
+      });
       load();
+      document.addEventListener('DOMContentLoaded', () => {
+        const initial = document.documentElement.dataset.theme || (media.matches ? 'dark' : 'light');
+        syncToggleButton(initial);
+      });
     })();
   </script>
   {{ hugo.Generator }}
@@ -68,5 +137,123 @@
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script defer type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
   {{ end }}
+
+  <script>
+    // Auto-hide header on scroll down, reveal on scroll up
+    (() => {
+      const header = document.querySelector('.site-header');
+      if (!header) return;
+      let lastY = window.scrollY;
+      let ticking = false;
+      const delta = 8;
+
+      const update = () => {
+        const y = window.scrollY;
+        if (y < 80) {
+          header.classList.remove('is-hidden');
+          lastY = y;
+          return;
+        }
+        if (Math.abs(y - lastY) < delta) return;
+        if (y > lastY) header.classList.add('is-hidden');
+        else header.classList.remove('is-hidden');
+        lastY = y;
+      };
+
+      window.addEventListener('scroll', () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => { update(); ticking = false; });
+      }, { passive: true });
+    })();
+  </script>
+
+  <script>
+    // TOC scroll spy
+    (() => {
+      const tocLinks = Array.from(document.querySelectorAll('.toc__body a'));
+      if (!tocLinks.length) return;
+
+      const idFromLink = (a) => decodeURIComponent(a.hash.replace('#',''));
+      const linksById = new Map();
+      tocLinks.forEach((a) => {
+        const id = idFromLink(a);
+        const list = linksById.get(id) || [];
+        list.push(a);
+        linksById.set(id, list);
+      });
+
+      const headings = Array.from(new Set(
+        tocLinks
+          .map((a) => document.getElementById(idFromLink(a)))
+          .filter(Boolean)
+      ));
+      if (!headings.length) return;
+
+      const setActive = (id) => {
+        linksById.forEach((links, key) => {
+          links.forEach((l) => l.classList.toggle('is-active', key === id));
+        });
+      };
+
+      const fallbackCalc = () => {
+        const pos = window.scrollY + 120;
+        let activeId = headings[0].id;
+        for (const h of headings) {
+          if (h.offsetTop <= pos) activeId = h.id; else break;
+        }
+        setActive(activeId);
+        return activeId;
+      };
+
+      let lastActive = headings[0].id;
+      setActive(lastActive);
+
+      if ('IntersectionObserver' in window) {
+        const visible = new Map();
+        const update = () => {
+          if (visible.size) {
+            const topMost = Array.from(visible.values())
+              .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
+            lastActive = topMost.target.id;
+            setActive(lastActive);
+          } else {
+            lastActive = fallbackCalc();
+          }
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            const id = entry.target.id;
+            if (entry.isIntersecting) visible.set(id, entry);
+            else visible.delete(id);
+          });
+          update();
+        }, { rootMargin: '0px 0px -65% 0px', threshold: [0, 0.1, 0.5] });
+
+        headings.forEach((h) => observer.observe(h));
+        window.addEventListener('load', update);
+        window.addEventListener('resize', update, { passive: true });
+        return;
+      }
+
+      // Fallback: scroll-based detection
+      let ticking = false;
+      const onScroll = () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          fallbackCalc();
+          ticking = false;
+        });
+      };
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', fallbackCalc, { passive: true });
+      window.addEventListener('load', fallbackCalc);
+      document.querySelectorAll('img').forEach((img) => img.addEventListener('load', fallbackCalc, { once: true }));
+      fallbackCalc();
+    })();
+  </script>
 </body>
 </html>
