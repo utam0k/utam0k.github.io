@@ -1,1 +1,52 @@
-/* Override this file to add your own style adjustments */
+:root {
+  --bg: #f6f8fa;
+  --card: #ffffff;
+  --text: #24292e;
+  --muted: #586069;
+  --accent: #ff6600; /* HN orange */
+  --border: #e1e4e8;
+}
+
+[data-theme="dark"] {
+  --bg: #0d1117;
+  --card: #161b22;
+  --text: #e6edf3;
+  --muted: #8b949e;
+  --accent: #ffb054;
+  --border: #30363d;
+}
+
+body { background: var(--bg); color: var(--text); }
+#holy { background: none; }
+#main, #side, #header, #footer { background: var(--card); }
+
+nav .UnderlineNav-item.selected { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* Hacker News–like list */
+.hn-list { margin-top: 1rem; }
+.hn-list__items { list-style: decimal; padding-left: 1.5rem; }
+.hn-item { padding: 0.35rem 0; border-bottom: 1px solid var(--border); }
+.hn-item:last-child { border-bottom: none; }
+.hn-item__title a { color: var(--text); font-weight: 600; text-decoration: none; }
+.hn-item__title a:hover { color: var(--accent); text-decoration: underline; }
+.hn-item__meta { color: var(--muted); }
+.hn-item__summary { color: var(--muted); margin-top: 0.2rem; }
+
+/* Buttons */
+button.btn { background: var(--card); color: var(--text); border: 1px solid var(--border); }
+button.btn:hover { border-color: var(--accent); color: var(--accent); }
+
+/* Code blocks adapt */
+pre, code { background: rgba(0,0,0,0.04); }
+[data-theme="dark"] pre, [data-theme="dark"] code { background: #111827; }
+
+/* Links */
+a { color: var(--accent); }
+a:hover { opacity: 0.85; }
+
+/* Tables and borders */
+table { border-color: var(--border); }
+th, td { border-color: var(--border); }
+
+/* Footer */
+#footer { border-top: 1px solid var(--border); }
