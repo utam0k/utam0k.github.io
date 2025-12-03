@@ -50,3 +50,18 @@ th, td { border-color: var(--border); }
 
 /* Footer */
 #footer { border-top: 1px solid var(--border); }
+
+/* Constrain figures inside articles (including ones wrapped in blockquotes) */
+.article-body figure,
+.article-body blockquote figure {
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.article-body figure img,
+.article-body blockquote figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
