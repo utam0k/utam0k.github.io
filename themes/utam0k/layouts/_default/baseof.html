@@ -124,7 +124,9 @@
   </script>
   {{ hugo.Generator }}
 </head>
-<body class="{{ if .IsHome }}home{{ else }}page{{ end }}">
+{{ $toc := .TableOfContents }}
+{{ $hasToc := gt (len ($toc | plainify)) 0 }}
+<body class="{{ if .IsHome }}home{{ else }}page{{ end }}" data-has-toc="{{ if $hasToc }}true{{ else }}false{{ end }}">
   <div class="page-shell">
     {{ partial "header.html" . }}
     <main class="layout">
@@ -139,10 +141,88 @@
   {{ end }}
 
   <script>
-    // Auto-hide header on scroll down, reveal on scroll up
+    // Mobile detection helper (width or UA); sets body.dataset.isMobile
+    (() => {
+      const detect = () => {
+        const mq = window.matchMedia('(max-width: 1024px)').matches;
+        const ua = /Mobi|Android/i.test(navigator.userAgent);
+        const isMobile = mq || ua;
+        document.body.dataset.isMobile = isMobile ? 'true' : 'false';
+      };
+      detect();
+      window.addEventListener('resize', detect, { passive: true });
+    })();
+
+    // Mobile TOC floating button + modal (overlay close, toggle, auto-close on nav, button label swap)
+    (() => {
+      const btns = () => Array.from(document.querySelectorAll('[data-toc-modal]'));
+      const modals = () => Array.from(document.querySelectorAll('.toc-modal'));
+      const overlays = () => Array.from(document.querySelectorAll('.toc-modal__overlay'));
+      const btnsForModal = (modal) => btns().filter((b) => b.dataset.tocModal === `#${modal?.id}`);
+      const setBtnState = (modal, isOpen) => {
+        btnsForModal(modal).forEach((b) => {
+          b.classList.toggle('is-active', isOpen);
+          b.setAttribute('aria-pressed', isOpen ? 'true' : 'false');
+        });
+      };
+
+      const openModal = (modal) => {
+        if (!modal) return;
+        modal.classList.add('is-open');
+        modal.hidden = false;
+        document.body.classList.add('toc-open');
+        setBtnState(modal, true);
+      };
+      const closeModal = (modal) => {
+        if (!modal) return;
+        modal.classList.remove('is-open');
+        modal.hidden = true;
+        document.body.classList.remove('toc-open');
+        setBtnState(modal, false);
+      };
+      const closeAll = () => modals().forEach((m) => closeModal(m));
+      const toggleModal = (modal) => {
+        if (!modal) return;
+        modal.classList.contains('is-open') ? closeModal(modal) : openModal(modal);
+      };
+      const showOnScroll = () => {
+        btns().forEach((b) => b.classList.add('is-visible'));
+      };
+      const bind = () => {
+        btns().forEach((b) => {
+          b.addEventListener('click', () => {
+            const sel = b.dataset.tocModal;
+            const modal = sel ? document.querySelector(sel) : null;
+            toggleModal(modal);
+          });
+        });
+        // overlay click closes
+        document.addEventListener('click', (e) => {
+          if (e.target?.classList?.contains('toc-modal__overlay')) {
+            closeAll();
+          }
+          if (e.target?.matches('[data-toc-close]')) {
+            const modal = e.target.closest('.toc-modal');
+            closeModal(modal);
+          }
+          // Click on TOC links auto-close
+          if (e.target?.closest('.toc-modal') && e.target.tagName === 'A') {
+            closeAll();
+          }
+        });
+        window.addEventListener('scroll', showOnScroll, { passive: true });
+        showOnScroll();
+      };
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bind);
+      else bind();
+    })();
+
+    // Auto-hide header on scroll down, reveal on scroll up (desktop only)
     (() => {
       const header = document.querySelector('.site-header');
       if (!header) return;
+      const isMobile = () => document.body.dataset.isMobile === 'true';
+      if (isMobile()) return; // keep header fixed on mobile
       let lastY = window.scrollY;
       let ticking = false;
       const delta = 8;

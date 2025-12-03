@@ -608,18 +608,62 @@ blockquote.twitter-tweet a { color: var(--accent-2); }
 .terms__item { display: flex; justify-content: space-between; padding: 12px 14px; background: var(--surface); border-radius: 12px; border: 1px solid var(--border); }
 
 @media (max-width: 1024px) {
-  .site-header { position: static; padding-top: 22px; }
+  .site-header { position: sticky; top: 0; padding-top: 18px; }
   .layout { padding: 24px 16px 60px; }
   .article-layout { grid-template-columns: 1fr; }
   .toc-desktop { display: none; }
-  .toc-inline { display: block; }
+  .toc-inline { display: none; }
   .share-block--mobile { display: flex; }
   .share-block--desktop { display: none; }
+  .mobile-toc-fab {
+    position: fixed;
+    right: 14px;
+    bottom: 20px;
+    z-index: 30;
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    gap: 6px;
+    display: inline-flex;
+    align-items: center;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.14);
+    opacity: 0;
+    transform: translateY(10px);
+    pointer-events: none;
+    transition: opacity 0.18s ease, transform 0.18s ease;
+  }
+  .mobile-toc-fab.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .mobile-toc-fab.is-active {
+    border-color: var(--accent-2);
+    color: var(--accent-2);
+  }
+  .mobile-toc-fab__icon {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.18s ease;
+  }
+  .mobile-toc-fab.is-active .mobile-toc-fab__icon {
+    transform: rotate(180deg);
+  }
 }
 
 @media (max-width: 720px) {
   .brand-text { display: none; }
-  .article { padding: 26px 22px; }
+  .article {
+    padding: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+  .article .article-body { padding: 0; }
   .article-title { font-size: 30px; }
   .hero-text h1 { font-size: 32px; }
   .post-line { grid-template-columns: 1fr; }
@@ -628,4 +672,48 @@ blockquote.twitter-tweet a { color: var(--accent-2); }
 @media (min-width: 1025px) {
   .share-block--mobile { display: none; }
   .share-block--desktop { display: flex; }
+  .toc-modal { display: none !important; }
 }
+
+.toc-modal {
+  position: fixed;
+  left: 12px;
+  right: 12px;
+  bottom: 16px; /* sit just above where the fab sits */
+  max-height: 65vh;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 14px 30px rgba(0,0,0,0.2);
+  padding: 10px;
+  overflow: auto;
+  z-index: 25;
+  display: none;
+  font-size: 14px;
+}
+.toc-modal__overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.25);
+  z-index: 24;
+  display: none;
+}
+.toc-modal.is-open { display: block; }
+.toc-modal.is-open + .toc-modal__overlay { display: block; }
+.toc-modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.toc-modal__close {
+  border: none;
+  background: transparent;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+.toc-modal .toc { box-shadow: none; border: none; padding: 0; margin: 0; }
+.toc-modal .toc__title { display: none; }
+.toc-modal .toc__body li { margin: 4px 0; }

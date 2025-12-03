@@ -1,7 +1,10 @@
 {{ define "title" }}{{ .Title }} | {{ .Site.Title }}{{ end }}
 
 {{ define "main" }}
-{{ $hasToc := .TableOfContents }}
+{{ $toc := .TableOfContents }}
+{{ $hasToc := gt (len ($toc | plainify)) 0 }}
+{{ $tocId := "mobile-toc-inline" }}
+{{ $tocModalId := "mobile-toc-modal" }}
 <div class="article-layout">
   <article class="article">
     {{ $authorName := .Params.author | default (.Site.Params.author.name | default "") }}
@@ -53,10 +56,20 @@
     <div class="meta-separator" aria-hidden="true">---</div>
 
     {{ if $hasToc }}
-    <details class="toc-inline">
+    <details class="toc-inline" id="{{ $tocId }}">
       <summary>{{ i18n "toc_summary" | default "Table of contents" }}</summary>
       {{ partial "toc.html" . }}
     </details>
+    <div class="toc-modal" id="{{ $tocModalId }}" hidden>
+      <div class="toc-modal__header">
+        <span>{{ i18n "toc_title" | default "Contents" }}</span>
+        <button type="button" class="toc-modal__close" data-toc-close>&times;</button>
+      </div>
+      <div class="toc-modal__body">
+        {{ partial "toc.html" . }}
+      </div>
+    </div>
+    <div class="toc-modal__overlay" hidden></div>
     {{ end }}
 
     <div class="article-body">
@@ -83,4 +96,12 @@
     </aside>
   {{ end }}
 </div>
+
+{{ if $hasToc }}
+  {{ $tocLabel := cond (eq .Site.Language.Lang "ja") "目次" "TOC" }}
+  <button type="button" class="mobile-toc-fab" data-toc-modal="#{{ $tocModalId }}" aria-pressed="false">
+    <span class="mobile-toc-fab__label">{{ $tocLabel }}</span>
+    <svg class="mobile-toc-fab__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 14l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+{{ end }}
 {{ end }}
