@@ -66,7 +66,7 @@ Page Directory Table         4MB*1024=4GB
 カーネルのアドレス空間のVAとPAは図のようにマッピングしていきます。  
 **本章の解説するコードの目的は図のマッピングを作ることです。**
 
-> {{% figure src="memorylayout.png" %}}
+{{% figure src="memorylayout.png" %}}
 Source: [commentary/textbook](https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf)
 
 どのプロセスにもカーネル用の仮想アドレス空間が設定されています。
@@ -146,7 +146,7 @@ KERNBASE~4GBまではカーネル用の仮想アドレス空間になってい�
     11 #define V2P(a) (((uint) (a)) - KERNBASE)
     ```
 - L11: カーネルの物理メモリは決め打ちでわかる
-- > {{% figure src="memorylayout_red.png" %}}
+- {{% figure src="memorylayout_red.png" %}}
 Source: [commentary/textbook](https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf) + 赤色書き加え
 
 ### setupkvm()

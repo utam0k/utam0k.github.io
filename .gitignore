@@ -1,2 +1,6 @@
 public/**
 .hugo_cache/
+.npm-cache/
+node_modules/
+node_modules/
+.playwright-browsers/

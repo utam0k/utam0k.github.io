@@ -36,7 +36,7 @@ tags: [xv6, os]
 [前の記事]({{< ref "post/xv6_pagetable_1">}})で説明したメモリレイアウトの図です。
 本章でもかなり使うので載せておきます。適宜確認してください。
 
-> {{% figure src="memorylayout.png" %}}
+{{% figure src="memorylayout.png" %}}
 Source: [commentary/textbook](https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf)
 
 VAとPAの関係表です。

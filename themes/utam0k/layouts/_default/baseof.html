@@ -246,6 +246,80 @@
         requestAnimationFrame(() => { update(); ticking = false; });
       }, { passive: true });
     })();
+
+    // Mobile share bar: float and reveal only while scrolling up
+    (() => {
+      const bar = document.querySelector('.share-block--mobile');
+      if (!bar) return;
+      const isMobile = () => document.body.dataset.isMobile === 'true';
+      let lastY = window.scrollY;
+      let ticking = false;
+      const delta = 4;
+      const threshold = 80;
+
+      const enableFloating = () => {
+        if (bar.classList.contains('is-floating')) return;
+        bar.classList.add('is-floating');
+        document.body.classList.add('has-mobile-share');
+      };
+      const disableFloating = () => {
+        bar.classList.remove('is-floating', 'is-visible');
+        document.body.classList.remove('has-mobile-share');
+      };
+      const update = () => {
+        if (!isMobile()) { disableFloating(); return; }
+        enableFloating();
+        const y = window.scrollY;
+        if (y < threshold) {
+          bar.classList.add('is-visible');
+          lastY = y;
+          return;
+        }
+        if (Math.abs(y - lastY) < delta) return;
+        const goingUp = y < lastY;
+        if (goingUp) bar.classList.add('is-visible');
+        else bar.classList.remove('is-visible');
+        lastY = y;
+      };
+
+      window.addEventListener('scroll', () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => { update(); ticking = false; });
+      }, { passive: true });
+      window.addEventListener('resize', update, { passive: true });
+      window.addEventListener('orientationchange', update, { passive: true });
+      update();
+    })();
+
+    // Native share (mobile only; falls back to removal if unsupported)
+    (() => {
+      const btn = document.querySelector('[data-share-native]');
+      if (!btn) return;
+      const url = btn.dataset.shareUrl || location.href;
+      const title = btn.dataset.shareTitle || document.title;
+      const isMobile = () => document.body.dataset.isMobile === 'true';
+      const enable = () => {
+        btn.hidden = false;
+        btn.addEventListener('click', async (e) => {
+          e.preventDefault();
+          try {
+            await navigator.share({ title, url });
+          } catch (err) {
+            // Swallow aborts; remove button on hard failure
+            if (err && err.name === 'AbortError') return;
+            btn.remove();
+          }
+        });
+      };
+      const evaluate = () => {
+        if (navigator.share && isMobile()) enable();
+        else btn.remove();
+      };
+      evaluate();
+      window.addEventListener('resize', evaluate, { passive: true });
+      window.addEventListener('orientationchange', evaluate, { passive: true });
+    })();
   </script>
 
   <script>
@@ -333,6 +407,31 @@
       window.addEventListener('load', fallbackCalc);
       document.querySelectorAll('img').forEach((img) => img.addEventListener('load', fallbackCalc, { once: true }));
       fallbackCalc();
+    })();
+  </script>
+
+  <script>
+    // Lightweight lightbox for article images
+    (() => {
+      const imgs = Array.from(document.querySelectorAll('.article-body img'));
+      if (!imgs.length) return;
+      const overlay = document.createElement('div');
+      overlay.className = 'lightbox-backdrop';
+      overlay.innerHTML = '<img alt=\"\">';
+      document.body.appendChild(overlay);
+      const view = overlay.querySelector('img');
+      const close = () => overlay.classList.remove('is-open');
+      overlay.addEventListener('click', close);
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') close();
+      });
+      imgs.forEach((img) => {
+        img.addEventListener('click', () => {
+          view.src = img.src;
+          view.alt = img.alt || '';
+          overlay.classList.add('is-open');
+        });
+      });
     })();
   </script>
 </body>
