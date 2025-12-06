@@ -1,10 +1,12 @@
 {{ $p := .page }}
 {{ $n := .number }}
+{{ $isExternal := isset $p.Params "externalurl" }}
+{{ $href := cond $isExternal $p.Params.externalUrl $p.RelPermalink }}
 <li class="post-line">
-  <a class="post-line__one" href="{{ $p.RelPermalink }}">
-    <span class="post-line__title">{{ $p.Title }}</span>
+  <a class="post-line__one" href="{{ $href }}"{{ if $isExternal }} target="_blank" rel="noopener"{{ end }}>
+    <span class="post-line__title">{{ if $isExternal }}↗ {{ end }}{{ $p.Title }}</span>
     <span class="post-line__meta">
-      {{ $p.Date.Format "2006-01-02" }} · {{ printf "%d min" $p.ReadingTime }}
+      {{ $p.Date.Format "2006-01-02" }}{{ if not $isExternal }} · {{ printf "%d min" $p.ReadingTime }}{{ end }}
       {{ with $p.Params.tags }}
         {{ $total := len . }}
         {{ $top := first 2 . }}

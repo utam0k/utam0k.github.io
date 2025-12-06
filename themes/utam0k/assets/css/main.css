@@ -1129,3 +1129,36 @@ body {
   .article-body h5 { font-size: 1em; }
   .article-body h6 { font-size: 0.85em; }
 }
+
+/* 404 Error Page */
+.error-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  text-align: center;
+  padding: 2rem;
+}
+.error-page h1 {
+  font-size: 6rem;
+  margin: 0;
+  color: var(--accent);
+  line-height: 1;
+}
+.error-page p {
+  font-size: 1.25rem;
+  color: var(--muted);
+  margin: 1rem 0 2rem;
+}
+.error-page a {
+  padding: 0.75rem 1.5rem;
+  background: var(--accent);
+  color: var(--bg);
+  border-radius: 4px;
+  font-weight: 600;
+}
+.error-page a:hover {
+  text-decoration: none;
+  opacity: 0.9;
+}

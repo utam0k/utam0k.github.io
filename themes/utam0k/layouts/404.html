@@ -1,0 +1,9 @@
+{{ define "title" }}404 - Page Not Found | {{ .Site.Title }}{{ end }}
+
+{{ define "main" }}
+<div class="error-page">
+  <h1>404</h1>
+  <p>{{ i18n "404_message" | default "Page not found" }}</p>
+  <a href="{{ "/" | relLangURL }}">{{ i18n "404_back_home" | default "Back to home" }}</a>
+</div>
+{{ end }}

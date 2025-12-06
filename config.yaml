@@ -22,7 +22,9 @@ pygmentsUseClasses: true
 
 summaryLength: 0
 
-googleAnalytics: "UA-119773781-1"
+services:
+  googleAnalytics:
+    ID: "G-F75YLEHSJN"
 
 languages:
   ja:

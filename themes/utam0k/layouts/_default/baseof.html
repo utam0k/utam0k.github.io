@@ -123,7 +123,7 @@
     })();
   </script>
   {{ hugo.Generator }}
-  {{ with .Site.GoogleAnalytics }}
+  {{ with site.Config.Services.GoogleAnalytics.ID }}
   <script async src="https://www.googletagmanager.com/gtag/js?id={{ . }}"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -135,7 +135,7 @@
 </head>
 {{ $toc := .TableOfContents }}
 {{ $hasToc := gt (len ($toc | plainify)) 0 }}
-<body class="{{ if .IsHome }}home{{ else }}page{{ end }}" data-has-toc="{{ if $hasToc }}true{{ else }}false{{ end }}">
+<body class="{{ if .IsHome }}home{{ else if eq .Kind "404" }}error404{{ else }}page{{ end }}" data-has-toc="{{ if $hasToc }}true{{ else }}false{{ end }}">
   <div class="page-shell">
     {{ partial "header.html" . }}
     <main class="layout">
@@ -529,5 +529,228 @@
       });
     })();
   </script>
+
+  {{ with site.Config.Services.GoogleAnalytics.ID }}
+  <script>
+    // GA4 Enhanced Tracking
+    (() => {
+      if (typeof gtag !== 'function') return;
+
+      // 2. External link click tracking
+      document.addEventListener('click', (e) => {
+        const link = e.target.closest('a[href]');
+        if (!link) return;
+        const url = new URL(link.href, location.origin);
+        if (url.hostname !== location.hostname) {
+          gtag('event', 'click', {
+            event_category: 'outbound',
+            event_label: link.href,
+            transport_type: 'beacon'
+          });
+        }
+      });
+
+      // 3. Scroll depth tracking (25%, 50%, 75%, 100%)
+      const scrollMarks = [25, 50, 75, 100];
+      const scrollFired = new Set();
+      const trackScroll = () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        if (docHeight <= 0) return;
+        const percent = Math.round((scrollTop / docHeight) * 100);
+        scrollMarks.forEach((mark) => {
+          if (percent >= mark && !scrollFired.has(mark)) {
+            scrollFired.add(mark);
+            gtag('event', 'scroll_depth', {
+              event_category: 'engagement',
+              event_label: mark + '%',
+              value: mark
+            });
+          }
+        });
+      };
+      let scrollTicking = false;
+      window.addEventListener('scroll', () => {
+        if (scrollTicking) return;
+        scrollTicking = true;
+        requestAnimationFrame(() => { trackScroll(); scrollTicking = false; });
+      }, { passive: true });
+
+      // 4. 404 error page tracking
+      if (document.body.classList.contains('error404')) {
+        gtag('event', 'page_not_found', {
+          event_category: 'error',
+          event_label: location.pathname + location.search,
+          page_referrer: document.referrer
+        });
+      }
+
+      // 5. Reading time tracking
+      const startTime = Date.now();
+      const sendReadTime = () => {
+        const timeSpent = Math.round((Date.now() - startTime) / 1000);
+        if (timeSpent > 5) { // Only track if > 5 seconds
+          gtag('event', 'read_time', {
+            event_category: 'engagement',
+            event_label: location.pathname,
+            value: timeSpent
+          });
+        }
+      };
+      window.addEventListener('beforeunload', sendReadTime);
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'hidden') sendReadTime();
+      });
+
+      // 6. Author social link clicks (GitHub, X, LinkedIn)
+      document.addEventListener('click', (e) => {
+        const link = e.target.closest('a[href]');
+        if (!link) return;
+        const href = link.href;
+        const socialPatterns = [
+          { pattern: /github\.com\/utam0k/i, platform: 'github' },
+          { pattern: /x\.com\/utam0k|twitter\.com\/utam0k/i, platform: 'x' },
+          { pattern: /linkedin\.com\/in\/utam0k/i, platform: 'linkedin' }
+        ];
+        for (const { pattern, platform } of socialPatterns) {
+          if (pattern.test(href)) {
+            gtag('event', 'author_social_click', {
+              event_category: 'engagement',
+              event_label: platform,
+              link_url: href
+            });
+            break;
+          }
+        }
+      });
+
+      // 7. Share button clicks
+      document.addEventListener('click', (e) => {
+        const btn = e.target.closest('.share-btn, [data-share], [data-share-native]');
+        if (!btn) return;
+        const platform = btn.dataset.share || btn.dataset.platform || btn.getAttribute('aria-label') || 'unknown';
+        gtag('event', 'share', {
+          event_category: 'engagement',
+          event_label: platform.toLowerCase(),
+          content_type: 'article',
+          item_id: location.pathname
+        });
+      });
+
+      // 8. Traffic source tracking (on page load)
+      const ref = document.referrer;
+      const params = new URLSearchParams(location.search);
+      const utmSource = params.get('utm_source') || '';
+      const utmMedium = params.get('utm_medium') || '';
+      const utmCampaign = params.get('utm_campaign') || '';
+      let source = 'direct';
+      if (utmSource) {
+        source = utmSource;
+      } else if (ref) {
+        try {
+          const refHost = new URL(ref).hostname;
+          if (/google\./i.test(refHost)) source = 'google';
+          else if (/bing\./i.test(refHost)) source = 'bing';
+          else if (/twitter\.com|x\.com/i.test(refHost)) source = 'x';
+          else if (/facebook\.com/i.test(refHost)) source = 'facebook';
+          else if (/linkedin\.com/i.test(refHost)) source = 'linkedin';
+          else if (/t\.co/i.test(refHost)) source = 'x';
+          else source = refHost;
+        } catch (e) { source = 'referral'; }
+      }
+      gtag('event', 'traffic_source', {
+        event_category: 'acquisition',
+        event_label: source,
+        referrer: ref || 'direct',
+        utm_source: utmSource,
+        utm_medium: utmMedium,
+        utm_campaign: utmCampaign
+      });
+
+      // 9. Text copy tracking
+      document.addEventListener('copy', () => {
+        const selection = window.getSelection()?.toString() || '';
+        if (selection.length > 10) {
+          gtag('event', 'text_copy', {
+            event_category: 'engagement',
+            event_label: location.pathname,
+            text_length: selection.length
+          });
+        }
+      });
+
+      // 10. Internal link clicks (site navigation)
+      document.addEventListener('click', (e) => {
+        const link = e.target.closest('a[href]');
+        if (!link) return;
+        try {
+          const url = new URL(link.href, location.origin);
+          if (url.hostname === location.hostname && url.pathname !== location.pathname) {
+            gtag('event', 'internal_link', {
+              event_category: 'navigation',
+              event_label: url.pathname,
+              link_text: link.textContent?.trim().slice(0, 50) || '',
+              from_page: location.pathname
+            });
+          }
+        } catch (e) {}
+      });
+
+      // 11. Dark mode toggle
+      const origSetTheme = window.__setTheme;
+      if (origSetTheme) {
+        window.__setTheme = (mode) => {
+          origSetTheme(mode);
+          gtag('event', 'theme_change', {
+            event_category: 'preference',
+            event_label: mode || document.documentElement.dataset.theme
+          });
+        };
+      }
+
+      // 12. Language switch
+      document.addEventListener('click', (e) => {
+        const link = e.target.closest('.lang-choice, [data-lang], .meta-link[href*="/en/"], .meta-link[href*="/ja/"]');
+        if (!link) return;
+        const href = link.href || '';
+        const toLang = href.includes('/en/') ? 'en' : 'ja';
+        gtag('event', 'language_switch', {
+          event_category: 'preference',
+          event_label: toLang,
+          from_lang: document.documentElement.lang || 'unknown'
+        });
+      });
+
+      // 13. TOC (Table of Contents) clicks
+      document.addEventListener('click', (e) => {
+        const link = e.target.closest('.toc a, .toc__body a');
+        if (!link) return;
+        gtag('event', 'toc_click', {
+          event_category: 'navigation',
+          event_label: link.textContent?.trim().slice(0, 50) || '',
+          target_id: link.hash || ''
+        });
+      });
+
+      // 14. RSS link clicks
+      document.addEventListener('click', (e) => {
+        const link = e.target.closest('a[href*="index.xml"], a[href*=".rss"], a[href*="/feed"]');
+        if (!link) return;
+        gtag('event', 'rss_click', {
+          event_category: 'engagement',
+          event_label: location.pathname
+        });
+      });
+
+      // 15. Print tracking
+      window.addEventListener('beforeprint', () => {
+        gtag('event', 'page_print', {
+          event_category: 'engagement',
+          event_label: location.pathname
+        });
+      });
+    })();
+  </script>
+  {{ end }}
 </body>
 </html>
