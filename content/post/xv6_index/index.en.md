@@ -1,6 +1,6 @@
 ---
-title: "Annotated xv6 (Education Edition UNIX v6)"
-subtitle: "Annotated xv6 table of contents"
+title: "xv6 Deep Dive (Education Edition UNIX v6)"
+subtitle: "xv6 Deep Dive table of contents"
 date: 2019-03-05T18:35:00+09:00
 tags: [xv6, os]
 ---

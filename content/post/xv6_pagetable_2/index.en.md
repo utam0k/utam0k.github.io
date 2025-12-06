@@ -1,10 +1,10 @@
 ---
-title: "Annotated xv6 Page tables 2"
+title: "xv6 Deep Dive Page tables 2"
 date: 2019-04-25T09:00:00+09:00
 tags: [xv6, os]
 ---
 
-[Annotated xv6 table of contents]({{< ref "post/xv6_index">}})  
+[xv6 Deep Dive table of contents]({{< ref "post/xv6_index">}})  
 [Previous post]({{< ref "post/xv6_pagetable_1">}})  
 [Next post]({{< ref "post/xv6_traps_interrupts_drivers_1">}})
 - - -

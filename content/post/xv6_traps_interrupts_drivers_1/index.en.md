@@ -1,10 +1,10 @@
 ---
-title: "Annotated xv6 Traps, interrupts, and drivers 1"
+title: "xv6 Deep Dive Traps, interrupts, and drivers 1"
 date: 2019-07-08T00:00:00+09:00
 tags: [xv6, os]
 ---
 
-[Annotated xv6 table of contents]({{< ref "post/xv6_index">}})  
+[xv6 Deep Dive table of contents]({{< ref "post/xv6_index">}})  
 [Previous post]({{< ref "post/xv6_pagetable_2">}})  
 [Next post]({{< ref "post/xv6_scheduling_1" >}})
 - - -

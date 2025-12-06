@@ -1,12 +1,12 @@
 ---
-title: "Annotated xv6 Page tables 1"
+title: "xv6 Deep Dive Page tables 1"
 date: 2019-03-05T18:35:02+09:00
 description: Part 1 of an explanation of xv6 page tables.
 local_share_img: sequence_without_error_handling.png
 tags: [xv6, os]
 ---
 
-[Annotated xv6 table of contents]({{< ref "post/xv6_index">}})  
+[xv6 Deep Dive table of contents]({{< ref "post/xv6_index">}})  
 [Next post]({{< ref "post/xv6_pagetable_2">}})
 - - -
 

@@ -1,9 +1,9 @@
 ---
-title: "Annotated xv6: Introduction"
+title: "xv6 Deep Dive: Introduction"
 date: 2019-03-05T18:35:01+09:00
 tags: [xv6, os]
 ---
-[Annotated xv6 table of contents]({{< ref "post/xv6_index" >}})
+[xv6 Deep Dive table of contents]({{< ref "post/xv6_index" >}})
 ***
 
 ### Introduction
