@@ -7,6 +7,7 @@ speakerdeck_url: ""
 event: ""
 tags: [slides]
 description: ""
+co_presenters: false
 draft: true
 ---
 

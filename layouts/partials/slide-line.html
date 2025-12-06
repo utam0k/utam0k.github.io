@@ -3,12 +3,18 @@
 <li class="post-line">
   <a class="post-line__one" href="{{ $p.RelPermalink }}">
     <span class="post-line__title">{{ $p.Title }}</span>
+    {{ $co := $p.Params.co_presenters }}
     <span class="post-line__meta">
       {{ $p.Date.Format "2006-01-02" }}
       {{ with $p.Params.event }} · {{ . }}{{ end }}
       {{ if $p.Params.speakerdeck_id }} · Speaker Deck{{ end }}
+      {{ if $co }} · co-presented{{ end }}
     </span>
   </a>
   {{ $desc := $p.Params.description | default ($p.Summary | plainify) }}
-  {{ if $desc }}<p class="post-line__desc">{{ $desc }}</p>{{ end }}
+  {{ if $desc }}
+    <p class="post-line__desc">
+      {{ if $co }}<span style="text-decoration: underline;">co-presented</span> | {{ end }}{{ $desc }}
+    </p>
+  {{ end }}
 </li>

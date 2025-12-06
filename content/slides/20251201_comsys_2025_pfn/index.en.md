@@ -3,9 +3,9 @@ title: AI/MLのマルチテナント基盤を支えるコンテナ技術
 date: 2025-12-01T00:00:00+09:00
 speakerdeck_id: d50c408f593f42939d73f44b164f3a99
 speakerdeck_url: https://speakerdeck.com/pfn/20251201_comsys_2025_pfn
-event: COMSYS 2025
+event: ComSys 2025
 tags: [slides, pfn]
-description: Slides presented at COMSYS 2025, hosted on Speaker Deck.
+description: Invited Talk at ComSys 2025
 draft: false
 ---
 

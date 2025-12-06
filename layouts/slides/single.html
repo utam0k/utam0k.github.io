@@ -26,14 +26,16 @@
     {{ end }}
   {{ end }}
 
+  {{ $coPresented := .Params.co_presenters }}
   <article class="article slides-article">
     <header class="article-hero article-hero--stack">
       <h1 class="article-title">{{ .Title }}</h1>
       {{ partial "share-buttons.html" . }}
       <div class="article-meta article-meta--stack">
         <div class="meta-row">date: <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time></div>
-        <div class="meta-row">author: {{ if $authorLink }}<a class="meta-link" href="{{ $authorLink | relLangURL }}">{{ $authorHandle }}</a>{{ else }}{{ $authorHandle }}{{ end }}</div>
+        <div class="meta-row">author: {{ if $authorLink }}<a class="meta-link" href="{{ $authorLink | relLangURL }}">{{ $authorHandle }}</a>{{ else }}{{ $authorHandle }}{{ end }}{{ if $coPresented }} and others{{ end }}</div>
         {{ with .Params.event }}<div class="meta-row">event: {{ . }}</div>{{ end }}
+        {{ if $coPresented }}<div class="meta-row">co-presented</div>{{ end }}
         {{ with .Params.tags }}<div class="meta-row">tags: [{{ range $i, $tag := . }}{{ if $i }}, {{ end }}<a class="meta-link" href="{{ "/tags/" | relLangURL }}{{ urlize $tag }}">{{ $tag }}</a>{{ end }}]</div>{{ end }}
         {{ if gt (len $langs) 1 }}
         <div class="meta-row">languages: [
