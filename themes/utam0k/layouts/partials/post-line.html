@@ -4,14 +4,21 @@
 {{ $href := cond $isExternal $p.Params.externalUrl $p.RelPermalink }}
 <li class="post-line">
   <a class="post-line__one" href="{{ $href }}"{{ if $isExternal }} target="_blank" rel="noopener"{{ end }}>
-    <span class="post-line__title">{{ if $isExternal }}↗ {{ end }}{{ $p.Title }}</span>
+    <span class="post-line__title">
+      {{ $p.Title }}
+      {{ if $isExternal }}
+        <span class="post-line__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+            <path d="M14 4h6v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M20 4 12 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M10 6H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="sr-only">External link</span>
+      {{ end }}
+    </span>
     <span class="post-line__meta">
       {{ $p.Date.Format "2006-01-02" }}{{ if not $isExternal }} · {{ printf "%d min" $p.ReadingTime }}{{ end }}
-      {{ with $p.Params.tags }}
-        {{ $total := len . }}
-        {{ $top := first 2 . }}
-        · {{ delimit $top ", " }}{{ if gt $total 2 }} (+{{ sub $total 2 }}){{ end }}
-      {{ end }}
     </span>
   </a>
 </li>
