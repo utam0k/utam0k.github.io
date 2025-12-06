@@ -1,0 +1,337 @@
+{{- /* Generate OGP image dynamically - HN style with blog metadata */ -}}
+
+{{- $ogpImage := "" -}}
+
+{{- /* Check for existing ogp.png in page bundle */ -}}
+{{- $existingOgp := .Resources.GetMatch "ogp.png" -}}
+{{- if $existingOgp -}}
+  {{- $ogpImage = $existingOgp.Permalink -}}
+{{- else -}}
+  {{- /* Monospace font for hacker aesthetic */ -}}
+  {{- $fontUrl := "https://github.com/coz-m/MPLUS_FONTS/raw/refs/heads/master/fonts/ttf/Mplus1Code-Bold.ttf" -}}
+  {{- $font := resources.GetRemote $fontUrl -}}
+  {{- $fontRegularUrl := "https://github.com/coz-m/MPLUS_FONTS/raw/refs/heads/master/fonts/ttf/Mplus1Code-Regular.ttf" -}}
+  {{- $fontRegular := resources.GetRemote $fontRegularUrl -}}
+  {{- /* Hack font for @username */ -}}
+  {{- $fontHackUrl := "https://github.com/source-foundry/Hack/raw/refs/heads/master/build/ttf/Hack-Regular.ttf" -}}
+  {{- $fontHack := resources.GetRemote $fontHackUrl -}}
+
+  {{- /* Circular avatar image */ -}}
+  {{- $avatar := resources.Get "img/og/avatar_circle.png" -}}
+
+  {{- /* Base image: 1200x630, cream background (#f7f3eb) */ -}}
+  {{- $base := resources.Get "img/og/base.png" -}}
+
+  {{- if and $font $fontRegular $base -}}
+    {{- /* Prepare title text with word-aware line breaking */ -}}
+    {{- $title := .Title | default .Site.Title -}}
+    {{- /* Override title for special pages */ -}}
+    {{- if .IsHome -}}
+      {{- $title = "Toru Komatsu" -}}
+    {{- else if eq .Title "About" -}}
+      {{- $title = "About @utam0k" -}}
+    {{- end -}}
+    {{- $titleText := "" -}}
+    {{- $lineCount := 1 -}}
+    {{- $maxCharsPerLine := 32 -}}
+
+    {{- /* Check if title contains spaces (likely English) */ -}}
+    {{- if strings.Contains $title " " -}}
+      {{- /* English: split by words */ -}}
+      {{- $words := split $title " " -}}
+      {{- $currentLine := "" -}}
+      {{- range $words -}}
+        {{- $word := . -}}
+        {{- $testLine := "" -}}
+        {{- if $currentLine -}}
+          {{- $testLine = printf "%s %s" $currentLine $word -}}
+        {{- else -}}
+          {{- $testLine = $word -}}
+        {{- end -}}
+        {{- if gt (strings.RuneCount $testLine) $maxCharsPerLine -}}
+          {{- if $currentLine -}}
+            {{- if $titleText -}}
+              {{- $titleText = printf "%s\n%s" $titleText $currentLine -}}
+              {{- $lineCount = add $lineCount 1 -}}
+            {{- else -}}
+              {{- $titleText = $currentLine -}}
+            {{- end -}}
+            {{- $currentLine = $word -}}
+          {{- else -}}
+            {{- $currentLine = $word -}}
+          {{- end -}}
+        {{- else -}}
+          {{- $currentLine = $testLine -}}
+        {{- end -}}
+      {{- end -}}
+      {{- if $currentLine -}}
+        {{- if $titleText -}}
+          {{- $titleText = printf "%s\n%s" $titleText $currentLine -}}
+          {{- $lineCount = add $lineCount 1 -}}
+        {{- else -}}
+          {{- $titleText = $currentLine -}}
+        {{- end -}}
+      {{- end -}}
+    {{- else -}}
+      {{- /* Japanese: split by character count */ -}}
+      {{- $maxCharsPerLine = 18 -}}
+      {{- $titleLen := strings.RuneCount $title -}}
+      {{- range $i := seq 0 $maxCharsPerLine (sub $titleLen 1) -}}
+        {{- $end := add $i $maxCharsPerLine -}}
+        {{- if gt $end $titleLen -}}
+          {{- $end = $titleLen -}}
+        {{- end -}}
+        {{- $line := substr $title $i (sub $end $i) -}}
+        {{- if $titleText -}}
+          {{- $titleText = printf "%s\n%s" $titleText $line -}}
+          {{- $lineCount = add $lineCount 1 -}}
+        {{- else -}}
+          {{- $titleText = $line -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- /* Adjust font size based on line count */ -}}
+    {{- $titleFontSize := 52 -}}
+    {{- $titleLineHeight := 70 -}}
+    {{- $isEnglish := strings.Contains (.Title | default .Site.Title) " " -}}
+    {{- if and (eq $lineCount 1) $isEnglish -}}
+      {{- $titleFontSize = 72 -}}
+      {{- $titleLineHeight = 90 -}}
+    {{- end -}}
+
+    {{- /* Calculate vertical center layout */ -}}
+    {{- $titleHeight := mul $lineCount $titleLineHeight -}}
+    {{- $separatorHeight := 30 -}}
+    {{- $metaHeight := 120 -}}
+    {{- /* Add extra height for @utam0k subtitle on home page */ -}}
+    {{- $subtitleHeight := 0 -}}
+    {{- if .IsHome -}}
+      {{- $subtitleHeight = 50 -}}
+    {{- end -}}
+    {{- $totalContentHeight := add $titleHeight (add $subtitleHeight (add $separatorHeight $metaHeight)) -}}
+    {{- $imageHeight := 630 -}}
+    {{- $startY := div (sub $imageHeight $totalContentHeight) 2 -}}
+    {{- $startY = add $startY 15 -}}
+    {{- if lt $startY 40 -}}
+      {{- $startY = 40 -}}
+    {{- end -}}
+    {{- $titleY := $startY -}}
+    {{- $separatorY := add $titleY (add $titleHeight (add $subtitleHeight 20)) -}}
+    {{- $metaY := add $separatorY 40 -}}
+
+    {{- /* Add title text */ -}}
+    {{- $img := $base.Filter (images.Text $titleText (dict
+      "font" $font
+      "size" $titleFontSize
+      "color" "#151820"
+      "linespacing" 18
+      "x" 60
+      "y" $titleY
+    )) -}}
+
+    {{- /* Add orange accent line (same width as title) */ -}}
+    {{- $lineChars := "" -}}
+    {{- range seq 1 $maxCharsPerLine -}}
+      {{- $lineChars = printf "%s-" $lineChars -}}
+    {{- end -}}
+    {{- $img = $img.Filter (images.Text $lineChars (dict
+      "font" $font
+      "size" 20
+      "color" "#ff7a1a"
+      "x" 60
+      "y" $separatorY
+    )) -}}
+
+
+    {{- /* Build metadata based on page type */ -}}
+    {{- $metaLineY := $metaY -}}
+
+    {{- if .IsHome -}}
+      {{- /* Home page: add @utam0k below title with Hack font */ -}}
+      {{- $usernameY := add $titleY (add $titleHeight 5) -}}
+      {{- if $fontHack -}}
+        {{- $img = $img.Filter (images.Text "@utam0k" (dict
+          "font" $fontHack
+          "size" 36
+          "color" "#5f6c7b"
+          "x" 60
+          "y" $usernameY
+        )) -}}
+      {{- end -}}
+      {{- /* Metadata */ -}}
+      {{- $img = $img.Filter (images.Text "tagline: Open Source Enthusiast" (dict
+        "font" $fontRegular
+        "size" 24
+        "color" "#5f6c7b"
+        "x" 60
+        "y" $metaLineY
+      )) -}}
+      {{- $metaLineY = add $metaLineY 30 -}}
+      {{- $img = $img.Filter (images.Text "site: utam0k.jp" (dict
+        "font" $fontRegular
+        "size" 24
+        "color" "#5f6c7b"
+        "x" 60
+        "y" $metaLineY
+      )) -}}
+      {{- /* Large avatar for home */ -}}
+      {{- if $avatar -}}
+        {{- $avatarResized := $avatar.Fill "150x150" -}}
+        {{- $img = $img.Filter (images.Overlay $avatarResized 990 430) -}}
+      {{- end -}}
+
+    {{- else if eq .Title "About" -}}
+      {{- /* About page: profile style with large avatar */ -}}
+      {{- $img = $img.Filter (images.Text "tagline: Open Source Enthusiast" (dict
+        "font" $fontRegular
+        "size" 24
+        "color" "#5f6c7b"
+        "x" 60
+        "y" $metaLineY
+      )) -}}
+      {{- $metaLineY = add $metaLineY 30 -}}
+      {{- $img = $img.Filter (images.Text "site: utam0k.jp" (dict
+        "font" $fontRegular
+        "size" 24
+        "color" "#5f6c7b"
+        "x" 60
+        "y" $metaLineY
+      )) -}}
+      {{- /* Large avatar for About */ -}}
+      {{- if $avatar -}}
+        {{- $avatarResized := $avatar.Fill "150x150" -}}
+        {{- $img = $img.Filter (images.Overlay $avatarResized 990 430) -}}
+      {{- end -}}
+
+    {{- else if eq .Section "slides" -}}
+      {{- /* Slides page: event info */ -}}
+      {{- $dateLine := printf "date: %s" (.Date.Format "2006-01-02") -}}
+      {{- $img = $img.Filter (images.Text $dateLine (dict
+        "font" $fontRegular
+        "size" 24
+        "color" "#5f6c7b"
+        "x" 60
+        "y" $metaLineY
+      )) -}}
+      {{- $metaLineY = add $metaLineY 30 -}}
+      {{- with .Params.event -}}
+        {{- $eventLine := printf "event: %s" . -}}
+        {{- $img = $img.Filter (images.Text $eventLine (dict
+          "font" $fontRegular
+          "size" 24
+          "color" "#5f6c7b"
+          "x" 60
+          "y" $metaLineY
+        )) -}}
+        {{- $metaLineY = add $metaLineY 30 -}}
+      {{- end -}}
+      {{- $img = $img.Filter (images.Text "type: slides" (dict
+        "font" $fontRegular
+        "size" 24
+        "color" "#5f6c7b"
+        "x" 60
+        "y" $metaLineY
+      )) -}}
+      {{- $metaLineY = add $metaLineY 30 -}}
+      {{- $img = $img.Filter (images.Text "site: utam0k.jp" (dict
+        "font" $fontRegular
+        "size" 24
+        "color" "#5f6c7b"
+        "x" 60
+        "y" $metaLineY
+      )) -}}
+      {{- /* Avatar at bottom right */ -}}
+      {{- if $avatar -}}
+        {{- $avatarResized := $avatar.Fill "100x100" -}}
+        {{- $img = $img.Filter (images.Overlay $avatarResized 1040 480) -}}
+      {{- end -}}
+
+    {{- else if and (eq .Section "post") .IsPage -}}
+      {{- /* Blog post: full metadata */ -}}
+      {{- $dateLine := printf "date: %s" (.Date.Format "2006-01-02") -}}
+      {{- $img = $img.Filter (images.Text $dateLine (dict
+        "font" $fontRegular
+        "size" 24
+        "color" "#5f6c7b"
+        "x" 60
+        "y" $metaLineY
+      )) -}}
+      {{- $metaLineY = add $metaLineY 30 -}}
+      {{- $img = $img.Filter (images.Text "author: Toru Komatsu(@utam0k)" (dict
+        "font" $fontRegular
+        "size" 24
+        "color" "#5f6c7b"
+        "x" 60
+        "y" $metaLineY
+      )) -}}
+      {{- $metaLineY = add $metaLineY 30 -}}
+      {{- $currentLang := .Lang | upper -}}
+      {{- $hasTranslation := gt (len .Translations) 0 -}}
+      {{- $langStr := "" -}}
+      {{- if $hasTranslation -}}
+        {{- $langStr = "lang: JA | EN" -}}
+      {{- else -}}
+        {{- $langStr = printf "lang: %s" $currentLang -}}
+      {{- end -}}
+      {{- $img = $img.Filter (images.Text $langStr (dict
+        "font" $fontRegular
+        "size" 24
+        "color" "#5f6c7b"
+        "x" 60
+        "y" $metaLineY
+      )) -}}
+      {{- $metaLineY = add $metaLineY 30 -}}
+      {{- $img = $img.Filter (images.Text "site: utam0k.jp" (dict
+        "font" $fontRegular
+        "size" 24
+        "color" "#5f6c7b"
+        "x" 60
+        "y" $metaLineY
+      )) -}}
+      {{- /* Avatar at bottom right */ -}}
+      {{- if $avatar -}}
+        {{- $avatarResized := $avatar.Fill "100x100" -}}
+        {{- $img = $img.Filter (images.Overlay $avatarResized 1040 480) -}}
+      {{- end -}}
+
+    {{- else if .IsSection -}}
+      {{- /* Section list pages (e.g., /blog/) */ -}}
+      {{- $img = $img.Filter (images.Text "site: utam0k.jp" (dict
+        "font" $fontRegular
+        "size" 24
+        "color" "#5f6c7b"
+        "x" 60
+        "y" $metaLineY
+      )) -}}
+      {{- /* Avatar at bottom right */ -}}
+      {{- if $avatar -}}
+        {{- $avatarResized := $avatar.Fill "100x100" -}}
+        {{- $img = $img.Filter (images.Overlay $avatarResized 1040 480) -}}
+      {{- end -}}
+
+    {{- else -}}
+      {{- /* Default: just site name */ -}}
+      {{- $img = $img.Filter (images.Text "site: utam0k.jp" (dict
+        "font" $fontRegular
+        "size" 24
+        "color" "#5f6c7b"
+        "x" 60
+        "y" $metaLineY
+      )) -}}
+      {{- /* Avatar at bottom right */ -}}
+      {{- if $avatar -}}
+        {{- $avatarResized := $avatar.Fill "100x100" -}}
+        {{- $img = $img.Filter (images.Overlay $avatarResized 1040 480) -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- $ogpImage = $img.Permalink -}}
+  {{- else -}}
+    {{- with .Site.Params.logo -}}
+      {{- $ogpImage = . | absURL -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return $ogpImage -}}

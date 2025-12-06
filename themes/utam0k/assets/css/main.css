@@ -317,7 +317,11 @@ img { max-width: 100%; }
 }
 .brand-text { display: flex; flex-direction: column; }
 .brand-name { font-weight: 700; letter-spacing: -0.01em; font-size: 17px; }
-.brand-tagline { color: var(--muted); font-size: 12px; }
+.brand-tagline {
+  color: var(--muted);
+  font-size: 12px;
+  font-family: "Hack", ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", "Courier New", monospace;
+}
 
 .main-nav { display: flex; gap: 8px; flex-wrap: wrap; }
 .nav-item {

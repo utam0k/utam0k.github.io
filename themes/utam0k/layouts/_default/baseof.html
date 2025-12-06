@@ -19,7 +19,9 @@
   <meta property="og:site_name" content="{{ .Site.Title }}">
   {{ with .Permalink }}<meta property="og:url" content="{{ . }}">{{ end }}
   {{ with .Title }}<meta property="og:title" content="{{ . }}">{{ end }}
-  {{ with .Params.image | default .Site.Params.logo }}<meta property="og:image" content="{{ . | absURL }}">{{ end }}
+  {{ with partial "ogp-image.html" . }}<meta property="og:image" content="{{ . }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="{{ . }}">{{ end }}
   <link rel="alternate" type="application/rss+xml" href="{{ "index.xml" | relLangURL }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

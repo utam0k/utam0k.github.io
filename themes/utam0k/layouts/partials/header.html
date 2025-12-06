@@ -9,7 +9,15 @@
     {{ $brandHandle := or .Site.Params.author.github (or .Site.Params.author.twitter .Site.Params.description) }}
     <div class="brand-text">
       <span class="brand-name">{{ $brandName }}</span>
-      {{ with $brandHandle }}<span class="brand-tagline">{{ . }}</span>{{ end }}
+      {{ with $brandHandle }}
+        <span class="brand-tagline">
+          {{ if or $.Site.Params.author.github $.Site.Params.author.twitter }}
+            {{ if hasPrefix . "@" }}{{ . }}{{ else }}@{{ . }}{{ end }}
+          {{ else }}
+            {{ . }}
+          {{ end }}
+        </span>
+      {{ end }}
     </div>
   </a>
 
