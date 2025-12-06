@@ -1,7 +1,7 @@
 <footer class="site-footer">
   <div class="footer-meta">
     {{ with .Site.Params.author.name }}<span>&copy; {{ now.Format "2006" }} {{ . }}</span>{{ end }}
-    {{ with .Site.Params.author.twitter }}<a href="https://twitter.com/{{ . }}" target="_blank" rel="noopener" class="muted">@{{ . }}</a>{{ end }}
+    {{ with .Site.Params.author.twitter }}<a href="https://x.com/{{ . }}" target="_blank" rel="noopener" class="muted">@{{ . }}</a>{{ end }}
   </div>
   <div class="footer-links">
     <a class="muted" href="{{ "index.xml" | relLangURL }}">RSS</a>

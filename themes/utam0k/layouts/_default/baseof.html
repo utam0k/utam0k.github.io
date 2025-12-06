@@ -306,9 +306,9 @@
           try {
             await navigator.share({ title, url });
           } catch (err) {
-            // Swallow aborts; remove button on hard failure
+            // Swallow aborts; keep the button even on failure so the user can retry
             if (err && err.name === 'AbortError') return;
-            btn.remove();
+            console.warn('Native share failed', err);
           }
         });
       };
@@ -319,6 +319,36 @@
       evaluate();
       window.addEventListener('resize', evaluate, { passive: true });
       window.addEventListener('orientationchange', evaluate, { passive: true });
+    })();
+
+    // Mobile menu toggle
+    (() => {
+      const btn = document.querySelector('[data-menu-toggle]');
+      const menu = document.getElementById('mobile-menu');
+      const overlay = document.querySelector('[data-menu-overlay]');
+      if (!btn || !menu) return;
+      const isMobile = () => document.body.dataset.isMobile === 'true';
+      const setState = (open) => {
+        btn.classList.toggle('is-open', open);
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        menu.hidden = !open;
+        menu.classList.toggle('is-open', open);
+        if (overlay) {
+          overlay.hidden = !open;
+          overlay.classList.toggle('is-open', open);
+        }
+        document.body.classList.toggle('menu-open', open);
+      };
+      const toggle = () => setState(!(btn.getAttribute('aria-expanded') === 'true'));
+      const close = () => setState(false);
+      btn.addEventListener('click', (e) => { e.stopPropagation(); toggle(); });
+      document.querySelectorAll('[data-menu-close]').forEach((c) => c.addEventListener('click', close));
+      document.addEventListener('click', (e) => {
+        if (!menu.contains(e.target) && !btn.contains(e.target)) close();
+      });
+      if (overlay) overlay.addEventListener('click', close);
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+      window.addEventListener('resize', () => { if (!isMobile()) close(); }, { passive: true });
     })();
   </script>
 

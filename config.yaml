@@ -29,8 +29,8 @@ languages:
     weight: 1
     menu:
       main:
-        - name: Posts
-          url: /post/
+        - name: Blog
+          url: /blog/
           weight: 1
         - name: Slides
           url: /slides/
@@ -43,8 +43,8 @@ languages:
     weight: 2
     menu:
       main:
-        - name: Posts
-          url: /en/post/
+        - name: Blog
+          url: /en/blog/
           weight: 1
         - name: Slides
           url: /en/slides/
