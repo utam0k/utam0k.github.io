@@ -123,6 +123,15 @@
     })();
   </script>
   {{ hugo.Generator }}
+  {{ with .Site.GoogleAnalytics }}
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ . }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{ . }}');
+  </script>
+  {{ end }}
 </head>
 {{ $toc := .TableOfContents }}
 {{ $hasToc := gt (len ($toc | plainify)) 0 }}
@@ -153,7 +162,7 @@
       window.addEventListener('resize', detect, { passive: true });
     })();
 
-    // Mobile TOC floating button + modal (overlay close, toggle, auto-close on nav, button label swap)
+    // Mobile TOC floating button + modal (overlay close, toggle, auto-close on nav, button label swap, swipe to close)
     (() => {
       const btns = () => Array.from(document.querySelectorAll('[data-toc-modal]'));
       const modals = () => Array.from(document.querySelectorAll('.toc-modal'));
@@ -175,6 +184,7 @@
       };
       const closeModal = (modal) => {
         if (!modal) return;
+        modal.style.transform = '';
         modal.classList.remove('is-open');
         modal.hidden = true;
         document.body.classList.remove('toc-open');
@@ -188,6 +198,59 @@
       const showOnScroll = () => {
         btns().forEach((b) => b.classList.add('is-visible'));
       };
+
+      // Swipe down to close
+      const setupSwipe = (modal) => {
+        let startY = 0;
+        let currentY = 0;
+        let isDragging = false;
+        const threshold = 80;
+
+        const onTouchStart = (e) => {
+          // Only start drag from handle or header area, or when scrolled to top
+          const handle = modal.querySelector('.toc-modal__handle');
+          const header = modal.querySelector('.toc-modal__header');
+          const isHandleOrHeader = handle?.contains(e.target) || header?.contains(e.target);
+          const isScrolledToTop = modal.scrollTop <= 0;
+
+          if (!isHandleOrHeader && !isScrolledToTop) return;
+
+          isDragging = true;
+          startY = e.touches[0].clientY;
+          currentY = startY;
+          modal.style.transition = 'none';
+        };
+
+        const onTouchMove = (e) => {
+          if (!isDragging) return;
+          currentY = e.touches[0].clientY;
+          const deltaY = currentY - startY;
+
+          // Only allow dragging down
+          if (deltaY > 0) {
+            modal.style.transform = `translateY(${deltaY}px)`;
+            e.preventDefault();
+          }
+        };
+
+        const onTouchEnd = () => {
+          if (!isDragging) return;
+          isDragging = false;
+          modal.style.transition = '';
+
+          const deltaY = currentY - startY;
+          if (deltaY > threshold) {
+            closeModal(modal);
+          } else {
+            modal.style.transform = '';
+          }
+        };
+
+        modal.addEventListener('touchstart', onTouchStart, { passive: true });
+        modal.addEventListener('touchmove', onTouchMove, { passive: false });
+        modal.addEventListener('touchend', onTouchEnd, { passive: true });
+      };
+
       const bind = () => {
         btns().forEach((b) => {
           b.addEventListener('click', () => {
@@ -196,6 +259,8 @@
             toggleModal(modal);
           });
         });
+        // Setup swipe for each modal
+        modals().forEach((m) => setupSwipe(m));
         // overlay click closes
         document.addEventListener('click', (e) => {
           if (e.target?.classList?.contains('toc-modal__overlay')) {
