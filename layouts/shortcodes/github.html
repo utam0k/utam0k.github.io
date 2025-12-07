@@ -1,0 +1,65 @@
+{{- $url := .Get 0 -}}
+{{- /* Parse: https://github.com/owner/repo/pull/123 or /issues/123 */ -}}
+{{- $path := replaceRE `^https?://github\.com/` "" $url -}}
+{{- $parts := split $path "/" -}}
+{{- $owner := index $parts 0 -}}
+{{- $repoName := index $parts 1 -}}
+{{- $repo := printf "%s/%s" $owner $repoName -}}
+{{- $type := index $parts 2 -}}
+{{- $number := index $parts 3 -}}
+{{- $apiUrl := "" -}}
+{{- $icon := "" -}}
+
+{{- if eq $type "pull" -}}
+  {{- $apiUrl = printf "https://api.github.com/repos/%s/pulls/%s" $repo $number -}}
+  {{- $icon = "pr" -}}
+{{- else if eq $type "issues" -}}
+  {{- $apiUrl = printf "https://api.github.com/repos/%s/issues/%s" $repo $number -}}
+  {{- $icon = "issue" -}}
+{{- end -}}
+
+{{- $data := dict -}}
+{{- with resources.GetRemote $apiUrl -}}
+  {{- $data = . | transform.Unmarshal -}}
+{{- end -}}
+
+{{- $title := $data.title | default (printf "#%s" $number) -}}
+{{- $author := "" -}}
+{{- with $data.user -}}
+  {{- $author = .login -}}
+{{- end -}}
+{{- $state := $data.state | default "unknown" -}}
+{{- $stateClass := "gh-card__state--open" -}}
+{{- $showState := true -}}
+{{- if eq $state "open" -}}
+  {{- $showState = false -}}
+{{- else if eq $state "closed" -}}
+  {{- if and (eq $icon "pr") $data.merged_at -}}
+    {{- $stateClass = "gh-card__state--merged" -}}
+    {{- $state = "merged" -}}
+  {{- else -}}
+    {{- $stateClass = "gh-card__state--closed" -}}
+  {{- end -}}
+{{- end -}}
+
+<a href="{{ $url }}" class="gh-card" target="_blank" rel="noopener noreferrer">
+  <span class="gh-card__icon gh-card__icon--{{ $icon }} {{ $stateClass }}">
+    {{- if eq $icon "pr" -}}
+      <svg viewBox="0 0 16 16" fill="currentColor"><path d="M1.5 3.25a2.25 2.25 0 1 1 3 2.122v5.256a2.251 2.251 0 1 1-1.5 0V5.372A2.25 2.25 0 0 1 1.5 3.25Zm5.677-.177L9.573.677A.25.25 0 0 1 10 .854V2.5h1A2.5 2.5 0 0 1 13.5 5v5.628a2.251 2.251 0 1 1-1.5 0V5a1 1 0 0 0-1-1h-1v1.646a.25.25 0 0 1-.427.177L7.177 3.427a.25.25 0 0 1 0-.354ZM3.75 2.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm0 9.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm8.25.75a.75.75 0 1 0 1.5 0 .75.75 0 0 0-1.5 0Z"/></svg>
+    {{- else -}}
+      <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"/><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"/></svg>
+    {{- end -}}
+  </span>
+  <span class="gh-card__content">
+    <span class="gh-card__title">{{ $title }}</span>
+    <span class="gh-card__meta">
+      <span class="gh-card__repo">{{ $repo }}</span>
+      <span class="gh-card__number">#{{ $number }}</span>
+      {{- if $author -}}<span class="gh-card__author">by {{ $author }}</span>{{- end -}}
+      {{- if $showState -}}<span class="gh-card__state {{ $stateClass }}">{{ $state }}</span>{{- end -}}
+    </span>
+  </span>
+  <span class="gh-card__arrow">
+    <svg viewBox="0 0 16 16" fill="currentColor"><path d="M6.22 3.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L9.94 8 6.22 4.28a.75.75 0 0 1 0-1.06Z"/></svg>
+  </span>
+</a>

@@ -34,12 +34,15 @@ languages:
         - name: Blog
           url: /blog/
           weight: 1
+        - name: /tmp
+          url: /tmp/
+          weight: 2
         - name: Slides
           url: /slides/
-          weight: 2
+          weight: 3
         - name: About
           url: /page/about/
-          weight: 3
+          weight: 4
   en:
     title: utam0k
     weight: 2
@@ -48,12 +51,15 @@ languages:
         - name: Blog
           url: /en/blog/
           weight: 1
+        - name: /tmp
+          url: /en/tmp/
+          weight: 2
         - name: Slides
           url: /en/slides/
-          weight: 2
+          weight: 3
         - name: About
           url: /en/page/about/
-          weight: 3
+          weight: 4
 
 Params:
   description: "utam0k"
@@ -78,6 +84,15 @@ markup:
   goldmark:
     renderer:
       unsafe: true
+    parser:
+      attribute:
+        block: true
+      autoHeadingIDType: github
+    extensions:
+      alert:
+        enable: true
+      typographer:
+        disable: true
   tableOfContents:
     startLevel: 1
     endLevel: 5

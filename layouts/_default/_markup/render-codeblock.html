@@ -1,0 +1,8 @@
+{{- $title := .Attributes.title -}}
+{{- $lang := .Type -}}
+<div class="code-block{{ if $title }} code-block--titled{{ end }}">
+  {{- if $title -}}
+  <div class="code-block__title">{{ $title }}</div>
+  {{- end -}}
+  {{- highlight .Inner $lang "" -}}
+</div>

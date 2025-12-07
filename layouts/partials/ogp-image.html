@@ -247,7 +247,7 @@
         {{- $img = $img.Filter (images.Overlay $avatarResized 1040 480) -}}
       {{- end -}}
 
-    {{- else if and (eq .Section "post") .IsPage -}}
+    {{- else if and (or (eq .Section "post") (eq .Section "tmp")) .IsPage -}}
       {{- /* Blog post: full metadata */ -}}
       {{- $dateLine := printf "date: %s" (.Date.Format "2006-01-02") -}}
       {{- $img = $img.Filter (images.Text $dateLine (dict
