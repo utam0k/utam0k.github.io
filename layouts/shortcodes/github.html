@@ -37,6 +37,7 @@
   {{- if and (eq $icon "pr") $data.merged_at -}}
     {{- $stateClass = "gh-card__state--merged" -}}
     {{- $state = "merged" -}}
+    {{- $showState = false -}}
   {{- else -}}
     {{- $stateClass = "gh-card__state--closed" -}}
   {{- end -}}

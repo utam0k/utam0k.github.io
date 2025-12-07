@@ -1,0 +1,21 @@
+{{- $url := .Get 0 -}}
+{{- $ratio := .Get 1 | default "56.25" -}}
+{{- $oembedUrl := printf "https://speakerdeck.com/oembed.json?url=%s" $url -}}
+{{- $data := dict -}}
+{{- with resources.GetRemote $oembedUrl -}}
+  {{- $data = . | transform.Unmarshal -}}
+{{- end -}}
+{{- $html := $data.html | default "" -}}
+{{- $dataId := "" -}}
+{{- if $html -}}
+  {{- $dataId = replaceRE `(?s).*speakerdeck\.com/player/([a-f0-9]+).*` "$1" $html | strings.TrimSpace -}}
+{{- end -}}
+
+<div class="speakerdeck-embed" style="position: relative; padding-bottom: {{ $ratio }}%; height: 0; overflow: hidden; max-width: 100%;">
+  <iframe
+    src="https://speakerdeck.com/player/{{ $dataId }}"
+    title="{{ $data.title | default "Speaker Deck" }}"
+    allowfullscreen
+    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;">
+  </iframe>
+</div>
