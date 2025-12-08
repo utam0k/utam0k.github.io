@@ -77,6 +77,15 @@
       {{ .Content }}
     </div>
 
+    {{ with .Site.Params.author.twitter }}
+    <div class="follow-cta">
+      <a class="follow-cta__link" href="https://x.com/{{ . }}?utm_source=blog&utm_medium=follow_cta&utm_campaign=article_footer" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h5.3l3.4 4.8L14.8 3H21l-6.8 9.2L21 21h-5.3l-3.7-5.2L8.2 21H3l6.8-8.9L3 3z"/></svg>
+        Follow @{{ . }}
+      </a>
+    </div>
+    {{ end }}
+
     <div class="article-footer">
       <a class="muted" href="{{ "/blog/" | relLangURL }}">← Back to blog</a>
       {{ if or .PrevInSection .NextInSection }}
