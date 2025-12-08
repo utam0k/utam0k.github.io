@@ -1,4 +1,5 @@
 THEME=utam0k
+EDITOR ?= vim
 
 default: preview
 
@@ -9,4 +10,7 @@ init:
 	git submodule update --init --recursive
 	git pull --recurse-submodules
 
-.PHONY: preview init
+tmp:
+	$(eval FILENAME := $(shell date +%Y%m%d%H%M%S))
+	hugo new tmp/$(FILENAME).md --kind tmp
+	$(EDITOR) content/tmp/$(FILENAME).md
