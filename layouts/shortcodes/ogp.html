@@ -1,0 +1,75 @@
+{{- $url := .Get 0 -}}
+{{- $title := "" -}}
+{{- $description := "" -}}
+{{- $image := "" -}}
+{{- $siteName := "" -}}
+
+{{- with resources.GetRemote $url -}}
+  {{- $html := .Content -}}
+  {{- /* Extract og:title */ -}}
+  {{- $titleMatch := findRE `<meta[^>]+property=["']og:title["'][^>]+content=["']([^"']+)["']` $html 1 -}}
+  {{- if not $titleMatch -}}
+    {{- $titleMatch = findRE `<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:title["']` $html 1 -}}
+  {{- end -}}
+  {{- with $titleMatch -}}
+    {{- $title = index . 0 | replaceRE `.*content=["']([^"']+)["'].*` "$1" -}}
+  {{- end -}}
+  {{- /* Fallback to <title> */ -}}
+  {{- if not $title -}}
+    {{- $titleTagMatch := findRE `<title>([^<]+)</title>` $html 1 -}}
+    {{- with $titleTagMatch -}}
+      {{- $title = index . 0 | replaceRE `<title>([^<]+)</title>` "$1" -}}
+    {{- end -}}
+  {{- end -}}
+  {{- /* Extract og:description */ -}}
+  {{- $descMatch := findRE `<meta[^>]+property=["']og:description["'][^>]+content=["']([^"']+)["']` $html 1 -}}
+  {{- if not $descMatch -}}
+    {{- $descMatch = findRE `<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:description["']` $html 1 -}}
+  {{- end -}}
+  {{- with $descMatch -}}
+    {{- $description = index . 0 | replaceRE `.*content=["']([^"']+)["'].*` "$1" -}}
+  {{- end -}}
+  {{- /* Extract og:image */ -}}
+  {{- $imageMatch := findRE `<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']` $html 1 -}}
+  {{- if not $imageMatch -}}
+    {{- $imageMatch = findRE `<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']` $html 1 -}}
+  {{- end -}}
+  {{- with $imageMatch -}}
+    {{- $image = index . 0 | replaceRE `.*content=["']([^"']+)["'].*` "$1" -}}
+  {{- end -}}
+  {{- /* Extract og:site_name */ -}}
+  {{- $siteMatch := findRE `<meta[^>]+property=["']og:site_name["'][^>]+content=["']([^"']+)["']` $html 1 -}}
+  {{- if not $siteMatch -}}
+    {{- $siteMatch = findRE `<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:site_name["']` $html 1 -}}
+  {{- end -}}
+  {{- with $siteMatch -}}
+    {{- $siteName = index . 0 | replaceRE `.*content=["']([^"']+)["'].*` "$1" -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Parse domain from URL */ -}}
+{{- $domain := $url | replaceRE `^https?://([^/]+).*` "$1" -}}
+
+{{- /* Fallback title to domain */ -}}
+{{- if not $title -}}
+  {{- $title = $domain -}}
+{{- end -}}
+
+<a href="{{ $url }}" class="ogp-card" target="_blank" rel="noopener noreferrer">
+  {{- if $image -}}
+  <span class="ogp-card__image" style="background-image: url('{{ $image }}');"></span>
+  {{- end -}}
+  <span class="ogp-card__content">
+    <span class="ogp-card__title">{{ $title | htmlUnescape }}</span>
+    {{- if $description -}}
+    <span class="ogp-card__desc">{{ $description | htmlUnescape | truncate 120 }}</span>
+    {{- end -}}
+    <span class="ogp-card__meta">
+      <svg class="ogp-card__favicon" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0ZM1.5 8a6.5 6.5 0 1 1 13 0 6.5 6.5 0 0 1-13 0Z"/><path d="M6.5 7.5v1h3v-1h-3Z"/></svg>
+      <span class="ogp-card__domain">{{ $domain }}</span>
+      {{- if $siteName -}}
+      <span class="ogp-card__site">{{ $siteName }}</span>
+      {{- end -}}
+    </span>
+  </span>
+</a>
