@@ -7,14 +7,23 @@
 {{- if $existingOgp -}}
   {{- $ogpImage = $existingOgp.Permalink -}}
 {{- else -}}
-  {{- /* Monospace font for hacker aesthetic */ -}}
-  {{- $fontUrl := "https://github.com/coz-m/MPLUS_FONTS/raw/refs/heads/master/fonts/ttf/Mplus1Code-Bold.ttf" -}}
-  {{- $font := resources.GetRemote $fontUrl -}}
-  {{- $fontRegularUrl := "https://github.com/coz-m/MPLUS_FONTS/raw/refs/heads/master/fonts/ttf/Mplus1Code-Regular.ttf" -}}
-  {{- $fontRegular := resources.GetRemote $fontRegularUrl -}}
+  {{- /* Monospace font for hacker aesthetic (prefer vendored, fallback to remote) */ -}}
+  {{- $font := resources.Get "fonts/ogp/Mplus1Code-Bold.ttf" -}}
+  {{- if not $font -}}
+    {{- $fontUrl := "https://github.com/coz-m/MPLUS_FONTS/raw/refs/heads/master/fonts/ttf/Mplus1Code-Bold.ttf" -}}
+    {{- $font = resources.GetRemote $fontUrl -}}
+  {{- end -}}
+  {{- $fontRegular := resources.Get "fonts/ogp/Mplus1Code-Regular.ttf" -}}
+  {{- if not $fontRegular -}}
+    {{- $fontRegularUrl := "https://github.com/coz-m/MPLUS_FONTS/raw/refs/heads/master/fonts/ttf/Mplus1Code-Regular.ttf" -}}
+    {{- $fontRegular = resources.GetRemote $fontRegularUrl -}}
+  {{- end -}}
   {{- /* Hack font for @username */ -}}
-  {{- $fontHackUrl := "https://github.com/source-foundry/Hack/raw/refs/heads/master/build/ttf/Hack-Regular.ttf" -}}
-  {{- $fontHack := resources.GetRemote $fontHackUrl -}}
+  {{- $fontHack := resources.Get "fonts/ogp/Hack-Regular.ttf" -}}
+  {{- if not $fontHack -}}
+    {{- $fontHackUrl := "https://github.com/source-foundry/Hack/raw/refs/heads/master/build/ttf/Hack-Regular.ttf" -}}
+    {{- $fontHack = resources.GetRemote $fontHackUrl -}}
+  {{- end -}}
 
   {{- /* Circular avatar image */ -}}
   {{- $avatar := resources.Get "img/og/avatar_circle.png" -}}
@@ -31,9 +40,10 @@
     {{- else if eq .Title "About" -}}
       {{- $title = "About @utam0k" -}}
     {{- end -}}
+    {{- $forceSingle := .Params.ogp_single_line | default false -}}
     {{- $titleText := "" -}}
     {{- $lineCount := 1 -}}
-    {{- $maxCharsPerLine := 32 -}}
+    {{- $maxCharsPerLine := 26 -}}
 
     {{- /* Check if title contains spaces (likely English) */ -}}
     {{- if strings.Contains $title " " -}}
@@ -91,14 +101,33 @@
       {{- end -}}
     {{- end -}}
 
-    {{- /* Adjust font size based on line count */ -}}
+    {{- if $forceSingle -}}
+      {{- $titleText = $title -}}
+      {{- $lineCount = 1 -}}
+    {{- end -}}
+
+    {{- /* Adjust font size based on line count and length */ -}}
     {{- $titleFontSize := 52 -}}
     {{- $titleLineHeight := 70 -}}
     {{- $isEnglish := strings.Contains (.Title | default .Site.Title) " " -}}
+    {{- $titleRuneCount := strings.RuneCount $title -}}
+    {{- if $forceSingle -}}
+      {{- $titleFontSize = 60 -}}
+      {{- $titleLineHeight = 78 -}}
+    {{- else -}}
     {{- if and (eq $lineCount 1) $isEnglish -}}
-      {{- $titleFontSize = 72 -}}
-      {{- $titleLineHeight = 90 -}}
+      {{- if ge $titleRuneCount 24 -}}
+        {{- $titleFontSize = 64 -}}
+        {{- $titleLineHeight = 82 -}}
+      {{- else -}}
+        {{- $titleFontSize = 72 -}}
+        {{- $titleLineHeight = 90 -}}
+      {{- end -}}
     {{- end -}}
+    {{- end -}}
+
+    {{- /* Fixed left margin for title/separator */ -}}
+    {{- $titleX := 60 -}}
 
     {{- /* Calculate vertical center layout */ -}}
     {{- $titleHeight := mul $lineCount $titleLineHeight -}}
@@ -326,6 +355,18 @@
       {{- end -}}
     {{- end -}}
 
+    {{- /* Fix output filename to avoid changing hashes per build */ -}}
+    {{- $baseName := printf "ogp-default-%s.png" $.Lang -}}
+    {{- with .File }}
+      {{- $path := strings.TrimSuffix "/" (strings.TrimPrefix "content/" .Dir) -}}
+      {{- $path = replace $path "/" "-" -}}
+      {{- if eq $path "" }}
+        {{- $path = .TranslationBaseName -}}
+      {{- end -}}
+      {{- $baseName = printf "%s-%s-%s.png" $path .TranslationBaseName $.Lang -}}
+    {{- end -}}
+    {{- $target := printf "img/og/%s" $baseName -}}
+    {{- $img = resources.Copy $target $img -}}
     {{- $ogpImage = $img.Permalink -}}
   {{- else -}}
     {{- with .Site.Params.logo -}}

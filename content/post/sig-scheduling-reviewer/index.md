@@ -4,6 +4,7 @@ date: 2025-12-09T00:00:00+09:00
 categories: [tech, diary]
 tags: [kubernetes, oss]
 description: "Kubernetes SIG-Scheduling の Reviewer になりました"
+ogp_single_line: true
 ---
 
 こんにちは。

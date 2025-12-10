@@ -1,0 +1,104 @@
+{{- $url := .Get 0 -}}
+{{- /* Parse: https://github.com/owner/repo/blob/commit/path/to/file.go#L10-L20 */ -}}
+
+{{- /* Extract hash fragment for line numbers */ -}}
+{{- $lines := "" -}}
+{{- $startLine := 0 -}}
+{{- $endLine := 0 -}}
+{{- if findRE `#L\d+` $url -}}
+  {{- $lines = replaceRE `.*#(L\d+.*)$` "$1" $url -}}
+  {{- $url = replaceRE `#L\d+.*$` "" $url -}}
+  {{- if findRE `^L\d+-L\d+$` $lines -}}
+    {{- $startLine = int (replaceRE `^L(\d+)-L\d+$` "$1" $lines) -}}
+    {{- $endLine = int (replaceRE `^L\d+-L(\d+)$` "$1" $lines) -}}
+  {{- else -}}
+    {{- $startLine = int (replaceRE `^L(\d+)$` "$1" $lines) -}}
+    {{- $endLine = $startLine -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Parse URL path */ -}}
+{{- $path := replaceRE `^https?://github\.com/` "" $url -}}
+{{- $parts := split $path "/" -}}
+{{- $owner := index $parts 0 -}}
+{{- $repoName := index $parts 1 -}}
+{{- $repo := printf "%s/%s" $owner $repoName -}}
+{{- $commit := index $parts 3 -}}
+
+{{- /* Extract file path (everything after blob/commit/) */ -}}
+{{- $filePath := replaceRE (printf `^%s/%s/blob/%s/` $owner $repoName $commit) "" $path -}}
+
+{{- /* Get file extension for syntax highlighting */ -}}
+{{- $ext := path.Ext $filePath -}}
+{{- $lang := replaceRE `^\.` "" $ext -}}
+{{- /* Map some extensions to highlight.js language names */ -}}
+{{- if eq $lang "rs" }}{{ $lang = "rust" }}{{ end -}}
+{{- if eq $lang "py" }}{{ $lang = "python" }}{{ end -}}
+{{- if eq $lang "js" }}{{ $lang = "javascript" }}{{ end -}}
+{{- if eq $lang "ts" }}{{ $lang = "typescript" }}{{ end -}}
+{{- if eq $lang "rb" }}{{ $lang = "ruby" }}{{ end -}}
+{{- if eq $lang "yml" }}{{ $lang = "yaml" }}{{ end -}}
+{{- if eq $lang "md" }}{{ $lang = "markdown" }}{{ end -}}
+
+{{- /* Fetch raw content from GitHub */ -}}
+{{- $rawUrl := printf "https://raw.githubusercontent.com/%s/%s/%s" $repo $commit $filePath -}}
+{{- $content := "" -}}
+{{- $result := try (resources.GetRemote $rawUrl) -}}
+{{- with $result.Value -}}
+  {{- $content = .Content -}}
+{{- end -}}
+
+{{- /* Extract specific lines if specified */ -}}
+{{- $displayContent := $content -}}
+{{- if and (gt $startLine 0) (ne $content "") -}}
+  {{- $contentLines := split $content "\n" -}}
+  {{- $selectedLines := slice -}}
+  {{- range $i, $line := $contentLines -}}
+    {{- $lineNum := add $i 1 -}}
+    {{- if and (ge $lineNum $startLine) (le $lineNum $endLine) -}}
+      {{- $selectedLines = $selectedLines | append $line -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $displayContent = delimit $selectedLines "\n" -}}
+{{- end -}}
+
+{{- /* Build original URL with line numbers */ -}}
+{{- $originalUrl := printf "https://github.com/%s/blob/%s/%s" $repo $commit $filePath -}}
+{{- if gt $startLine 0 -}}
+  {{- if eq $startLine $endLine -}}
+    {{- $originalUrl = printf "%s#L%d" $originalUrl $startLine -}}
+  {{- else -}}
+    {{- $originalUrl = printf "%s#L%d-L%d" $originalUrl $startLine $endLine -}}
+  {{- end -}}
+{{- end -}}
+
+<div class="github-code">
+  <div class="github-code__header">
+    <svg class="github-code__icon" viewBox="0 0 16 16" fill="currentColor">
+      <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/>
+    </svg>
+    <a href="{{ $originalUrl }}" target="_blank" rel="noopener noreferrer" class="github-code__link">
+      <span class="github-code__repo">{{ $repo }}</span>
+      <span class="github-code__file">{{ $filePath }}</span>
+      {{- if gt $startLine 0 -}}
+        <span class="github-code__lines">
+          {{- if eq $startLine $endLine -}}
+            L{{ $startLine }}
+          {{- else -}}
+            L{{ $startLine }}-L{{ $endLine }}
+          {{- end -}}
+        </span>
+      {{- end -}}
+    </a>
+  </div>
+  {{- if ne $displayContent "" -}}
+  <div class="github-code__content">
+    {{- $codeBlock := printf "```%s\n%s\n```" $lang $displayContent -}}
+    {{ $codeBlock | markdownify }}
+  </div>
+  {{- else -}}
+  <div class="github-code__error">
+    Failed to load code from GitHub
+  </div>
+  {{- end -}}
+</div>
