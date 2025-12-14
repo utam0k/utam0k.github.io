@@ -508,6 +508,72 @@
   </script>
 
   <script>
+    // Gist copy to clipboard
+    window.copyGist = async (id) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const codeEl = el.querySelector('.blob-code-inner, .js-file-line');
+      const tableEl = el.querySelector('.highlight table, .js-file-line-container');
+      let text = '';
+      if (tableEl) {
+        const lines = tableEl.querySelectorAll('.blob-code-inner, .js-file-line');
+        text = Array.from(lines).map(l => l.textContent).join('\n');
+      } else if (codeEl) {
+        text = codeEl.textContent;
+      }
+      if (!text) {
+        const wrapper = el.querySelector('.gist-embed__content');
+        if (wrapper) text = wrapper.textContent;
+      }
+      try {
+        await navigator.clipboard.writeText(text.trim());
+        const btn = el.querySelector('.gist-embed__copy');
+        if (btn) {
+          btn.classList.add('is-copied');
+          setTimeout(() => btn.classList.remove('is-copied'), 2000);
+        }
+      } catch (err) {
+        console.error('Failed to copy:', err);
+      }
+    };
+
+    // Code block copy button
+    (() => {
+      const codeBlocks = document.querySelectorAll('.article-body pre');
+      codeBlocks.forEach((pre) => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'code-block-wrapper';
+        pre.parentNode.insertBefore(wrapper, pre);
+        wrapper.appendChild(pre);
+
+        const btn = document.createElement('button');
+        btn.className = 'code-copy-btn';
+        btn.setAttribute('aria-label', 'Copy code');
+        btn.innerHTML = `
+          <svg class="code-copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+          <svg class="code-check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        `;
+        wrapper.appendChild(btn);
+
+        btn.addEventListener('click', async () => {
+          const code = pre.querySelector('code');
+          const text = code ? code.textContent : pre.textContent;
+          try {
+            await navigator.clipboard.writeText(text);
+            btn.classList.add('is-copied');
+            setTimeout(() => btn.classList.remove('is-copied'), 2000);
+          } catch (err) {
+            console.error('Failed to copy:', err);
+          }
+        });
+      });
+    })();
+
     // Lightweight lightbox for article images
     (() => {
       const imgs = Array.from(document.querySelectorAll('.article-body img'));
@@ -530,6 +596,42 @@
         });
       });
     })();
+  </script>
+
+  <!-- Mermaid diagram support -->
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: document.documentElement.dataset.theme === 'dark' ? 'dark' : 'default'
+    });
+
+    // Find all mermaid code blocks and render them
+    document.querySelectorAll('pre code.language-mermaid').forEach((block, index) => {
+      const pre = block.parentElement;
+      const wrapper = document.createElement('div');
+      wrapper.className = 'mermaid';
+      wrapper.textContent = block.textContent;
+      pre.replaceWith(wrapper);
+    });
+
+    mermaid.run();
+
+    // Re-render on theme change
+    const origSetTheme = window.__setTheme;
+    if (origSetTheme) {
+      window.__setTheme = (mode) => {
+        origSetTheme(mode);
+        const effective = mode === 'system'
+          ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+          : mode;
+        mermaid.initialize({ theme: effective === 'dark' ? 'dark' : 'default' });
+        document.querySelectorAll('.mermaid').forEach(el => {
+          el.removeAttribute('data-processed');
+        });
+        mermaid.run();
+      };
+    }
   </script>
 
   {{ with site.Config.Services.GoogleAnalytics.ID }}
