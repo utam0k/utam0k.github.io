@@ -80,6 +80,18 @@ Author:
   twitter: utam0k
   github: utam0k
 
+related:
+  threshold: 80
+  includeNewer: true
+  toLower: true
+  indices:
+    - name: tags
+      weight: 100
+    - name: categories
+      weight: 80
+    - name: date
+      weight: 10
+
 markup:
   goldmark:
     renderer:
