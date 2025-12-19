@@ -10,5 +10,8 @@ description: "3-shake SRE Tech Talk #14 登壇資料"
 draft: false
 ---
 
+実例のスクリーンショットをもとに、GitHubでホストされるOSSの脆弱性対応を、報告→確認→Security Advisory→CVSS/CVE→パッチ→公開までの流れで解説します。
+temporary private forkを使った非公開修正の進め方など、脆弱性対応の舞台裏も紹介します。
+
 3-shake SRE Tech Talk #14 オンサイトでの発表資料です。
 https://3-shake.connpass.com/event/351203/
