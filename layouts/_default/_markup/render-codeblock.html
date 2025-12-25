@@ -4,5 +4,10 @@
   {{- if $title -}}
   <div class="code-block__title">{{ $title }}</div>
   {{- end -}}
-  {{- highlight .Inner $lang "" -}}
+  {{- $highlighted := highlight .Inner $lang "" -}}
+  {{- if eq $lang "console" -}}
+    {{- $highlighted = replace $highlighted " \\\n" " <span class=\"se\">\\</span>\n" -}}
+    {{- $highlighted = replace $highlighted "| " "<span class=\"o\">|</span> " -}}
+  {{- end -}}
+  {{- $highlighted | safeHTML -}}
 </div>

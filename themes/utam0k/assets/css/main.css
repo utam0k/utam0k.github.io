@@ -583,6 +583,8 @@ img { max-width: 100%; }
 .chroma .p, .chroma .w { color: #e2e8f0; } /* punctuation, whitespace */
 .chroma .o, .chroma .ow { color: #f472b6; }
 .chroma .gp { color: #22d3ee; } /* prompt ($) */
+.chroma .go { color: #e2e8f0; } /* console output - same as base text */
+.chroma .se { color: #fbbf24; font-weight: 600; } /* line continuation / escapes */
 .chroma .err { color: #f87171; }
 
 .article-body table { margin: 16px auto; border-collapse: collapse; }
