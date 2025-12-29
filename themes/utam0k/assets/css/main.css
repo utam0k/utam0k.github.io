@@ -832,6 +832,34 @@ blockquote.twitter-tweet a { color: var(--accent-2); }
   box-shadow: 0 6px 16px rgba(0,0,0,0.08);
 }
 .share-btn svg { width: 18px; height: 18px; fill: currentColor; }
+.share-btn--follow {
+  width: auto;
+  padding: 0 10px;
+  gap: 5px;
+}
+.share-btn--follow:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.share-btn__label { font-size: 13px; font-weight: 600; white-space: nowrap; }
+
+.follow-inline {
+  margin-left: 6px;
+  padding: 2px 8px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 11px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.follow-inline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  text-decoration: none;
+}
 
 .toc-inline {
   display: none;
@@ -1202,7 +1230,7 @@ body {
   max-width: 100%;
   margin-left: auto;
   margin-right: auto;
-  position: relative;
+  text-align: center;
 }
 
 .article-body figure img,
@@ -1210,32 +1238,16 @@ body {
   display: block;
   width: 100%;
   height: auto;
+  position: relative;
 }
 
-.article-body figure::after,
-.article-body blockquote figure::after {
-  content: "🔍";
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
-  background: rgba(0, 0, 0, 0.55);
-  color: #fff;
-  font-size: 12px;
-  line-height: 1;
-  padding: 4px 6px;
-  border-radius: 999px;
-  opacity: 0.45;
-  pointer-events: none;
-  transition: opacity 0.15s ease, transform 0.15s ease;
+.article-body figure figcaption {
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: 8px;
 }
 
-.article-body figure:hover::after,
-.article-body figure:focus-within::after,
-.article-body blockquote figure:hover::after,
-.article-body blockquote figure:focus-within::after {
-  opacity: 0.9;
-  transform: scale(1.05);
-}
+
 
 /* Any inline images inside article body should not overflow */
 .article-body img {
