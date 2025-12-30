@@ -19,6 +19,7 @@
   <meta property="og:site_name" content="{{ .Site.Title }}">
   {{ with .Permalink }}<meta property="og:url" content="{{ . }}">{{ end }}
   {{ with .Title }}<meta property="og:title" content="{{ . }}">{{ end }}
+  {{ with .Site.Params.hatenaId }}<link rel="author" href="https://www.hatena.ne.jp/{{ . }}/" />{{ end }}
   {{ with partial "ogp-image.html" . }}<meta property="og:image" content="{{ . }}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="{{ . }}">{{ end }}
