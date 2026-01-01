@@ -943,7 +943,13 @@ blockquote.twitter-tweet a { color: var(--accent-2); }
     pointer-events: none;
     transition: opacity 0.22s ease, transform 0.22s ease;
   }
-  .share-block--mobile.is-floating .share-btn { width: 34px; height: 34px; box-shadow: 0 8px 18px rgba(0,0,0,0.12); }
+  .share-block--mobile.is-floating .share-btn {
+    width: 40px;
+    height: 40px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    background: var(--surface);
+    border: 1px solid rgba(255, 122, 26, 0.4);
+  }
   .share-block--mobile.is-floating.is-visible {
     opacity: 1;
     transform: translate(-50%, 0);
