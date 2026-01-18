@@ -2,7 +2,7 @@
 title: "Youki Kaigi #1 Event Report"
 date: 2026-01-18T21:30:00+09:00
 draft: false
-tags : [diary]
+tags : [diary, youki]
 author: utam0k
 ---
 
